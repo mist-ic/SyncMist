@@ -1,0 +1,13 @@
+# Go Server - SyncMist WebSocket Relay
+# https://moonrepo.dev/docs/config/project
+
+$schema: 'https://moonrepo.dev/schemas/project.json'
+
+language: go
+type: application
+
+# Project metadata
+project:
+  name: server
+  description: 'WebSocket relay server for clipboard sync'
+  channel: '#syncmist'

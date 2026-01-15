@@ -1,0 +1,38 @@
+# Rust-specific tasks
+# Applied to projects with language: rust
+# https://moonrepo.dev/docs/concepts/task-inheritance
+
+$schema: 'https://moonrepo.dev/schemas/tasks.json'
+
+implicitInputs:
+  - 'Cargo.toml'
+  - 'Cargo.lock'
+
+tasks:
+  build:
+    command: 'cargo build --release'
+    inputs:
+      - 'src/**/*.rs'
+    outputs:
+      - 'target/release'
+    options:
+      runInCI: true
+      
+  dev:
+    command: 'cargo build'
+    inputs:
+      - 'src/**/*.rs'
+    outputs:
+      - 'target/debug'
+      
+  test:
+    command: 'cargo test'
+    inputs:
+      - 'src/**/*.rs'
+    options:
+      runInCI: true
+      
+  lint:
+    command: 'cargo clippy'
+    inputs:
+      - 'src/**/*.rs'

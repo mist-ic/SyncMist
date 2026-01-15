@@ -1,0 +1,11 @@
+# Global tasks inherited by all projects
+# https://moonrepo.dev/docs/config/tasks
+
+$schema: 'https://moonrepo.dev/schemas/tasks.json'
+
+tasks:
+  # Lint task - overridden per project
+  lint:
+    command: 'echo "No lint configured"'
+    options:
+      runInCI: true

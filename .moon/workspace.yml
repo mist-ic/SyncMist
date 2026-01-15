@@ -1,0 +1,23 @@
+# https://moonrepo.dev/docs/config/workspace
+$schema: 'https://moonrepo.dev/schemas/workspace.json'
+
+# Projects in the monorepo
+projects:
+  - 'apps/*'
+  - 'packages/*'
+
+# Version control settings
+vcs:
+  manager: git
+  defaultBranch: dev
+  remoteCandidates:
+    - origin
+
+# Generator templates (for scaffolding)
+generator:
+  templates:
+    - './templates'
+
+# Constraints for dependency management
+constraints:
+  enforceCleanWorkingDirectory: true

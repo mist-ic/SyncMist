@@ -1,0 +1,21 @@
+[package]
+name = "rust_core"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "staticlib"]
+
+[dependencies]
+# Flutter Rust Bridge for FFI
+flutter_rust_bridge = "2"
+
+# Encryption
+aes-gcm = "0.10"
+rand = "0.8"
+
+# Key exchange (for Phase 3)
+# x25519-dalek = "2"
+
+# CRDT (for Phase 5)
+# loro = "0.16"

@@ -1,0 +1,37 @@
+# Go-specific tasks
+# Applied to projects with language: go
+# https://moonrepo.dev/docs/concepts/task-inheritance
+
+$schema: 'https://moonrepo.dev/schemas/tasks.json'
+
+implicitInputs:
+  - 'go.mod'
+  - 'go.sum'
+
+tasks:
+  build:
+    command: 'go build -o dist/server ./cmd/server'
+    inputs:
+      - '**/*.go'
+    outputs:
+      - 'dist/server'
+    options:
+      runInCI: true
+      
+  dev:
+    command: 'go run ./cmd/server'
+    local: true
+    options:
+      persistent: true
+      
+  test:
+    command: 'go test ./...'
+    inputs:
+      - '**/*.go'
+    options:
+      runInCI: true
+      
+  lint:
+    command: 'go vet ./...'
+    inputs:
+      - '**/*.go'
