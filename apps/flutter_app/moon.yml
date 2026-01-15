@@ -1,0 +1,71 @@
+# Flutter App - SyncMist Client
+# https://moonrepo.dev/docs/config/project
+
+$schema: 'https://moonrepo.dev/schemas/project.json'
+
+language: other
+type: application
+
+# Project metadata
+project:
+  name: flutter_app
+  description: 'Cross-platform clipboard sync client'
+  channel: '#syncmist'
+
+# Dependencies on other projects
+dependsOn:
+  - 'rust_core'
+
+# Flutter-specific tasks (not inherited from language)
+tasks:
+  build-windows:
+    command: 'flutter build windows'
+    inputs:
+      - 'lib/**/*.dart'
+      - 'pubspec.yaml'
+    outputs:
+      - 'build/windows'
+    options:
+      runInCI: false
+      os: ['windows']
+      
+  build-android:
+    command: 'flutter build apk'
+    inputs:
+      - 'lib/**/*.dart'
+      - 'pubspec.yaml'
+      - 'android/**'
+    outputs:
+      - 'build/app/outputs'
+    options:
+      runInCI: true
+      
+  build-linux:
+    command: 'flutter build linux'
+    inputs:
+      - 'lib/**/*.dart'
+      - 'pubspec.yaml'
+    outputs:
+      - 'build/linux'
+    options:
+      runInCI: false
+      os: ['linux']
+      
+  dev:
+    command: 'flutter run'
+    local: true
+    options:
+      persistent: true
+      
+  test:
+    command: 'flutter test'
+    inputs:
+      - 'lib/**/*.dart'
+      - 'test/**/*.dart'
+    options:
+      runInCI: true
+      
+  analyze:
+    command: 'flutter analyze'
+    inputs:
+      - 'lib/**/*.dart'

@@ -1,0 +1,13 @@
+# Rust Core - SyncMist Crypto & CRDT
+# https://moonrepo.dev/docs/config/project
+
+$schema: 'https://moonrepo.dev/schemas/project.json'
+
+language: rust
+type: library
+
+# Project metadata
+project:
+  name: rust_core
+  description: 'Encryption and CRDT implementation in Rust'
+  channel: '#syncmist'
