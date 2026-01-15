@@ -5,8 +5,9 @@ import (
 	"net/http"
 	"os"
 
+	"syncmist-server/internal/hub"
+
 	"github.com/gorilla/websocket"
-	"github.com/syncmist/server/internal/hub"
 )
 
 var upgrader = websocket.Upgrader{
