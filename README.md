@@ -2,7 +2,7 @@
 
 **Universal Clipboard Sync** - Copy anywhere, paste everywhere.
 
-[![CI](https://github.com/your-username/syncmist/actions/workflows/ci.yml/badge.svg)](https://github.com/your-username/syncmist/actions/workflows/ci.yml)
+[![CI](https://github.com/mist-ic/syncmist/actions/workflows/ci.yml/badge.svg)](https://github.com/mist-ic/syncmist/actions/workflows/ci.yml)
 
 ## 🚀 Features
 

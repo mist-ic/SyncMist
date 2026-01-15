@@ -4,7 +4,34 @@ import (
 	"log/slog"
 	"net/http"
 	"os"
+
+	"github.com/gorilla/websocket"
+	"github.com/syncmist/server/internal/hub"
 )
+
+var upgrader = websocket.Upgrader{
+	ReadBufferSize:  1024,
+	WriteBufferSize: 1024,
+	CheckOrigin: func(r *http.Request) bool {
+		// Allow connections from any origin (will secure in production)
+		return true
+	},
+}
+
+func serveWs(h *hub.Hub, w http.ResponseWriter, r *http.Request) {
+	conn, err := upgrader.Upgrade(w, r, nil)
+	if err != nil {
+		slog.Error("WebSocket upgrade failed", "error", err)
+		return
+	}
+
+	client := hub.NewClient(h, conn)
+	h.Register(client)
+
+	// Start read and write pumps in separate goroutines
+	go client.WritePump()
+	go client.ReadPump()
+}
 
 func main() {
 	// Configure structured logging
@@ -13,16 +40,19 @@ func main() {
 	}))
 	slog.SetDefault(logger)
 
+	// Create and start the hub
+	h := hub.NewHub()
+	go h.Run()
+
 	// Health check endpoint
 	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 		w.Write([]byte("OK"))
 	})
 
-	// WebSocket endpoint (to be implemented in Phase 1)
+	// WebSocket endpoint
 	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
-		w.WriteHeader(http.StatusNotImplemented)
-		w.Write([]byte("WebSocket not implemented yet"))
+		serveWs(h, w, r)
 	})
 
 	// Get port from environment or default

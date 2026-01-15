@@ -13,14 +13,17 @@ dependencies:
   # WebSocket communication
   web_socket_channel: ^2.4.0
   
-  # Clipboard access
-  super_clipboard: ^0.9.0
+  # Clipboard access (Phase 1: using Flutter's built-in Clipboard)
+  # super_clipboard: ^0.9.0  # TODO: Re-enable in Phase 4/5 for rich clipboard
   
   # State management
   flutter_riverpod: ^2.4.0
   
-  # Secure storage
-  flutter_secure_storage: ^9.0.0
+  # Secure storage (commented until needed - has native deps)
+  # flutter_secure_storage: ^9.0.0
+
+  # Device info for ID
+  device_info_plus: ^10.1.0
   
   # Rust FFI (generated)
   # flutter_rust_bridge: ^2.0.0

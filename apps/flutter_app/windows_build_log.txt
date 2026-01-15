@@ -1,0 +1,379 @@
+[+1713 ms] Artifact Instance of 'AndroidGenSnapshotArtifacts' is not required, skipping update.
+[   +1 ms] Artifact Instance of 'AndroidInternalBuildArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IOSEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterWebSdk' is not required, skipping update.
+[        ] Artifact Instance of 'LegacyCanvasKitRemover' is not required, skipping update.
+[   +6 ms] Artifact Instance of 'WindowsEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'MacOSEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'LinuxEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'LinuxFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'MacOSFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterRunnerSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterRunnerDebugSymbols' is not required, skipping update.
+[ +227 ms] Artifact Instance of 'AndroidGenSnapshotArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'AndroidInternalBuildArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IOSEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterWebSdk' is not required, skipping update.
+[        ] Artifact Instance of 'LegacyCanvasKitRemover' is not required, skipping update.
+[   +8 ms] Artifact Instance of 'MacOSEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'LinuxEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'LinuxFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'MacOSFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterRunnerSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterRunnerDebugSymbols' is not required, skipping update.
+[ +264 ms] Skipping pub get: version match.
+[ +165 ms] Found plugin device_info_plus at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\device_info_plus-10.1.2\
+[  +91 ms] Found plugin flutter_secure_storage at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_secure_storage-9.2.4\
+[  +29 ms] Found plugin flutter_secure_storage_linux at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_secure_storage_linux-1.2.3\
+[   +7 ms] Found plugin flutter_secure_storage_macos at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_secure_storage_macos-3.1.3\
+[  +18 ms] Found plugin flutter_secure_storage_web at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_secure_storage_web-1.2.1\
+[   +4 ms] Found plugin flutter_secure_storage_windows at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_secure_storage_windows-3.1.2\
+[   +6 ms] Found plugin irondash_engine_context at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\irondash_engine_context-0.5.5\
+[  +62 ms] Found plugin path_provider at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\path_provider-2.1.5\
+[  +11 ms] Found plugin path_provider_android at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\path_provider_android-2.2.19\
+[   +8 ms] Found plugin path_provider_foundation at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\path_provider_foundation-2.4.2\
+[   +6 ms] Found plugin path_provider_linux at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\path_provider_linux-2.2.1\
+[  +66 ms] Found plugin super_native_extensions at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\super_native_extensions-0.9.1\
+[ +102 ms] Package path_provider:windows references path_provider_windows:windows as the default plugin, but the package does not exist, or is not a plugin package.
+           Ask the maintainers of path_provider to either avoid referencing a default implementation via `platforms: windows: default_package: path_provider_windows` or create a plugin named path_provider_windows.
+
+[  +54 ms] Found plugin device_info_plus at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\device_info_plus-10.1.2\
+[  +40 ms] Found plugin flutter_secure_storage at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_secure_storage-9.2.4\
+[   +7 ms] Found plugin flutter_secure_storage_linux at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_secure_storage_linux-1.2.3\
+[   +5 ms] Found plugin flutter_secure_storage_macos at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_secure_storage_macos-3.1.3\
+[   +5 ms] Found plugin flutter_secure_storage_web at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_secure_storage_web-1.2.1\
+[   +3 ms] Found plugin flutter_secure_storage_windows at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_secure_storage_windows-3.1.2\
+[  +39 ms] Found plugin irondash_engine_context at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\irondash_engine_context-0.5.5\
+[  +28 ms] Found plugin path_provider at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\path_provider-2.1.5\
+[   +3 ms] Found plugin path_provider_android at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\path_provider_android-2.2.19\
+[   +3 ms] Found plugin path_provider_foundation at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\path_provider_foundation-2.4.2\
+[  +28 ms] Found plugin path_provider_linux at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\path_provider_linux-2.2.1\
+[  +29 ms] Found plugin super_native_extensions at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\super_native_extensions-0.9.1\
+[  +50 ms] Package path_provider:windows references path_provider_windows:windows as the default plugin, but the package does not exist, or is not a plugin package.
+           Ask the maintainers of path_provider to either avoid referencing a default implementation via `platforms: windows: default_package: path_provider_windows` or create a plugin named path_provider_windows.
+
+[  +89 ms] Found plugin device_info_plus at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\device_info_plus-10.1.2\
+[  +30 ms] Found plugin flutter_secure_storage at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_secure_storage-9.2.4\
+[   +2 ms] Found plugin flutter_secure_storage_linux at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_secure_storage_linux-1.2.3\
+[   +2 ms] Found plugin flutter_secure_storage_macos at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_secure_storage_macos-3.1.3\
+[   +5 ms] Found plugin flutter_secure_storage_web at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_secure_storage_web-1.2.1\
+[   +2 ms] Found plugin flutter_secure_storage_windows at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_secure_storage_windows-3.1.2\
+[   +3 ms] Found plugin irondash_engine_context at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\irondash_engine_context-0.5.5\
+[  +62 ms] Found plugin path_provider at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\path_provider-2.1.5\
+[   +2 ms] Found plugin path_provider_android at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\path_provider_android-2.2.19\
+[   +3 ms] Found plugin path_provider_foundation at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\path_provider_foundation-2.4.2\
+[  +10 ms] Found plugin path_provider_linux at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\path_provider_linux-2.2.1\
+[  +49 ms] Found plugin super_native_extensions at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\super_native_extensions-0.9.1\
+[  +99 ms] Package path_provider:windows references path_provider_windows:windows as the default plugin, but the package does not exist, or is not a plugin package.
+           Ask the maintainers of path_provider to either avoid referencing a default implementation via `platforms: windows: default_package: path_provider_windows` or create a plugin named path_provider_windows.
+
+[   +6 ms] Generating D:\Work\Git\SyncMist\apps\flutter_app\android\app\src\main\java\io\flutter\plugins\GeneratedPluginRegistrant.java
+[ +364 ms] Initializing file store
+[  +25 ms] Skipping target: gen_localizations
+[   +8 ms] gen_dart_plugin_registrant: Starting due to {InvalidatedReasonKind.inputChanged: The following inputs have updated contents: D:\Work\Git\SyncMist\apps\flutter_app\.dart_tool\package_config_subset,D:\Work\Git\SyncMist\apps\flutter_app\.dart_tool\flutter_build\dart_plugin_registrant.dart}
+[ +108 ms] Found plugin device_info_plus at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\device_info_plus-10.1.2\
+[ +119 ms] Found plugin flutter_secure_storage at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_secure_storage-9.2.4\
+[   +3 ms] Found plugin flutter_secure_storage_linux at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_secure_storage_linux-1.2.3\
+[   +2 ms] Found plugin flutter_secure_storage_macos at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_secure_storage_macos-3.1.3\
+[   +4 ms] Found plugin flutter_secure_storage_web at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_secure_storage_web-1.2.1\
+[   +3 ms] Found plugin flutter_secure_storage_windows at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_secure_storage_windows-3.1.2\
+[   +6 ms] Found plugin irondash_engine_context at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\irondash_engine_context-0.5.5\
+[ +162 ms] Found plugin path_provider at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\path_provider-2.1.5\
+[   +3 ms] Found plugin path_provider_android at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\path_provider_android-2.2.19\
+[   +4 ms] Found plugin path_provider_foundation at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\path_provider_foundation-2.4.2\
+[   +3 ms] Found plugin path_provider_linux at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\path_provider_linux-2.2.1\
+[ +149 ms] Found plugin super_native_extensions at C:\Users\Prave\AppData\Local\Pub\Cache\hosted\pub.dev\super_native_extensions-0.9.1\
+[  +43 ms] Package path_provider:windows references path_provider_windows:windows as the default plugin, but the package does not exist, or is not a plugin package.
+           Ask the maintainers of path_provider to either avoid referencing a default implementation via `platforms: windows: default_package: path_provider_windows` or create a plugin named path_provider_windows.
+
+[  +29 ms] gen_dart_plugin_registrant: Complete
+[   +2 ms] Skipping target: _composite
+[   +3 ms] complete
+[   +6 ms] Launching lib\main.dart on Windows in debug mode...
+[   +7 ms] C:\Users\Prave\AppData\Local\dev\flutter\bin\cache\dart-sdk\bin\dartaotruntime.exe C:\Users\Prave\AppData\Local\dev\flutter\bin\cache\dart-sdk\bin\snapshots\frontend_server_aot.dart.snapshot --sdk-root C:\Users\Prave\AppData\Local\dev\flutter\bin\cache\artifacts\engine\common\flutter_patched_sdk/ --incremental --target=flutter --experimental-emit-debug-metadata --output-dill C:\Users\Prave\AppData\Local\Temp\flutter_tools.6de822e3\flutter_tool.ba6d9195\app.dill --packages D:\Work\Git\SyncMist\apps\flutter_app\.dart_tool\package_config.json -Ddart.vm.profile=false -Ddart.vm.product=false --enable-asserts --track-widget-creation --filesystem-scheme org-dartlang-root --initialize-from-dill build\cache.dill.track.dill --source file:///D:/Work/Git/SyncMist/apps/flutter_app/.dart_tool/flutter_build/dart_plugin_registrant.dart --source package:flutter/src/dart_plugin_registrant.dart -Dflutter.dart_plugin_registrant=file:///D:/Work/Git/SyncMist/apps/flutter_app/.dart_tool/flutter_build/dart_plugin_registrant.dart --verbosity=error --enable-experiment=alternative-invalidation-strategy
+[  +83 ms] executing: C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe -format json -products * -utf8 -latest -version 16 -requires Microsoft.VisualStudio.Workload.NativeDesktop Microsoft.VisualStudio.Component.VC.Tools.x86.x64 Microsoft.VisualStudio.Component.VC.CMake.Project
+[ +547 ms] Exit code 0 from: C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe -format json -products * -utf8 -latest -version 16 -requires Microsoft.VisualStudio.Workload.NativeDesktop Microsoft.VisualStudio.Component.VC.Tools.x86.x64 Microsoft.VisualStudio.Component.VC.CMake.Project
+[        ] []
+[        ] executing: C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe -format json -products * -utf8 -latest -version 16 -requires Microsoft.VisualStudio.Workload.VCTools Microsoft.VisualStudio.Component.VC.Tools.x86.x64 Microsoft.VisualStudio.Component.VC.CMake.Project
+[ +289 ms] Exit code 0 from: C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe -format json -products * -utf8 -latest -version 16 -requires Microsoft.VisualStudio.Workload.VCTools Microsoft.VisualStudio.Component.VC.Tools.x86.x64 Microsoft.VisualStudio.Component.VC.CMake.Project
+[        ] [
+             {
+               "instanceId": "82eb1058",
+               "installDate": "2024-11-29T14:58:52Z",
+               "installationName": "VisualStudio/16.11.53+36631.11",
+               "installationPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools",
+               "installationVersion": "16.11.36631.11",
+               "productId": "Microsoft.VisualStudio.Product.BuildTools",
+               "productPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\Common7\\Tools\\LaunchDevCmd.bat",
+               "state": 4294967295,
+               "isComplete": true,
+               "isLaunchable": true,
+               "isPrerelease": false,
+               "isRebootRequired": false,
+               "displayName": "Visual Studio Build Tools 2019",
+               "description": "The Visual Studio Build Tools allows you to build native and managed MSBuild-based applications without requiring the Visual Studio IDE. There are options to install the Visual C++ compilers and libraries, MFC, ATL, and C++/CLI support.",
+               "channelId": "VisualStudio.16.Release",
+               "channelUri": "https://aka.ms/vs/16/release/channel",
+               "enginePath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer\\resources\\app\\ServiceHub\\Services\\Microsoft.VisualStudio.Setup.Service",
+               "installedChannelId": "VisualStudio.16.Release",
+               "installedChannelUri": "https://aka.ms/vs/16/release/channel",
+               "releaseNotes": "https://docs.microsoft.com/en-us/visualstudio/releases/2019/release-notes-v16.11#16.11.53",
+               "resolvedInstallationPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools",
+               "thirdPartyNotices": "https://go.microsoft.com/fwlink/?LinkId=660909",
+               "updateDate": "2026-01-15T22:39:47.1565368Z",
+               "catalog": {
+                 "buildBranch": "d16.11",
+                 "buildVersion": "16.11.36631.11",
+                 "id": "VisualStudio/16.11.53+36631.11",
+                 "localBuild": "build-lab",
+                 "manifestName": "VisualStudio",
+                 "manifestType": "installer",
+                 "productDisplayVersion": "16.11.53",
+                 "productLine": "Dev16",
+                 "productLineVersion": "2019",
+                 "productMilestone": "RTW",
+                 "productMilestoneIsPreRelease": "False",
+                 "productName": "Visual Studio",
+                 "productPatchVersion": "53",
+                 "productPreReleaseMilestoneSuffix": "1.0",
+                 "productSemanticVersion": "16.11.53+36631.11",
+                 "requiredEngineVersion": "2.11.72.18200"
+               },
+               "properties": {
+                 "appLocalWPF": "true",
+                 "campaignId": "",
+                 "canceled": "0",
+                 "channelManifestId": "VisualStudio.16.Release/16.11.53+36631.11",
+                 "includeRecommended": "0",
+                 "nickname": "",
+                 "setupEngineFilePath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer\\setup.exe"
+               }
+             }
+           ]
+[   +5 ms] Building Windows application...
+[  +13 ms] <- compile package:syncmist/main.dart
+[   +1 ms] executing: C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe -S D:\Work\Git\SyncMist\apps\flutter_app\windows -B D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64 -G Visual Studio 16 2019 -A x64 -DFLUTTER_TARGET_PLATFORM=windows-x64
+[ +194 ms] -- Selecting Windows SDK version 10.0.26100.0 to target Windows 10.0.26200.
+[+1039 ms] -- Configuring done
+[+3915 ms] -- Generating done
+[+1006 ms] -- Build files have been written to: D:/Work/Git/SyncMist/apps/flutter_app/build/windows/x64
+[ +118 ms] executing: C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe --build D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64 --config Debug --target INSTALL --verbose
+[ +865 ms] Microsoft (R) Build Engine version 16.11.6+a918ceb31 for .NET Framework
+[        ] Copyright (C) Microsoft Corporation. All rights reserved.
+[ +570 ms] Build started 16-Jan-26 4:25:23 AM.
+[+1777 ms] Project "D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\INSTALL.vcxproj" on node 1 (default targets).
+[        ] Project "D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\INSTALL.vcxproj" (1) is building "D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\ZERO_CHECK.vcxproj" (2) on node 1 (default targets).
+[   +3 ms] InitializeBuildStatus:
+[        ]   Creating "x64\Debug\ZERO_CHECK\ZERO_CHECK.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+[  +84 ms] CustomBuild:
+[        ]   All outputs are up-to-date.
+[ +206 ms]   Checking Build System
+[ +487 ms] FinalizeBuildStatus:
+[        ]   Deleting file "x64\Debug\ZERO_CHECK\ZERO_CHECK.tlog\unsuccessfulbuild".
+[        ]   Touching "x64\Debug\ZERO_CHECK\ZERO_CHECK.tlog\ZERO_CHECK.lastbuildstate".
+[   +3 ms] Done Building Project "D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\ZERO_CHECK.vcxproj" (default targets).
+[ +264 ms] Project "D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\INSTALL.vcxproj" (1) is building "D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\ALL_BUILD.vcxproj" (3) on node 1 (default targets).
+[        ] Project "D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\ALL_BUILD.vcxproj" (3) is building "D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\plugins\flutter_secure_storage_windows\flutter_secure_storage_windows_plugin.vcxproj" (4) on node 1 (default targets).
+[        ] Project "D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\plugins\flutter_secure_storage_windows\flutter_secure_storage_windows_plugin.vcxproj" (4) is building "D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\flutter\flutter_assemble.vcxproj" (5) on node 1 (default targets).
+[        ] InitializeBuildStatus:
+[        ]   Creating "x64\Debug\flutter_assemble\flutter_assemble.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+[  +10 ms] CustomBuild:
+[        ]   "The build of 'D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\CMakeFiles\d922d50232aec2b59779709c5266ee11\flutter_assemble.rule' depends on 'D:\WORK\GIT\SYNCMIST\APPS\FLUTTER_APP\WINDOWS\FLUTTER\EPHEMERAL\FLUTTER_WINDOWS.DLL' which is produced by the build of 'D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\CMakeFiles\ba30f2fbca70ef0a62a1ea318cbd8b3f\flutter_windows.dll.rule'. The items cannot be built in parallel."
+[ +203 ms]   Generating D:/Work/Git/SyncMist/apps/flutter_app/windows/flutter/ephemeral/flutter_windows.dll, D:/Work/Git/SyncMist/apps/flutter_app/windows/flutter/ephemeral/flutter_export.h, D:/Work/Git/SyncMist/apps/flutter_app/windows/flutter/ephemeral/flutter_windows.h, D:/Work/Git/SyncMist/apps/flutter_app/windows/flutter/ephemeral/flutter_messenger.h, D:/Work/Git/SyncMist/apps/flutter_app/windows/flutter/ephemeral/flutter_plugin_registrar.h, D:/Work/Git/SyncMist/apps/flutter_app/windows/flutter/ephemeral/flutter_texture_registrar.h, D:/Work/Git/SyncMist/apps/flutter_app/windows/flutter/ephemeral/cpp_client_wrapper/core_implementations.cc, D:/Work/Git/SyncMist/apps/flutter_app/windows/flutter/ephemeral/cpp_client_wrapper/standard_codec.cc, D:/Work/Git/SyncMist/apps/flutter_app/windows/flutter/ephemeral/cpp_client_wrapper/plugin_registrar.cc, D:/Work/Git/SyncMist/apps/flutter_app/windows/flutter/ephemeral/cpp_client_wrapper/flutter_engine.cc, D:/Work/Git/SyncMist/apps/flutter_app/windows/flutter/ephemeral/cpp_client_wrapper/flutter_view_controller.cc, _phony_
+[+5689 ms]   [ +651 ms] Artifact Instance of 'AndroidGenSnapshotArtifacts' is not required, skipping update.
+[        ]   [   +1 ms] Artifact Instance of 'AndroidInternalBuildArtifacts' is not required, skipping update.
+[        ]   [        ] Artifact Instance of 'IOSEngineArtifacts' is not required, skipping update.
+[        ]   [        ] Artifact Instance of 'FlutterWebSdk' is not required, skipping update.
+[        ]   [        ] Artifact Instance of 'LegacyCanvasKitRemover' is not required, skipping update.
+[        ]   [   +5 ms] Artifact Instance of 'WindowsEngineArtifacts' is not required, skipping update.
+[        ]   [        ] Artifact Instance of 'MacOSEngineArtifacts' is not required, skipping update.
+[        ]   [        ] Artifact Instance of 'LinuxEngineArtifacts' is not required, skipping update.
+[        ]   [        ] Artifact Instance of 'LinuxFuchsiaSDKArtifacts' is not required, skipping update.
+[        ]   [        ] Artifact Instance of 'MacOSFuchsiaSDKArtifacts' is not required, skipping update.
+[        ]   [        ] Artifact Instance of 'FlutterRunnerSDKArtifacts' is not required, skipping update.
+[        ]   [        ] Artifact Instance of 'FlutterRunnerDebugSymbols' is not required, skipping update.
+[ +206 ms]   [ +218 ms] Artifact Instance of 'MaterialFonts' is not required, skipping update.
+[   +1 ms]   [        ] Artifact Instance of 'GradleWrapper' is not required, skipping update.
+[        ]   [        ] Artifact Instance of 'AndroidGenSnapshotArtifacts' is not required, skipping update.
+[        ]   [        ] Artifact Instance of 'AndroidInternalBuildArtifacts' is not required, skipping update.
+[        ]   [        ] Artifact Instance of 'IOSEngineArtifacts' is not required, skipping update.
+[        ]   [        ] Artifact Instance of 'FlutterWebSdk' is not required, skipping update.
+[        ]   [        ] Artifact Instance of 'LegacyCanvasKitRemover' is not required, skipping update.
+[        ]   [        ] Artifact Instance of 'FlutterSdk' is not required, skipping update.
+[   +4 ms]   [   +5 ms] Artifact Instance of 'MacOSEngineArtifacts' is not required, skipping update.
+[        ]   [        ] Artifact Instance of 'LinuxEngineArtifacts' is not required, skipping update.
+[        ]   [        ] Artifact Instance of 'LinuxFuchsiaSDKArtifacts' is not required, skipping update.
+[        ]   [        ] Artifact Instance of 'MacOSFuchsiaSDKArtifacts' is not required, skipping update.
+[        ]   [        ] Artifact Instance of 'FlutterRunnerSDKArtifacts' is not required, skipping update.
+[        ]   [        ] Artifact Instance of 'FlutterRunnerDebugSymbols' is not required, skipping update.
+[        ]   [        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ]   [        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ]   [        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ]   [        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ]   [        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ]   [        ] Artifact Instance of 'FontSubsetArtifacts' is not required, skipping update.
+[        ]   [        ] Artifact Instance of 'PubDependencies' is not required, skipping update.
+[ +182 ms]   [ +182 ms] Initializing file store
+[  +70 ms]   [  +70 ms] Done initializing file store
+[ +289 ms]   [ +289 ms] Skipping target: gen_localizations
+[  +18 ms]   [  +19 ms] Skipping target: gen_dart_plugin_registrant
+[+9401 ms]   [+9399 ms] Skipping target: unpack_windows
+[+2400 ms]   [+2401 ms] Skipping target: kernel_snapshot_program
+[  +15 ms]   [  +15 ms] Skipping target: dart_build
+[   +1 ms]   [   +1 ms] Skipping target: install_code_assets
+[+1192 ms]   [+1190 ms] Skipping target: debug_bundle_windows-x64_assets
+[        ]   [   +1 ms] Persisting file store
+[  +33 ms]   [  +32 ms] Done persisting file store
+[ +108 ms]   [ +108 ms] build succeeded.
+[  +25 ms]   [  +25 ms] "flutter assemble" took 14,212ms.
+[  +44 ms]   [  +44 ms] Running 1 shutdown hook
+[   +1 ms]   [   +1 ms] Shutdown hooks complete
+[ +274 ms]   [ +275 ms] exiting with code 0
+[ +756 ms] FinalizeBuildStatus:
+[        ]   Deleting file "x64\Debug\flutter_assemble\flutter_assemble.tlog\unsuccessfulbuild".
+[        ]   Touching "x64\Debug\flutter_assemble\flutter_assemble.tlog\flutter_assemble.lastbuildstate".
+[        ] Done Building Project "D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\flutter\flutter_assemble.vcxproj" (default targets).
+[ +261 ms] Project "D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\plugins\flutter_secure_storage_windows\flutter_secure_storage_windows_plugin.vcxproj" (4) is building "D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\flutter\flutter_wrapper_plugin.vcxproj" (6) on node 1 (default targets).
+[        ] InitializeBuildStatus:
+[        ]   Creating "flutter_wrapper_plugin.dir\Debug\flutter_.C5E66877.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+[   +1 ms] CustomBuild:
+[        ]   All outputs are up-to-date.
+[ +120 ms] ClCompile:
+[        ]   All outputs are up-to-date.
+[  +54 ms] Lib:
+[        ]   All outputs are up-to-date.
+[  +32 ms]   flutter_wrapper_plugin.vcxproj -> D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\flutter\Debug\flutter_wrapper_plugin.lib
+[ +253 ms] FinalizeBuildStatus:
+[        ]   Deleting file "flutter_wrapper_plugin.dir\Debug\flutter_.C5E66877.tlog\unsuccessfulbuild".
+[        ]   Touching "flutter_wrapper_plugin.dir\Debug\flutter_.C5E66877.tlog\flutter_wrapper_plugin.lastbuildstate".
+[        ] Done Building Project "D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\flutter\flutter_wrapper_plugin.vcxproj" (default targets).
+[  +18 ms] InitializeBuildStatus:
+[        ]   Touching "flutter_secure_storage_windows_plugin.dir\Debug\flutter_.94F65E1F.tlog\unsuccessfulbuild".
+[   +3 ms] CustomBuild:
+[        ]   All outputs are up-to-date.
+[  +81 ms] ClCompile:
+[        ]   C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\VC\Tools\MSVC\14.29.30133\bin\HostX64\x64\CL.exe /c /ID:\Work\Git\SyncMist\apps\flutter_app\windows\flutter\ephemeral /ID:\Work\Git\SyncMist\apps\flutter_app\windows\flutter\ephemeral\cpp_client_wrapper\include /Zi /nologo /W4 /WX /diagnostics:column /Od /Ob0 /D WIN32 /D _WINDOWS /D _HAS_EXCEPTIONS=0 /D _DEBUG /D FLUTTER_PLUGIN_IMPL /D UNICODE /D _UNICODE /D "SECURE_STORAGE_KEY_PREFIX=\"syncmist_VGhpcyBpcyB0aGUgcHJlZml4IGZv_\"" /D "CMAKE_INTDIR=\"Debug\"" /D flutter_secure_storage_windows_plugin_EXPORTS /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /std:c++17 /Fo"flutter_secure_storage_windows_plugin.dir\Debug\\" /Fd"flutter_secure_storage_windows_plugin.dir\Debug\vc142.pdb" /external:W4 /Gd /TP /wd4100 /errorReport:queue D:\Work\Git\SyncMist\apps\flutter_app\windows\flutter\ephemeral\.plugin_symlinks\flutter_secure_storage_windows\windows\flutter_secure_storage_windows_plugin.cpp
+[+2533 ms]   flutter_secure_storage_windows_plugin.cpp
+[+3081 ms] D:\Work\Git\SyncMist\apps\flutter_app\windows\flutter\ephemeral\.plugin_symlinks\flutter_secure_storage_windows\windows\flutter_secure_storage_windows_plugin.cpp(6,10): fatal error C1083: Cannot open include file: 'atlstr.h': No such file or directory [D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\plugins\flutter_secure_storage_windows\flutter_secure_storage_windows_plugin.vcxproj]
+[+1551 ms] Done Building Project "D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\plugins\flutter_secure_storage_windows\flutter_secure_storage_windows_plugin.vcxproj" (default targets) -- FAILED.
+[ +119 ms] Project "D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\ALL_BUILD.vcxproj" (3) is building "D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\flutter\flutter_wrapper_app.vcxproj" (7) on node 1 (default targets).
+[        ] InitializeBuildStatus:
+[        ]   Creating "flutter_wrapper_app.dir\Debug\flutter_.E616DF08.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+[   +2 ms] CustomBuild:
+[        ]   All outputs are up-to-date.
+[  +63 ms] ClCompile:
+[        ]   All outputs are up-to-date.
+[  +11 ms] Lib:
+[        ]   All outputs are up-to-date.
+[        ]   flutter_wrapper_app.vcxproj -> D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\flutter\Debug\flutter_wrapper_app.lib
+[  +59 ms] FinalizeBuildStatus:
+[        ]   Deleting file "flutter_wrapper_app.dir\Debug\flutter_.E616DF08.tlog\unsuccessfulbuild".
+[        ]   Touching "flutter_wrapper_app.dir\Debug\flutter_.E616DF08.tlog\flutter_wrapper_app.lastbuildstate".
+[        ] Done Building Project "D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\flutter\flutter_wrapper_app.vcxproj" (default targets).
+[ +296 ms] Project "D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\ALL_BUILD.vcxproj" (3) is building "D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\plugins\irondash_engine_context\irondash_engine_context_plugin.vcxproj" (8) on node 1 (default targets).
+[        ] InitializeBuildStatus:
+[        ]   Creating "irondash_engine_context_plugin.dir\Debug\irondash.11CFBEBE.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+[   +4 ms] CustomBuild:
+[        ]   All outputs are up-to-date.
+[  +66 ms] ClCompile:
+[        ]   All outputs are up-to-date.
+[  +58 ms] Link:
+[        ]   All outputs are up-to-date.
+[   +3 ms]   irondash_engine_context_plugin.vcxproj -> D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\plugins\irondash_engine_context\Debug\irondash_engine_context_plugin.dll
+[  +78 ms] FinalizeBuildStatus:
+[        ]   Deleting file "irondash_engine_context_plugin.dir\Debug\irondash.11CFBEBE.tlog\unsuccessfulbuild".
+[        ]   Touching "irondash_engine_context_plugin.dir\Debug\irondash.11CFBEBE.tlog\irondash_engine_context_plugin.lastbuildstate".
+[   +4 ms] Done Building Project "D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\plugins\irondash_engine_context\irondash_engine_context_plugin.vcxproj" (default targets).
+[ +395 ms] Project "D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\ALL_BUILD.vcxproj" (3) is building "D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\plugins\super_native_extensions\super_native_extensions_plugin.vcxproj" (9) on node 1 (default targets).
+[        ] Project "D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\plugins\super_native_extensions\super_native_extensions_plugin.vcxproj" (9) is building "D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\plugins\super_native_extensions\super_native_extensions_plugin_cargokit.vcxproj" (10) on node 1 (default targets).
+[        ] InitializeBuildStatus:
+[        ]   Touching "x64\Debug\super_native_extensions_plugin_cargokit\super_na.E4248C7A.tlog\unsuccessfulbuild".
+[  +29 ms] CustomBuild:
+[        ]   "The build of 'D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\CMakeFiles\c5732babe09e963891ddfc02224e604b\super_native_extensions_plugin_cargokit.rule' depends on 'D:\WORK\GIT\SYNCMIST\APPS\FLUTTER_APP\BUILD\WINDOWS\X64\PLUGINS\SUPER_NATIVE_EXTENSIONS\DEBUG\SUPER_NATIVE_EXTENSIONS.DLL' which is produced by the build of 'D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\CMakeFiles\8c622de21f72a115d6356ebb4d5aba78\super_native_extensions.dll.rule'. The items cannot be built in parallel."
+[ +948 ms]   Generating Debug/super_native_extensions.dll, _phony_
+[+9301 ms]           1 file(s) moved.
+[ +481 ms]   Running pub get in "D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\plugins\super_native_extensions\cargokit_build\tool"
+[+2447 ms]   Resolving dependencies...
+[ +935 ms]   Downloading packages...
+[ +587 ms]     args 2.4.2 (2.7.0 available)
+[        ]     collection 1.18.0 (1.19.1 available)
+[        ]     convert 3.1.1 (3.1.2 available)
+[        ]     crypto 3.0.3 (3.0.7 available)
+[        ]     github 9.17.0 (9.25.0 available)
+[        ]     http 1.1.0 (1.6.0 available)
+[        ]     http_parser 4.0.2 (4.1.2 available)
+[        ]     logging 1.2.0 (1.3.0 available)
+[        ]     path 1.8.0 (1.9.1 available)
+[        ]     petitparser 5.4.0 (7.0.1 available)
+[        ]     source_span 1.10.0 (1.10.1 available)
+[        ]     toml 0.14.0 (0.18.0 available)
+[        ]     version 3.0.0 (3.0.2 available)
+[        ]     yaml 3.1.2 (3.1.3 available)
+[        ]   Got dependencies!
+[   +2 ms]   14 packages have newer versions incompatible with dependency constraints.
+[        ]   Try `dart pub outdated` for more information.
+[+3045 ms]   Compiling bin/build_tool_runner.dart to kernel file bin/build_tool_runner.dill.
+[+12600 ms]   INFO: Precompiled binaries are disabled
+[+2448 ms]   INFO: Building super_native_extensions for x86_64-pc-windows-msvc
+[+82488 ms] FinalizeBuildStatus:
+[        ]   Touching "x64\Debug\super_native_extensions_plugin_cargokit\super_na.E4248C7A.tlog\super_native_extensions_plugin_cargokit.lastbuildstate".
+[        ] Done Building Project "D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\plugins\super_native_extensions\super_native_extensions_plugin_cargokit.vcxproj" (default targets).
+[   +8 ms] InitializeBuildStatus:
+[        ]   Touching "super_native_extensions_plugin.dir\Debug\super_na.C9B220C4.tlog\unsuccessfulbuild".
+[   +1 ms] CustomBuild:
+[        ]   All outputs are up-to-date.
+[   +9 ms] ClCompile:
+[        ]   C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\VC\Tools\MSVC\14.29.30133\bin\HostX64\x64\CL.exe /c /ID:\Work\Git\SyncMist\apps\flutter_app\windows\flutter\ephemeral /ID:\Work\Git\SyncMist\apps\flutter_app\windows\flutter\ephemeral\cpp_client_wrapper\include /Zi /nologo /W4 /WX /diagnostics:column /Od /Ob0 /D WIN32 /D _WINDOWS /D _HAS_EXCEPTIONS=0 /D _DEBUG /D FLUTTER_PLUGIN_IMPL /D UNICODE /D _UNICODE /D "CMAKE_INTDIR=\"Debug\"" /D super_native_extensions_plugin_EXPORTS /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /std:c++17 /Fo"super_native_extensions_plugin.dir\Debug\\" /Fd"super_native_extensions_plugin.dir\Debug\vc142.pdb" /external:W4 /Gd /TP /wd4100 /errorReport:queue D:\Work\Git\SyncMist\apps\flutter_app\windows\flutter\ephemeral\.plugin_symlinks\super_native_extensions\windows\super_native_extensions_plugin_c_api.cpp D:\Work\Git\SyncMist\apps\flutter_app\windows\flutter\ephemeral\.plugin_symlinks\super_native_extensions\windows\super_native_extensions_plugin.cpp
+[ +130 ms]   super_native_extensions_plugin_c_api.cpp
+[+1891 ms]   super_native_extensions_plugin.cpp
+[+1243 ms]   Generating Code...
+[ +138 ms] Link:
+[        ]   C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\VC\Tools\MSVC\14.29.30133\bin\HostX64\x64\link.exe /ERRORREPORT:QUEUE /OUT:"D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\plugins\super_native_extensions\Debug\super_native_extensions_plugin.dll" /INCREMENTAL /ILK:"super_native_extensions_plugin.dir\Debug\super_native_extensions_plugin.ilk" /NOLOGO ..\..\flutter\Debug\flutter_wrapper_plugin.lib Debug\super_native_extensions.dll.lib D:\Work\Git\SyncMist\apps\flutter_app\windows\flutter\ephemeral\flutter_windows.dll.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /INCLUDE:super_native_extensions_init /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/Work/Git/SyncMist/apps/flutter_app/build/windows/x64/plugins/super_native_extensions/Debug/super_native_extensions_plugin.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/Work/Git/SyncMist/apps/flutter_app/build/windows/x64/plugins/super_native_extensions/Debug/super_native_extensions_plugin.lib" /MACHINE:X64  /machine:x64 /DLL super_native_extensions_plugin.dir\Debug\super_native_extensions_plugin_c_api.obj
+[        ]   super_native_extensions_plugin.dir\Debug\super_native_extensions_plugin.obj
+[ +204 ms]      Creating library D:/Work/Git/SyncMist/apps/flutter_app/build/windows/x64/plugins/super_native_extensions/Debug/super_native_extensions_plugin.lib and object D:/Work/Git/SyncMist/apps/flutter_app/build/windows/x64/plugins/super_native_extensions/Debug/super_native_extensions_plugin.exp
+[ +140 ms]   super_native_extensions_plugin.vcxproj -> D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\plugins\super_native_extensions\Debug\super_native_extensions_plugin.dll
+[   +9 ms] FinalizeBuildStatus:
+[        ]   Deleting file "super_native_extensions_plugin.dir\Debug\super_na.C9B220C4.tlog\unsuccessfulbuild".
+[        ]   Touching "super_native_extensions_plugin.dir\Debug\super_na.C9B220C4.tlog\super_native_extensions_plugin.lastbuildstate".
+[        ] Done Building Project "D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\plugins\super_native_extensions\super_native_extensions_plugin.vcxproj" (default targets).
+[  +31 ms] Done Building Project "D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\ALL_BUILD.vcxproj" (default targets) -- FAILED.
+[        ] Done Building Project "D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\INSTALL.vcxproj" (default targets) -- FAILED.
+[  +13 ms] Build FAILED.
+[   +2 ms] "D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\INSTALL.vcxproj" (default target) (1) ->
+[        ] "D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\ALL_BUILD.vcxproj" (default target) (3) ->
+[        ] "D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\plugins\flutter_secure_storage_windows\flutter_secure_storage_windows_plugin.vcxproj" (default target) (4) ->
+[        ] (ClCompile target) -> 
+[        ]   D:\Work\Git\SyncMist\apps\flutter_app\windows\flutter\ephemeral\.plugin_symlinks\flutter_secure_storage_windows\windows\flutter_secure_storage_windows_plugin.cpp(6,10): fatal error C1083: Cannot open include file: 'atlstr.h': No such file or directory [D:\Work\Git\SyncMist\apps\flutter_app\build\windows\x64\plugins\flutter_secure_storage_windows\flutter_secure_storage_windows_plugin.vcxproj]
+[        ]     0 Warning(s)
+[        ]     1 Error(s)
+[        ] Time Elapsed 00:02:32.09
+[  +29 ms] Building Windows application... (completed in 159.8s)
+[        ] Error: Build process failed.
+[   +2 ms] "flutter run" took 163,708ms.
+[  +19 ms] 
+           #0      throwToolExit (package:flutter_tools/src/base/common.dart:34:3)
+           #1      RunCommand.runCommand (package:flutter_tools/src/commands/run.dart:931:9)
+           <asynchronous suspension>
+           #2      FlutterCommand.run.<anonymous closure> (package:flutter_tools/src/runner/flutter_command.dart:1558:27)
+           <asynchronous suspension>
+           #3      AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:154:19)
+           <asynchronous suspension>
+           #4      CommandRunner.runCommand (package:args/command_runner.dart:212:13)
+           <asynchronous suspension>
+           #5      FlutterCommandRunner.runCommand.<anonymous closure> (package:flutter_tools/src/runner/flutter_command_runner.dart:496:9)
+           <asynchronous suspension>
+           #6      AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:154:19)
+           <asynchronous suspension>
+           #7      FlutterCommandRunner.runCommand (package:flutter_tools/src/runner/flutter_command_runner.dart:431:5)
+           <asynchronous suspension>
+           #8      run.<anonymous closure>.<anonymous closure> (package:flutter_tools/runner.dart:98:11)
+           <asynchronous suspension>
+           #9      AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:154:19)
+           <asynchronous suspension>
+           #10     main (package:flutter_tools/executable.dart:99:3)
+           <asynchronous suspension>
+
+
+[        ] Running 3 shutdown hooks
+[   +5 ms] Shutdown hooks complete
+[ +233 ms] exiting with code 1
