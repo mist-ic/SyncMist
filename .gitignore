@@ -1,0 +1,29 @@
+# Internal docs (research, drafts)
+Internal/
+
+# Agent configuration (local to each developer)
+.agent/
+
+# Moon cache
+.moon/cache/
+
+# Build outputs
+dist/
+build/
+target/
+
+# Dependencies
+node_modules/
+.dart_tool/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
