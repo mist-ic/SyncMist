@@ -17,7 +17,3 @@ vcs:
 generator:
   templates:
     - './templates'
-
-# Constraints for dependency management
-constraints:
-  enforceCleanWorkingDirectory: true

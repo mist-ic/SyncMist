@@ -27,6 +27,7 @@ tasks:
       - 'build/windows'
     options:
       runInCI: false
+      os: ['windows']
       
   build-android:
     command: 'flutter build apk'
@@ -46,6 +47,9 @@ tasks:
       - 'pubspec.yaml'
     outputs:
       - 'build/linux'
+    options:
+      runInCI: false
+      os: ['linux']
       
   dev:
     command: 'flutter run'
