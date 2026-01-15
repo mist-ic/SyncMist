@@ -42,13 +42,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String _connectionStatus = 'Disconnected';
-  String _lastClipboard = 'No clipboard data yet';
+  final String _connectionStatus = 'Disconnected';
+  final String _lastClipboard = 'No clipboard data yet';
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('SyncMist'),
@@ -100,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            
+
             // Current Clipboard Card
             Card(
               child: Padding(
@@ -139,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            
+
             // Devices Section
             Text(
               'Connected Devices',
