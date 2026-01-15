@@ -1,0 +1,14 @@
+# Proto toolchain configuration
+# https://moonrepo.dev/docs/proto/config
+
+# Node.js
+node = "20.10.0"
+
+# Bun (package manager)
+bun = "1.1.0"
+
+# Go
+go = "1.21.0"
+
+# Rust (use system rustup)
+# rust = "1.75.0"
