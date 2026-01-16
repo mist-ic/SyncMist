@@ -1,9 +1,5 @@
 # Internal docs (research, drafts)
-# Internal docs (research, drafts)
 /Internal/
-
-# Agent configuration (local to each developer)
-.agent/
 
 # Moon cache
 .moon/cache/
@@ -21,6 +17,7 @@ node_modules/
 .idea/
 .vscode/
 *.iml
+.agent/
 
 # OS
 .DS_Store

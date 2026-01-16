@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../services/websocket_service.dart';
 import '../services/clipboard_service.dart';
 import '../services/device_service.dart';
+import '../services/crypto_service.dart';
+import '../src/rust/frb_generated.dart' as rust;
 
 /// Home Screen with WebSocket integration
 class HomeScreen extends StatefulWidget {
@@ -16,6 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final WebSocketService _wsService = WebSocketService();
   final ClipboardService _clipboardService = ClipboardService();
   final DeviceService _deviceService = DeviceService();
+  late final CryptoService _cryptoService;
 
   final TextEditingController _urlController =
       TextEditingController(text: 'ws://localhost:8080/ws');
@@ -29,8 +32,16 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    _initRust();
     _initDevice();
     _startClipboardMonitoring();
+  }
+
+  Future<void> _initRust() async {
+    // Initialize Rust library
+    await rust.RustLib.init();
+    // Initialize crypto service
+    _cryptoService = CryptoService();
   }
 
   Future<void> _initDevice() async {
@@ -49,13 +60,12 @@ class _HomeScreenState extends State<HomeScreen> {
         setState(() {
           _currentClipboard = text;
         });
-        // Sync to WebSocket if connected
+        // Sync to WebSocket if connected (with encryption)
         if (_isConnected) {
-          _wsService.send({
-            'type': 'clipboard',
-            'content': text,
-            'sender': _deviceId,
-          });
+          _wsService.sendEncrypted(
+            content: text,
+            sender: _deviceId,
+          );
         }
       }
     });
@@ -63,9 +73,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _connect() {
     try {
-      _wsService.connect(_urlController.text);
+      _wsService.connect(_urlController.text, cryptoService: _cryptoService);
       setState(() {
-        _connectionStatus = 'Connected';
+        _connectionStatus = 'Connected (🔐 Encrypted)';
         _isConnected = true;
       });
 
@@ -75,11 +85,18 @@ class _HomeScreenState extends State<HomeScreen> {
           try {
             final data = jsonDecode(message.toString());
             if (data is Map && data['type'] == 'clipboard') {
-              final content = data['content'] as String;
               final sender = data['sender'] as String;
 
               // Loop avoidance: ignore if we are the sender
               if (sender == _deviceId) return;
+
+              // Decrypt the content
+              final content =
+                  _wsService.decryptMessage(data as Map<String, dynamic>);
+              if (content == null) {
+                debugPrint('Failed to decrypt message');
+                return;
+              }
 
               if (mounted) {
                 setState(() {
@@ -129,11 +146,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _sendMessage() {
     if (_messageController.text.isNotEmpty && _isConnected) {
-      _wsService.send({
-        'type': 'clipboard',
-        'content': _messageController.text,
-        'sender': _deviceId,
-      });
+      _wsService.sendEncrypted(
+        content: _messageController.text,
+        sender: _deviceId,
+      );
       _messageController.clear();
     }
   }

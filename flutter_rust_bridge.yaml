@@ -1,5 +1,6 @@
 # Flutter Rust Bridge Configuration
-rust_input: packages/rust_core/src/lib.rs
+rust_root: packages/rust_core/
+rust_input: crate
 dart_output: apps/flutter_app/lib/src/rust/
 
 # Use camelCase for Dart code

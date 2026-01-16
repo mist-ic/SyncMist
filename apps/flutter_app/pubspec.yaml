@@ -24,6 +24,7 @@ dependencies:
 
   # Device info for ID
   device_info_plus: ^10.1.0
+  flutter_rust_bridge: 2.11.1
   
   # Rust FFI (generated)
   # flutter_rust_bridge: ^2.0.0
