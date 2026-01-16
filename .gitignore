@@ -1,5 +1,6 @@
 # Internal docs (research, drafts)
-Internal/
+# Internal docs (research, drafts)
+/Internal/
 
 # Agent configuration (local to each developer)
 .agent/
@@ -27,3 +28,4 @@ Thumbs.db
 
 # Logs
 *.log
+*.exe
