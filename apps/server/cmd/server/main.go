@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"os"
 
-	"syncmist-server/internal/hub"
+	"github.com/mist-ic/SyncMist/apps/server/internal/hub"
 
 	"github.com/gorilla/websocket"
 )

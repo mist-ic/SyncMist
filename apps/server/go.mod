@@ -1,4 +1,4 @@
-module syncmist-server
+module github.com/mist-ic/SyncMist/apps/server
 
 go 1.21
 
