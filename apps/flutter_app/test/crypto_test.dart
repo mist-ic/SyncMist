@@ -9,25 +9,25 @@ void main() {
   });
 
   group('CryptoService Tests', () {
-    test('Encryption and Decryption Roundtrip', () {
+    test('Encryption and Decryption Roundtrip', () async {
       final cryptoService = CryptoService();
       const plaintext = "Hello from Flutter with Rust encryption!";
 
-      final ciphertext = cryptoService.encrypt(plaintext);
+      final ciphertext = await cryptoService.encrypt(plaintext);
       expect(ciphertext, isNot(plaintext));
       expect(ciphertext.length, greaterThan(plaintext.length));
 
-      final decrypted = cryptoService.decrypt(ciphertext);
+      final decrypted = await cryptoService.decrypt(ciphertext);
       expect(decrypted, equals(plaintext));
     });
 
     test('Ciphertext is different for same plaintext (nonce randomization)',
-        () {
+        () async {
       final cryptoService = CryptoService();
       const plaintext = "Stable content";
 
-      final ciphertext1 = cryptoService.encrypt(plaintext);
-      final ciphertext2 = cryptoService.encrypt(plaintext);
+      final ciphertext1 = await cryptoService.encrypt(plaintext);
+      final ciphertext2 = await cryptoService.encrypt(plaintext);
 
       expect(ciphertext1, isNot(equals(ciphertext2)));
     });

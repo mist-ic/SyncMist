@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'ui/home_screen.dart';
+import 'src/rust/frb_generated.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize Rust library BEFORE any screen can create CryptoService
+  await RustLib.init();
+
   runApp(const SyncMistApp());
 }
 

@@ -15,6 +15,18 @@ Uint8List generateKey() => RustLib.instance.api.crateCryptoGenerateKey();
 Uint8List encryptText({required String plaintext, required List<int> key}) =>
     RustLib.instance.api.crateCryptoEncryptText(plaintext: plaintext, key: key);
 
+/// Generate an X25519 keypair for device pairing
+///
+/// Returns: (secret_key, public_key) as 32-byte vectors
+(Uint8List, Uint8List) generateKeypair() => RustLib.instance.api.crateCryptoGenerateKeypair();
+
+/// Derive shared secret using X25519 Diffie-Hellman
+///
+/// Takes your secret key and their public key, returns a 32-byte shared secret
+/// that can be used as an AES-256 encryption key
+Uint8List deriveSharedSecret({required List<int> mySecret, required List<int> theirPublic}) =>
+    RustLib.instance.api.crateCryptoDeriveSharedSecret(mySecret: mySecret, theirPublic: theirPublic);
+
 /// Decrypt ciphertext using AES-256-GCM
 ///
 /// Expects: nonce (12 bytes) || ciphertext || tag (16 bytes)

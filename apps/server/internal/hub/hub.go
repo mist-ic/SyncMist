@@ -10,6 +10,9 @@ type Hub struct {
 	// Registered clients
 	clients map[*Client]bool
 
+	// Device ID to client mapping
+	deviceMap map[string]*Client
+
 	// Inbound messages from the clients
 	broadcast chan broadcastMessage
 
@@ -27,6 +30,7 @@ func NewHub() *Hub {
 		register:   make(chan *Client),
 		unregister: make(chan *Client),
 		clients:    make(map[*Client]bool),
+		deviceMap:  make(map[string]*Client),
 	}
 }
 
@@ -36,13 +40,15 @@ func (h *Hub) Run() {
 		select {
 		case client := <-h.register:
 			h.clients[client] = true
-			slog.Info("Client registered", "address", client.conn.RemoteAddr(), "total_clients", len(h.clients))
+			h.deviceMap[client.deviceID] = client
+			slog.Info("Client registered", "device_id", client.deviceID, "address", client.conn.RemoteAddr(), "total_clients", len(h.clients))
 
 		case client := <-h.unregister:
 			if _, ok := h.clients[client]; ok {
 				delete(h.clients, client)
+				delete(h.deviceMap, client.deviceID)
 				close(client.send)
-				slog.Info("Client unregistered", "address", client.conn.RemoteAddr(), "total_clients", len(h.clients))
+				slog.Info("Client unregistered", "device_id", client.deviceID, "address", client.conn.RemoteAddr(), "total_clients", len(h.clients))
 			}
 
 		case bm := <-h.broadcast:
@@ -57,7 +63,7 @@ func (h *Hub) Run() {
 			if len(displayContent) > 50 {
 				displayContent = displayContent[:47] + "..."
 			}
-			slog.Info("Broadcasting message", "type", msg.Type, "content", displayContent, "sender_addr", bm.sender.conn.RemoteAddr())
+			slog.Info("Broadcasting message", "type", msg.Type, "content", displayContent, "sender_device_id", bm.sender.deviceID)
 
 			for client := range h.clients {
 				// Broadcast to ALL clients except sender (to avoid echo)
@@ -72,7 +78,8 @@ func (h *Hub) Run() {
 					// Client's send buffer is full, assume client is dead or stuck
 					close(client.send)
 					delete(h.clients, client)
-					slog.Warn("Removed stuck client", "address", client.conn.RemoteAddr())
+					delete(h.deviceMap, client.deviceID)
+					slog.Warn("Removed stuck client", "device_id", client.deviceID, "address", client.conn.RemoteAddr())
 				}
 			}
 		}

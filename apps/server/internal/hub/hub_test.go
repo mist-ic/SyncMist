@@ -25,7 +25,7 @@ func TestHubIntegration(t *testing.T) {
 		if err != nil {
 			return
 		}
-		client := NewClient(h, conn)
+		client := NewClient(h, conn, "test-device")
 		h.register <- client
 
 		go client.WritePump()

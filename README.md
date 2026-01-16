@@ -1,8 +1,8 @@
-# SyncMist 🌫️
+# SyncMist
+
 
 **Universal Clipboard Sync** - Copy anywhere, paste everywhere.
 
-[![CI](https://github.com/mist-ic/syncmist/actions/workflows/ci.yml/badge.svg)](https://github.com/mist-ic/syncmist/actions/workflows/ci.yml)
 
 ## 🚀 Features
 

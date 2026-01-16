@@ -4,7 +4,8 @@ import '../services/websocket_service.dart';
 import '../services/clipboard_service.dart';
 import '../services/device_service.dart';
 import '../services/crypto_service.dart';
-import '../src/rust/frb_generated.dart' as rust;
+import '../services/auth_service.dart';
+import 'pairing_screen.dart';
 
 /// Home Screen with WebSocket integration
 class HomeScreen extends StatefulWidget {
@@ -18,6 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final WebSocketService _wsService = WebSocketService();
   final ClipboardService _clipboardService = ClipboardService();
   final DeviceService _deviceService = DeviceService();
+  final AuthService _authService = AuthService();
   late final CryptoService _cryptoService;
 
   final TextEditingController _urlController =
@@ -27,20 +29,33 @@ class _HomeScreenState extends State<HomeScreen> {
   String _connectionStatus = 'Disconnected';
   String _currentClipboard = 'No clipboard data yet';
   String _deviceId = 'calculating...';
+  String? _authToken;
   bool _isConnected = false;
 
   @override
   void initState() {
     super.initState();
-    _initRust();
+    _initCrypto();
     _initDevice();
+    // Auth is now done when user presses Connect (after they set the URL)
     _startClipboardMonitoring();
   }
 
-  Future<void> _initRust() async {
-    // Initialize Rust library
-    await rust.RustLib.init();
-    // Initialize crypto service
+  Future<void> _initAuth() async {
+    // Get base URL for registration (same host/port as WS, just HTTP instead of WS)
+    final uri = Uri.parse(_urlController.text);
+    final baseUrl = 'http://${uri.host}:${uri.port}';
+
+    final token = await _authService.getOrRegister(baseUrl);
+    if (mounted) {
+      setState(() {
+        _authToken = token;
+      });
+    }
+  }
+
+  void _initCrypto() {
+    // Rust is already initialized in main.dart
     _cryptoService = CryptoService();
   }
 
@@ -71,9 +86,16 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  void _connect() {
+  Future<void> _connect() async {
     try {
-      _wsService.connect(_urlController.text, cryptoService: _cryptoService);
+      // Get auth token with current URL (not default)
+      await _initAuth();
+
+      _wsService.connect(
+        _urlController.text,
+        cryptoService: _cryptoService,
+        token: _authToken,
+      );
       setState(() {
         _connectionStatus = 'Connected (🔐 Encrypted)';
         _isConnected = true;
@@ -81,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
       // Listen for messages (remote clipboard changes)
       _wsService.messages.listen(
-        (message) {
+        (message) async {
           try {
             final data = jsonDecode(message.toString());
             if (data is Map && data['type'] == 'clipboard') {
@@ -92,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
               // Decrypt the content
               final content =
-                  _wsService.decryptMessage(data as Map<String, dynamic>);
+                  await _wsService.decryptMessage(data as Map<String, dynamic>);
               if (content == null) {
                 debugPrint('Failed to decrypt message');
                 return;
@@ -173,9 +195,15 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
         actions: [
           IconButton(
-            icon: const Icon(Icons.settings),
+            icon: const Icon(Icons.qr_code_scanner),
+            tooltip: 'Pair Device',
             onPressed: () {
-              // TODO: Navigate to settings
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const PairingScreen(),
+                ),
+              );
             },
           ),
         ],

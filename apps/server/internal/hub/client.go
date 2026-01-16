@@ -30,6 +30,9 @@ type Client struct {
 
 	// Buffered channel of outbound messages
 	send chan []byte
+
+	// Device ID for this client
+	deviceID string
 }
 
 // Message represents a websocket message
@@ -46,11 +49,12 @@ type broadcastMessage struct {
 }
 
 // NewClient creates a new Client instance
-func NewClient(hub *Hub, conn *websocket.Conn) *Client {
+func NewClient(hub *Hub, conn *websocket.Conn, deviceID string) *Client {
 	return &Client{
-		hub:  hub,
-		conn: conn,
-		send: make(chan []byte, 256),
+		hub:      hub,
+		conn:     conn,
+		send:     make(chan []byte, 256),
+		deviceID: deviceID,
 	}
 }
 
