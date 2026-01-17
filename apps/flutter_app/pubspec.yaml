@@ -37,9 +37,6 @@ dependencies:
   # Device ID persistence
   shared_preferences: ^2.2.0
   
-  # UUID generation
-  uuid: ^4.2.0
-  
   # Rust FFI (generated)
   # flutter_rust_bridge: ^2.0.0
   
