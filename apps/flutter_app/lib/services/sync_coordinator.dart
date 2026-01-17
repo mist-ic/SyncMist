@@ -1,11 +1,10 @@
 import 'dart:async';
-import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
+import 'dart:typed_data';
 
 import 'p2p_service.dart';
 import 'discovery_service.dart';
 import '../core/interfaces/discovery_interface.dart';
+import '../src/rust/crypto.dart' as rust_crypto;
 
 /// Direction of a sync operation.
 enum SyncDirection {
@@ -43,35 +42,73 @@ class SyncEvent {
       'SyncEvent($direction, "$contentPreview", peer: $peerId, success: $success)';
 }
 
-/// Mock crypto service for development.
-///
-/// TODO: Replace with real CryptoService when available
-class _MockCryptoService {
+/// Abstract crypto interface.
+abstract class CryptoService {
+  /// Set to true in tests to use mock instead of real FFI.
+  static bool useMock = false;
+
+  /// Get the singleton instance.
+  static CryptoService get instance =>
+      useMock ? _MockCryptoService.instance : _RustCryptoService.instance;
+
+  Uint8List encrypt(String plaintext);
+  String decrypt(Uint8List ciphertext);
+}
+
+/// Real Rust crypto service using FFI.
+class _RustCryptoService implements CryptoService {
+  static final _RustCryptoService _instance = _RustCryptoService._internal();
+  factory _RustCryptoService() => _instance;
+  _RustCryptoService._internal();
+
+  static _RustCryptoService get instance => _instance;
+
+  /// Encryption key (generated once, stored for session).
+  Uint8List? _encryptionKey;
+
+  /// Get or generate encryption key.
+  Uint8List get encryptionKey {
+    _encryptionKey ??= rust_crypto.generateKey();
+    return _encryptionKey!;
+  }
+
+  @override
+  Uint8List encrypt(String plaintext) {
+    print('[RustCrypto] Encrypting ${plaintext.length} chars');
+    return rust_crypto.encryptText(plaintext: plaintext, key: encryptionKey);
+  }
+
+  @override
+  String decrypt(Uint8List ciphertext) {
+    print('[RustCrypto] Decrypting ${ciphertext.length} bytes');
+    return rust_crypto.decryptText(ciphertext: ciphertext, key: encryptionKey);
+  }
+}
+
+/// Mock crypto service for tests.
+class _MockCryptoService implements CryptoService {
   static final _MockCryptoService _instance = _MockCryptoService._internal();
   factory _MockCryptoService() => _instance;
   _MockCryptoService._internal();
 
   static _MockCryptoService get instance => _instance;
 
-  // Simple XOR-based mock encryption (NOT SECURE - for demo only)
+  // Simple XOR-based mock encryption (NOT SECURE - for testing only)
   final int _mockKey = 0x5A;
 
-  /// Mock encrypt data.
-  Uint8List encrypt(Uint8List data) {
-    debugPrint('[MockCrypto] Encrypting ${data.length} bytes');
-    return Uint8List.fromList(data.map((b) => b ^ _mockKey).toList());
+  @override
+  Uint8List encrypt(String plaintext) {
+    print('[MockCrypto] Encrypting ${plaintext.length} chars');
+    final bytes = Uint8List.fromList(plaintext.codeUnits);
+    return Uint8List.fromList(bytes.map((b) => b ^ _mockKey).toList());
   }
 
-  /// Mock decrypt data.
-  Uint8List decrypt(Uint8List data) {
-    debugPrint('[MockCrypto] Decrypting ${data.length} bytes');
-    // XOR is symmetric
-    return Uint8List.fromList(data.map((b) => b ^ _mockKey).toList());
-  }
-
-  /// Get room key (mock).
-  String getRoomKey() {
-    return 'mock-room-key-12345';
+  @override
+  String decrypt(Uint8List ciphertext) {
+    print('[MockCrypto] Decrypting ${ciphertext.length} bytes');
+    final bytes =
+        Uint8List.fromList(ciphertext.map((b) => b ^ _mockKey).toList());
+    return String.fromCharCodes(bytes);
   }
 }
 
@@ -97,7 +134,7 @@ class SyncCoordinator {
   late DiscoveryService _discoveryService;
 
   /// Crypto service for encryption.
-  late _MockCryptoService _cryptoService;
+  late CryptoService _cryptoService;
 
   /// Whether the coordinator has been initialized.
   bool isInitialized = false;
@@ -112,25 +149,22 @@ class SyncCoordinator {
   /// Subscription to incoming data.
   StreamSubscription<Uint8List>? _incomingDataSubscription;
 
-  /// Subscription to peer discovery.
-  StreamSubscription<List<PeerInfo>>? _discoverySubscription;
-
   /// Callback for received clipboard content.
   void Function(String content)? onClipboardReceived;
 
   /// Initialize the sync coordinator.
   Future<void> initialize() async {
     if (isInitialized) {
-      debugPrint('[SyncCoordinator] Already initialized');
+      print('[SyncCoordinator] Already initialized');
       return;
     }
 
-    debugPrint('[SyncCoordinator] Initializing...');
+    print('[SyncCoordinator] Initializing...');
 
     // Initialize services
     _p2pService = P2PService.instance;
     _discoveryService = DiscoveryService.instance;
-    _cryptoService = _MockCryptoService.instance;
+    _cryptoService = CryptoService.instance;
 
     await _p2pService.initialize();
     await _discoveryService.initialize();
@@ -142,7 +176,7 @@ class SyncCoordinator {
     await _p2pService.startAsServer();
 
     isInitialized = true;
-    debugPrint('[SyncCoordinator] Initialized successfully');
+    print('[SyncCoordinator] Initialized successfully');
   }
 
   /// Start syncing clipboard content.
@@ -150,29 +184,29 @@ class SyncCoordinator {
     _ensureInitialized();
 
     if (isSyncing) {
-      debugPrint('[SyncCoordinator] Already syncing');
+      print('[SyncCoordinator] Already syncing');
       return;
     }
 
-    debugPrint('[SyncCoordinator] Starting sync...');
+    print('[SyncCoordinator] Starting sync...');
 
     // Listen for incoming data
     _incomingDataSubscription = _p2pService.incomingData.listen(
       _handleIncomingData,
       onError: (error) {
-        debugPrint('[SyncCoordinator] Error receiving data: $error');
+        print('[SyncCoordinator] Error receiving data: $error');
       },
     );
 
     // Auto-connect to discovered peers
-    _discoverySubscription = _discoveryService.peers.listen((peers) {
+    _discoveryService.peers.listen((peers) {
       for (final peer in peers) {
         _connectToPeerIfNeeded(peer);
       }
     });
 
     isSyncing = true;
-    debugPrint('[SyncCoordinator] Sync started');
+    print('[SyncCoordinator] Sync started');
   }
 
   /// Stop syncing.
@@ -180,34 +214,28 @@ class SyncCoordinator {
     _ensureInitialized();
 
     if (!isSyncing) {
-      debugPrint('[SyncCoordinator] Not currently syncing');
+      print('[SyncCoordinator] Not currently syncing');
       return;
     }
 
-    debugPrint('[SyncCoordinator] Stopping sync...');
+    print('[SyncCoordinator] Stopping sync...');
 
     await _incomingDataSubscription?.cancel();
     _incomingDataSubscription = null;
 
-    await _discoverySubscription?.cancel();
-    _discoverySubscription = null;
-
     isSyncing = false;
-    debugPrint('[SyncCoordinator] Sync stopped');
+    print('[SyncCoordinator] Sync stopped');
   }
 
   /// Send clipboard content to all connected peers.
   Future<void> sendClipboard(String content) async {
     _ensureInitialized();
 
-    debugPrint('[SyncCoordinator] Sending clipboard content...');
+    print('[SyncCoordinator] Sending clipboard content...');
 
     try {
-      // Convert to bytes
-      final contentBytes = Uint8List.fromList(utf8.encode(content));
-
-      // Encrypt
-      final encryptedBytes = _cryptoService.encrypt(contentBytes);
+      // Encrypt content directly (Rust crypto takes String)
+      final encryptedBytes = _cryptoService.encrypt(content);
 
       // Broadcast to all peers
       await _p2pService.broadcast(encryptedBytes);
@@ -220,9 +248,9 @@ class SyncCoordinator {
         success: true,
       ));
 
-      debugPrint('[SyncCoordinator] Clipboard sent successfully');
+      print('[SyncCoordinator] Clipboard sent successfully');
     } catch (e) {
-      debugPrint('[SyncCoordinator] Error sending clipboard: $e');
+      print('[SyncCoordinator] Error sending clipboard: $e');
 
       // Emit failure event
       _syncEvents.add(SyncEvent(
@@ -237,13 +265,10 @@ class SyncCoordinator {
   /// Handle incoming data from peers.
   void _handleIncomingData(Uint8List encryptedData) {
     try {
-      debugPrint('[SyncCoordinator] Received ${encryptedData.length} bytes');
+      print('[SyncCoordinator] Received ${encryptedData.length} bytes');
 
-      // Decrypt
-      final decryptedBytes = _cryptoService.decrypt(encryptedData);
-
-      // Convert to string
-      final content = utf8.decode(decryptedBytes);
+      // Decrypt (Rust crypto returns String directly)
+      final content = _cryptoService.decrypt(encryptedData);
 
       // Emit success event
       _syncEvents.add(SyncEvent(
@@ -256,10 +281,9 @@ class SyncCoordinator {
       // Notify callback
       onClipboardReceived?.call(content);
 
-      debugPrint(
-          '[SyncCoordinator] Clipboard received: ${_getPreview(content)}');
+      print('[SyncCoordinator] Clipboard received: ${_getPreview(content)}');
     } catch (e) {
-      debugPrint('[SyncCoordinator] Error processing incoming data: $e');
+      print('[SyncCoordinator] Error processing incoming data: $e');
 
       // Emit failure event
       _syncEvents.add(SyncEvent(
@@ -309,15 +333,13 @@ class SyncCoordinator {
 
   /// Shutdown the coordinator.
   Future<void> shutdown() async {
-    debugPrint('[SyncCoordinator] Shutting down...');
+    print('[SyncCoordinator] Shutting down...');
 
     await stopSync();
     await _discoveryService.stopDiscovery();
     await _p2pService.disconnectAll();
 
-    await _syncEvents.close();
-
     isInitialized = false;
-    debugPrint('[SyncCoordinator] Shutdown complete');
+    print('[SyncCoordinator] Shutdown complete');
   }
 }

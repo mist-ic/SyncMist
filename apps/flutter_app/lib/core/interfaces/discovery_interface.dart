@@ -1,6 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
+import '../../src/rust/discovery/mdns.dart' as rust_mdns;
+import '../../src/rust/frb_generated.dart';
 
 /// Information about a discovered peer device.
 class PeerInfo {
@@ -27,6 +28,19 @@ class PeerInfo {
     DateTime? discoveredAt,
   }) : discoveredAt = discoveredAt ?? DateTime.now();
 
+  /// Create from Rust FFI PeerInfo.
+  factory PeerInfo.fromRust(rust_mdns.PeerInfo rustPeer) {
+    return PeerInfo(
+      deviceId: rustPeer.deviceId,
+      deviceName: rustPeer.deviceName,
+      addresses: rustPeer.addresses,
+      port: rustPeer.port,
+      discoveredAt: DateTime.fromMillisecondsSinceEpoch(
+        rustPeer.discoveredAt.toInt(),
+      ),
+    );
+  }
+
   @override
   String toString() => 'PeerInfo($deviceName @ ${addresses.join(", ")}:$port)';
 
@@ -42,12 +56,10 @@ class PeerInfo {
 }
 
 /// Abstract interface for mDNS-based device discovery.
-///
-/// This interface defines the contract for discovering other devices
-/// on the local network. Currently uses a mock implementation.
-///
-/// TODO: Replace with RustDiscovery.instance when FFI ready
 abstract class DiscoveryInterface {
+  /// Set to true in tests to use mock instead of real FFI.
+  static bool useMock = false;
+
   /// Register this device on the network for discovery.
   Future<void> register(String deviceId, String deviceName, int port);
 
@@ -61,13 +73,127 @@ abstract class DiscoveryInterface {
   Stream<List<PeerInfo>> get discoveredPeers;
 
   /// Get the singleton instance of the discovery service.
-  /// TODO: Replace with RustDiscovery.instance when FFI ready
-  static DiscoveryInterface get instance => MockDiscovery();
+  /// Uses mock in test mode, real FFI otherwise.
+  static DiscoveryInterface get instance =>
+      useMock ? MockDiscovery() : RustDiscovery();
 }
 
-/// Mock implementation of DiscoveryInterface for development.
-///
-/// TODO: Replace with RustDiscovery.instance when FFI ready
+/// Real Rust FFI implementation of DiscoveryInterface.
+/// Uses MdnsDiscovery from flutter_rust_bridge.
+class RustDiscovery implements DiscoveryInterface {
+  static final RustDiscovery _instance = RustDiscovery._internal();
+
+  factory RustDiscovery() => _instance;
+
+  RustDiscovery._internal();
+
+  rust_mdns.MdnsDiscovery? _mdnsDiscovery;
+  bool _isBrowsing = false;
+  Timer? _pollTimer;
+
+  final StreamController<List<PeerInfo>> _peersController =
+      StreamController<List<PeerInfo>>.broadcast();
+
+  @override
+  Future<void> register(String deviceId, String deviceName, int port) async {
+    await _ensureInitialized(deviceId, deviceName);
+
+    print(
+        '[RustDiscovery] Registering device: $deviceName ($deviceId) on port $port');
+
+    try {
+      _mdnsDiscovery!.register(port: port);
+      print('[RustDiscovery] Device registered successfully');
+    } catch (e) {
+      print('[RustDiscovery] Error registering: $e');
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> startBrowsing() async {
+    if (_isBrowsing) {
+      print('[RustDiscovery] Already browsing');
+      return;
+    }
+
+    if (_mdnsDiscovery == null) {
+      throw StateError('Discovery not initialized. Call register() first.');
+    }
+
+    print('[RustDiscovery] Starting network browsing...');
+
+    try {
+      _mdnsDiscovery!.startBrowsing();
+      _isBrowsing = true;
+
+      // Poll for discovered peers periodically
+      _pollTimer = Timer.periodic(const Duration(seconds: 2), (_) async {
+        await _pollPeers();
+      });
+
+      print('[RustDiscovery] Browsing started');
+    } catch (e) {
+      print('[RustDiscovery] Error starting browsing: $e');
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> stopBrowsing() async {
+    print('[RustDiscovery] Stopping network browsing');
+
+    _pollTimer?.cancel();
+    _pollTimer = null;
+    _isBrowsing = false;
+
+    if (_mdnsDiscovery != null) {
+      _mdnsDiscovery!.stop();
+    }
+
+    _peersController.add([]);
+  }
+
+  @override
+  Stream<List<PeerInfo>> get discoveredPeers => _peersController.stream;
+
+  /// Initialize the Rust library and create MdnsDiscovery.
+  Future<void> _ensureInitialized(String deviceId, String deviceName) async {
+    if (_mdnsDiscovery == null) {
+      await RustLib.init();
+      _mdnsDiscovery = rust_mdns.MdnsDiscovery(
+        deviceId: deviceId,
+        deviceName: deviceName,
+      );
+      print('[RustDiscovery] Initialized MdnsDiscovery');
+    }
+  }
+
+  /// Poll for peers from Rust.
+  Future<void> _pollPeers() async {
+    if (_mdnsDiscovery == null || !_isBrowsing) return;
+
+    try {
+      final rustPeers = await _mdnsDiscovery!.getDiscoveredPeers();
+      final peers = rustPeers.map((p) => PeerInfo.fromRust(p)).toList();
+      _peersController.add(peers);
+
+      if (peers.isNotEmpty) {
+        print('[RustDiscovery] Found ${peers.length} peers');
+      }
+    } catch (e) {
+      print('[RustDiscovery] Error polling peers: $e');
+    }
+  }
+
+  /// Check if currently browsing.
+  bool get isBrowsing => _isBrowsing;
+}
+
+// ============================================================================
+// MOCK IMPLEMENTATION (kept for fallback/testing)
+// ============================================================================
+
 class MockDiscovery implements DiscoveryInterface {
   static final MockDiscovery _instance = MockDiscovery._internal();
 
@@ -75,7 +201,6 @@ class MockDiscovery implements DiscoveryInterface {
 
   MockDiscovery._internal();
 
-  bool _isRegistered = false;
   bool _isBrowsing = false;
 
   final StreamController<List<PeerInfo>> _peersController =
@@ -85,25 +210,17 @@ class MockDiscovery implements DiscoveryInterface {
 
   @override
   Future<void> register(String deviceId, String deviceName, int port) async {
-    debugPrint(
+    print(
         '[MockDiscovery] Registering device: $deviceName ($deviceId) on port $port');
-
-    _isRegistered = true;
-
-    debugPrint('[MockDiscovery] Device registered successfully');
   }
 
   @override
   Future<void> startBrowsing() async {
-    if (_isBrowsing) {
-      debugPrint('[MockDiscovery] Already browsing');
-      return;
-    }
+    if (_isBrowsing) return;
 
-    debugPrint('[MockDiscovery] Starting network browsing...');
+    print('[MockDiscovery] Starting network browsing...');
     _isBrowsing = true;
 
-    // Simulate finding devices after 1 second delay
     Future.delayed(const Duration(seconds: 1), () {
       if (!_isBrowsing) return;
 
@@ -123,14 +240,12 @@ class MockDiscovery implements DiscoveryInterface {
         ),
       ]);
 
-      debugPrint('[MockDiscovery] Found ${_mockPeers.length} mock peers');
       _peersController.add(List.unmodifiable(_mockPeers));
     });
   }
 
   @override
   Future<void> stopBrowsing() async {
-    debugPrint('[MockDiscovery] Stopping network browsing');
     _isBrowsing = false;
     _mockPeers.clear();
     _peersController.add([]);
@@ -139,25 +254,5 @@ class MockDiscovery implements DiscoveryInterface {
   @override
   Stream<List<PeerInfo>> get discoveredPeers => _peersController.stream;
 
-  /// Check if currently browsing.
   bool get isBrowsing => _isBrowsing;
-
-  /// Check if device is registered.
-  bool get isRegistered => _isRegistered;
-
-  /// Add a mock peer (for testing).
-  void addMockPeer(PeerInfo peer) {
-    if (!_mockPeers.contains(peer)) {
-      _mockPeers.add(peer);
-      _peersController.add(List.unmodifiable(_mockPeers));
-      debugPrint('[MockDiscovery] Added mock peer: ${peer.deviceName}');
-    }
-  }
-
-  /// Remove a mock peer (for testing).
-  void removeMockPeer(String deviceId) {
-    _mockPeers.removeWhere((p) => p.deviceId == deviceId);
-    _peersController.add(List.unmodifiable(_mockPeers));
-    debugPrint('[MockDiscovery] Removed mock peer: $deviceId');
-  }
 }
