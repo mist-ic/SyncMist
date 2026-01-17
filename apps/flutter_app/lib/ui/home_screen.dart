@@ -7,7 +7,7 @@ import '../services/device_service.dart';
 import '../services/crypto_service.dart';
 import '../services/auth_service.dart';
 import '../services/discovery_service.dart';
-import '../services/sync_coordinator.dart';
+import '../services/sync_coordinator.dart' hide CryptoService;
 import '../services/p2p_service.dart';
 import '../core/interfaces/discovery_interface.dart';
 import 'pairing_screen.dart';
