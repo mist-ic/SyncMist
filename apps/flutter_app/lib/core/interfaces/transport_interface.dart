@@ -8,6 +8,9 @@ import '../../src/rust/frb_generated.dart';
 ///
 /// This interface defines the contract for peer-to-peer communication.
 abstract class TransportInterface {
+  /// Set to true in tests to use mock instead of real FFI.
+  static bool useMock = false;
+
   /// Start listening for incoming connections on the specified port.
   Future<void> startServer({int port = 9876});
 
@@ -21,8 +24,9 @@ abstract class TransportInterface {
   Future<void> disconnect();
 
   /// Get the singleton instance of the transport.
-  /// Using real Rust FFI implementation.
-  static TransportInterface get instance => RustTransport();
+  /// Uses mock in test mode, real FFI otherwise.
+  static TransportInterface get instance =>
+      useMock ? MockTransport() : RustTransport();
 }
 
 /// Represents a connection to a single peer.
@@ -197,7 +201,6 @@ class RustTransport implements TransportInterface {
 // MOCK IMPLEMENTATION (kept for fallback/testing)
 // ============================================================================
 
-/*
 /// Mock implementation of TransportInterface for development.
 class MockTransport implements TransportInterface {
   static final MockTransport _instance = MockTransport._internal();
@@ -220,7 +223,7 @@ class MockTransport implements TransportInterface {
     }
 
     await Future.delayed(const Duration(milliseconds: 50));
-    
+
     _serverPort = port;
     _isServerRunning = true;
     print('[MockTransport] Server started on port $port');
@@ -229,7 +232,7 @@ class MockTransport implements TransportInterface {
   @override
   Future<PeerConnection> connectToPeer(String address, int port) async {
     print('[MockTransport] Connecting to $address:$port...');
-    
+
     await Future.delayed(const Duration(milliseconds: 50));
 
     final peerId = 'peer-${DateTime.now().millisecondsSinceEpoch}';
@@ -270,7 +273,8 @@ class MockTransport implements TransportInterface {
   bool get isServerRunning => _isServerRunning;
 
   void simulateIncomingData(String peerId, Uint8List data) {
-    final connection = _connections.where((c) => c.peerId == peerId).firstOrNull;
+    final connection =
+        _connections.where((c) => c.peerId == peerId).firstOrNull;
     if (connection != null) {
       print('[MockTransport] Simulating incoming data from $peerId');
       Future.delayed(const Duration(milliseconds: 50), () {
@@ -279,4 +283,3 @@ class MockTransport implements TransportInterface {
     }
   }
 }
-*/

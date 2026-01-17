@@ -57,6 +57,9 @@ class PeerInfo {
 
 /// Abstract interface for mDNS-based device discovery.
 abstract class DiscoveryInterface {
+  /// Set to true in tests to use mock instead of real FFI.
+  static bool useMock = false;
+
   /// Register this device on the network for discovery.
   Future<void> register(String deviceId, String deviceName, int port);
 
@@ -70,8 +73,9 @@ abstract class DiscoveryInterface {
   Stream<List<PeerInfo>> get discoveredPeers;
 
   /// Get the singleton instance of the discovery service.
-  /// Using real Rust FFI implementation.
-  static DiscoveryInterface get instance => RustDiscovery();
+  /// Uses mock in test mode, real FFI otherwise.
+  static DiscoveryInterface get instance =>
+      useMock ? MockDiscovery() : RustDiscovery();
 }
 
 /// Real Rust FFI implementation of DiscoveryInterface.
@@ -190,7 +194,6 @@ class RustDiscovery implements DiscoveryInterface {
 // MOCK IMPLEMENTATION (kept for fallback/testing)
 // ============================================================================
 
-/*
 class MockDiscovery implements DiscoveryInterface {
   static final MockDiscovery _instance = MockDiscovery._internal();
 
@@ -207,7 +210,8 @@ class MockDiscovery implements DiscoveryInterface {
 
   @override
   Future<void> register(String deviceId, String deviceName, int port) async {
-    print('[MockDiscovery] Registering device: $deviceName ($deviceId) on port $port');
+    print(
+        '[MockDiscovery] Registering device: $deviceName ($deviceId) on port $port');
   }
 
   @override
@@ -252,4 +256,3 @@ class MockDiscovery implements DiscoveryInterface {
 
   bool get isBrowsing => _isBrowsing;
 }
-*/

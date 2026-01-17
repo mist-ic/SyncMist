@@ -6,11 +6,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncmist/services/sync_coordinator.dart';
 import 'package:syncmist/services/discovery_service.dart';
 import 'package:syncmist/services/p2p_service.dart';
+import 'package:syncmist/core/interfaces/transport_interface.dart';
+import 'package:syncmist/core/interfaces/discovery_interface.dart';
 
 void main() {
-  // Set up SharedPreferences mock before tests
+  // Set up SharedPreferences mock and enable mock mode before tests
   setUp(() {
     SharedPreferences.setMockInitialValues({});
+    // Enable mock mode to avoid Rust FFI initialization
+    TransportInterface.useMock = true;
+    DiscoveryInterface.useMock = true;
+    CryptoService.useMock = true;
   });
 
   group('SyncCoordinator', () {
