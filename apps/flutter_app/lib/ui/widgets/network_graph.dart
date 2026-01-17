@@ -84,17 +84,19 @@ class NetworkGraphState extends State<NetworkGraph>
     return SizedBox(
       width: 200,
       height: 200,
-      child: AnimatedBuilder(
-        animation: _animation,
-        builder: (context, child) {
-          return CustomPaint(
-            painter: _NetworkGraphPainter(
-              devices: widget.devices,
-              animationProgress: _animation.value,
-            ),
-            size: const Size(200, 200),
-          );
-        },
+      child: RepaintBoundary(
+        child: AnimatedBuilder(
+          animation: _animation,
+          builder: (context, child) {
+            return CustomPaint(
+              painter: _NetworkGraphPainter(
+                devices: widget.devices,
+                animationProgress: _animation.value,
+              ),
+              size: const Size(200, 200),
+            );
+          },
+        ),
       ),
     );
   }
@@ -202,7 +204,16 @@ class _NetworkGraphPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant _NetworkGraphPainter oldDelegate) {
-    return oldDelegate.devices != devices ||
-        oldDelegate.animationProgress != animationProgress;
+    if (oldDelegate.animationProgress != animationProgress) return true;
+    if (oldDelegate.devices.length != devices.length) return true;
+
+    // Check if any device status changed
+    for (int i = 0; i < devices.length; i++) {
+      if (oldDelegate.devices[i].id != devices[i].id ||
+          oldDelegate.devices[i].isConnected != devices[i].isConnected) {
+        return true;
+      }
+    }
+    return false;
   }
 }

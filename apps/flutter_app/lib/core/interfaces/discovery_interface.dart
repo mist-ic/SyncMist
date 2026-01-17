@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
+
 /// Information about a discovered peer device.
 class PeerInfo {
   /// Unique identifier for this device.
@@ -75,9 +77,6 @@ class MockDiscovery implements DiscoveryInterface {
 
   bool _isRegistered = false;
   bool _isBrowsing = false;
-  String? _registeredDeviceId;
-  String? _registeredDeviceName;
-  int? _registeredPort;
 
   final StreamController<List<PeerInfo>> _peersController =
       StreamController<List<PeerInfo>>.broadcast();
@@ -86,25 +85,22 @@ class MockDiscovery implements DiscoveryInterface {
 
   @override
   Future<void> register(String deviceId, String deviceName, int port) async {
-    print(
+    debugPrint(
         '[MockDiscovery] Registering device: $deviceName ($deviceId) on port $port');
 
-    _registeredDeviceId = deviceId;
-    _registeredDeviceName = deviceName;
-    _registeredPort = port;
     _isRegistered = true;
 
-    print('[MockDiscovery] Device registered successfully');
+    debugPrint('[MockDiscovery] Device registered successfully');
   }
 
   @override
   Future<void> startBrowsing() async {
     if (_isBrowsing) {
-      print('[MockDiscovery] Already browsing');
+      debugPrint('[MockDiscovery] Already browsing');
       return;
     }
 
-    print('[MockDiscovery] Starting network browsing...');
+    debugPrint('[MockDiscovery] Starting network browsing...');
     _isBrowsing = true;
 
     // Simulate finding devices after 1 second delay
@@ -127,14 +123,14 @@ class MockDiscovery implements DiscoveryInterface {
         ),
       ]);
 
-      print('[MockDiscovery] Found ${_mockPeers.length} mock peers');
+      debugPrint('[MockDiscovery] Found ${_mockPeers.length} mock peers');
       _peersController.add(List.unmodifiable(_mockPeers));
     });
   }
 
   @override
   Future<void> stopBrowsing() async {
-    print('[MockDiscovery] Stopping network browsing');
+    debugPrint('[MockDiscovery] Stopping network browsing');
     _isBrowsing = false;
     _mockPeers.clear();
     _peersController.add([]);
@@ -149,15 +145,12 @@ class MockDiscovery implements DiscoveryInterface {
   /// Check if device is registered.
   bool get isRegistered => _isRegistered;
 
-  /// Get registered device ID.
-  String? get registeredDeviceId => _registeredDeviceId;
-
   /// Add a mock peer (for testing).
   void addMockPeer(PeerInfo peer) {
     if (!_mockPeers.contains(peer)) {
       _mockPeers.add(peer);
       _peersController.add(List.unmodifiable(_mockPeers));
-      print('[MockDiscovery] Added mock peer: ${peer.deviceName}');
+      debugPrint('[MockDiscovery] Added mock peer: ${peer.deviceName}');
     }
   }
 
@@ -165,6 +158,6 @@ class MockDiscovery implements DiscoveryInterface {
   void removeMockPeer(String deviceId) {
     _mockPeers.removeWhere((p) => p.deviceId == deviceId);
     _peersController.add(List.unmodifiable(_mockPeers));
-    print('[MockDiscovery] Removed mock peer: $deviceId');
+    debugPrint('[MockDiscovery] Removed mock peer: $deviceId');
   }
 }

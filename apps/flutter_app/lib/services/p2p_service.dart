@@ -1,5 +1,6 @@
 import 'dart:async';
-import 'dart:typed_data';
+
+import 'package:flutter/foundation.dart';
 
 import '../core/interfaces/transport_interface.dart';
 import '../core/interfaces/discovery_interface.dart';
@@ -52,6 +53,9 @@ class P2PService {
   /// List of currently connected peers.
   final List<PeerConnection> _connectedPeers = [];
 
+  /// Map of peer IDs to their data stream subscriptions.
+  final Map<String, StreamSubscription> _peerSubscriptions = {};
+
   /// Whether this instance is running as a server.
   bool isServer = false;
 
@@ -69,11 +73,11 @@ class P2PService {
   /// Initialize the P2P service.
   Future<void> initialize() async {
     if (_isInitialized) {
-      print('[P2PService] Already initialized');
+      debugPrint('[P2PService] Already initialized');
       return;
     }
 
-    print('[P2PService] Initializing...');
+    debugPrint('[P2PService] Initializing...');
     _transport = TransportInterface.instance;
     _isInitialized = true;
 
@@ -83,11 +87,11 @@ class P2PService {
         _incomingDataController.add(data);
       },
       onError: (error) {
-        print('[P2PService] Error receiving data: $error');
+        debugPrint('[P2PService] Error receiving data: $error');
       },
     );
 
-    print('[P2PService] Initialized successfully');
+    debugPrint('[P2PService] Initialized successfully');
   }
 
   /// Start listening for incoming connections.
@@ -95,12 +99,12 @@ class P2PService {
     _ensureInitialized();
 
     try {
-      print('[P2PService] Starting server on port $port...');
+      debugPrint('[P2PService] Starting server on port $port...');
       await _transport.startServer(port: port);
       isServer = true;
-      print('[P2PService] Server started successfully');
+      debugPrint('[P2PService] Server started successfully');
     } catch (e) {
-      print('[P2PService] Error starting server: $e');
+      debugPrint('[P2PService] Error starting server: $e');
       rethrow;
     }
   }
@@ -111,12 +115,12 @@ class P2PService {
 
     // Don't connect if already connected
     if (_connectedPeers.any((p) => p.peerId == peer.deviceId)) {
-      print('[P2PService] Already connected to ${peer.deviceName}');
+      debugPrint('[P2PService] Already connected to ${peer.deviceName}');
       return;
     }
 
     try {
-      print('[P2PService] Connecting to ${peer.deviceName}...');
+      debugPrint('[P2PService] Connecting to ${peer.deviceName}...');
 
       // Use the first available address
       final address = peer.addresses.isNotEmpty
@@ -127,17 +131,20 @@ class P2PService {
       _connectedPeers.add(connection);
 
       // Listen for data from this peer
-      connection.dataStream.listen(
+      final subscription = connection.dataStream.listen(
         (data) {
           _incomingDataController.add(data);
         },
         onError: (error) {
-          print('[P2PService] Error from peer ${connection.peerId}: $error');
+          debugPrint(
+              '[P2PService] Error from peer ${connection.peerId}: $error');
         },
         onDone: () {
           _handlePeerDisconnected(connection.peerId);
         },
       );
+
+      _peerSubscriptions[connection.peerId] = subscription;
 
       // Emit connection event
       _connectionEvents.add(ConnectionEvent(
@@ -145,9 +152,9 @@ class P2PService {
         type: ConnectionEventType.connected,
       ));
 
-      print('[P2PService] Connected to ${peer.deviceName}');
+      debugPrint('[P2PService] Connected to ${peer.deviceName}');
     } catch (e) {
-      print('[P2PService] Error connecting to ${peer.deviceName}: $e');
+      debugPrint('[P2PService] Error connecting to ${peer.deviceName}: $e');
       // Don't crash on single peer failure
     }
   }
@@ -157,11 +164,11 @@ class P2PService {
     _ensureInitialized();
 
     if (_connectedPeers.isEmpty) {
-      print('[P2PService] No peers connected, nothing to broadcast');
+      debugPrint('[P2PService] No peers connected, nothing to broadcast');
       return;
     }
 
-    print(
+    debugPrint(
         '[P2PService] Broadcasting ${data.length} bytes to ${_connectedPeers.length} peers...');
 
     final futures = <Future>[];
@@ -170,7 +177,7 @@ class P2PService {
     }
 
     await Future.wait(futures);
-    print('[P2PService] Broadcast complete');
+    debugPrint('[P2PService] Broadcast complete');
   }
 
   /// Send data to a specific peer.
@@ -179,7 +186,7 @@ class P2PService {
 
     final peer = _connectedPeers.where((p) => p.peerId == peerId).firstOrNull;
     if (peer == null) {
-      print('[P2PService] Peer $peerId not found');
+      debugPrint('[P2PService] Peer $peerId not found');
       return;
     }
 
@@ -191,7 +198,7 @@ class P2PService {
     try {
       await peer.send(data);
     } catch (e) {
-      print('[P2PService] Error sending to ${peer.peerId}: $e');
+      debugPrint('[P2PService] Error sending to ${peer.peerId}: $e');
       _handlePeerDisconnected(peer.peerId);
     }
   }
@@ -199,11 +206,16 @@ class P2PService {
   /// Handle peer disconnection.
   void _handlePeerDisconnected(String peerId) {
     _connectedPeers.removeWhere((p) => p.peerId == peerId);
+
+    // Cancel subscription
+    _peerSubscriptions[peerId]?.cancel();
+    _peerSubscriptions.remove(peerId);
+
     _connectionEvents.add(ConnectionEvent(
       peerId: peerId,
       type: ConnectionEventType.disconnected,
     ));
-    print('[P2PService] Peer $peerId disconnected');
+    debugPrint('[P2PService] Peer $peerId disconnected');
   }
 
   /// Stream of incoming data from all connected peers.
@@ -223,8 +235,14 @@ class P2PService {
 
   /// Disconnect from all peers.
   Future<void> disconnectAll() async {
-    print('[P2PService] Disconnecting from all peers...');
+    debugPrint('[P2PService] Disconnecting from all peers...');
     await _transport.disconnect();
+
+    // Cancel all subscriptions
+    for (final sub in _peerSubscriptions.values) {
+      await sub.cancel();
+    }
+    _peerSubscriptions.clear();
 
     for (final peer in _connectedPeers) {
       _connectionEvents.add(ConnectionEvent(
@@ -234,7 +252,7 @@ class P2PService {
     }
     _connectedPeers.clear();
     isServer = false;
-    print('[P2PService] All peers disconnected');
+    debugPrint('[P2PService] All peers disconnected');
   }
 
   /// Ensure the service is initialized before use.

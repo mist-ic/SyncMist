@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import '../services/websocket_service.dart';
@@ -37,6 +38,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final GlobalKey<NetworkGraphState> _graphKey = GlobalKey<NetworkGraphState>();
 
+  // Stream subscriptions for cleanup
+  final List<StreamSubscription> _subscriptions = [];
+
   String _connectionStatus = 'Disconnected';
   String _currentClipboard = 'No clipboard data yet';
   String _deviceId = 'calculating...';
@@ -66,25 +70,25 @@ class _HomeScreenState extends State<HomeScreen> {
       await SyncCoordinator.instance.startSync();
 
       // Listen to discovered peers
-      DiscoveryService.instance.peers.listen((peers) {
+      _subscriptions.add(DiscoveryService.instance.peers.listen((peers) {
         if (mounted) {
           setState(() {
             _discoveredPeers = peers;
           });
         }
-      });
+      }));
 
       // Listen to connection events for peer count
-      P2PService.instance.connectionEvents.listen((event) {
+      _subscriptions.add(P2PService.instance.connectionEvents.listen((event) {
         if (mounted) {
           setState(() {
             _connectedPeerCount = P2PService.instance.peerCount;
           });
         }
-      });
+      }));
 
       // Listen to sync events for animations
-      SyncCoordinator.instance.syncEvents.listen((event) {
+      _subscriptions.add(SyncCoordinator.instance.syncEvents.listen((event) {
         if (mounted) {
           _graphKey.currentState?.playAnimation();
           setState(() {
@@ -93,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
             _lastSyncedContent = event.contentPreview;
           });
         }
-      });
+      }));
 
       // Set callback for received clipboard
       SyncCoordinator.instance.onClipboardReceived = (content) {
@@ -116,14 +120,18 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _initAuth() async {
-    final uri = Uri.parse(_urlController.text);
-    final baseUrl = 'http://${uri.host}:${uri.port}';
+    try {
+      final uri = Uri.parse(_urlController.text);
+      final baseUrl = 'http://${uri.host}:${uri.port}';
 
-    final token = await _authService.getOrRegister(baseUrl);
-    if (mounted) {
-      setState(() {
-        _authToken = token;
-      });
+      final token = await _authService.getOrRegister(baseUrl);
+      if (mounted) {
+        setState(() {
+          _authToken = token;
+        });
+      }
+    } catch (e) {
+      debugPrint('Auth initialization failed: $e');
     }
   }
 
@@ -142,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _startClipboardMonitoring() {
     _clipboardService.startMonitoring();
-    _clipboardService.onClipboardChange.listen((text) {
+    _subscriptions.add(_clipboardService.onClipboardChange.listen((text) {
       if (mounted) {
         setState(() {
           _currentClipboard = text;
@@ -160,7 +168,7 @@ class _HomeScreenState extends State<HomeScreen> {
           SyncCoordinator.instance.sendClipboard(text);
         }
       }
-    });
+    }));
   }
 
   void _triggerSyncAnimation(String content) {
@@ -184,6 +192,10 @@ class _HomeScreenState extends State<HomeScreen> {
     try {
       await _initAuth();
 
+      if (_authToken == null) {
+        throw Exception('Authentication failed');
+      }
+
       _wsService.connect(
         _urlController.text,
         cryptoService: _cryptoService,
@@ -194,7 +206,9 @@ class _HomeScreenState extends State<HomeScreen> {
         _isConnected = true;
       });
 
-      _wsService.messages.listen(
+      // We track this one separately via logic control, but ideally wsService manages its own stream
+      // _wsService.messages returns a stream that closes on disconnect.
+      _subscriptions.add(_wsService.messages.listen(
         (message) async {
           try {
             final data = jsonDecode(message.toString());
@@ -238,7 +252,7 @@ class _HomeScreenState extends State<HomeScreen> {
             });
           }
         },
-      );
+      ));
     } catch (e) {
       setState(() {
         _connectionStatus = 'Failed to connect: $e';
@@ -289,6 +303,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
+    for (var sub in _subscriptions) {
+      sub.cancel();
+    }
+    _subscriptions.clear();
     _wsService.dispose();
     _clipboardService.dispose();
     _urlController.dispose();
