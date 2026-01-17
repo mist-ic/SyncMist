@@ -5,15 +5,16 @@ import '../services/clipboard_service.dart';
 import '../services/device_service.dart';
 import '../services/crypto_service.dart';
 import '../services/auth_service.dart';
+import '../services/discovery_service.dart';
+import '../services/sync_coordinator.dart';
+import '../services/p2p_service.dart';
+import '../core/interfaces/discovery_interface.dart';
 import 'pairing_screen.dart';
 import 'widgets/status_badge.dart';
 import 'widgets/encryption_badge.dart';
 import 'widgets/peer_list.dart';
 import 'widgets/network_graph.dart';
 import 'widgets/sync_indicator.dart';
-
-// TODO: Connect to DiscoveryService.instance.peers stream
-// TODO: Connect to SyncCoordinator.instance.syncEvents stream
 
 /// Home Screen with WebSocket integration and network visualization
 class HomeScreen extends StatefulWidget {
@@ -30,9 +31,8 @@ class _HomeScreenState extends State<HomeScreen> {
   final AuthService _authService = AuthService();
   late final CryptoService _cryptoService;
 
-  final TextEditingController _urlController = TextEditingController(
-    text: 'ws://localhost:8080/ws',
-  );
+  final TextEditingController _urlController =
+      TextEditingController(text: 'ws://localhost:8080/ws');
   final TextEditingController _messageController = TextEditingController();
 
   final GlobalKey<NetworkGraphState> _graphKey = GlobalKey<NetworkGraphState>();
@@ -46,7 +46,8 @@ class _HomeScreenState extends State<HomeScreen> {
   DateTime? _lastSyncTime;
   String? _lastSyncedContent;
 
-  // Mock data for peer count (will be replaced with real data in D7)
+  // Real peer data from DiscoveryService
+  List<PeerInfo> _discoveredPeers = [];
   int _connectedPeerCount = 0;
 
   @override
@@ -55,6 +56,63 @@ class _HomeScreenState extends State<HomeScreen> {
     _initCrypto();
     _initDevice();
     _startClipboardMonitoring();
+    _initServices();
+  }
+
+  Future<void> _initServices() async {
+    try {
+      // Initialize the SyncCoordinator (which initializes P2P and Discovery)
+      await SyncCoordinator.instance.initialize();
+      await SyncCoordinator.instance.startSync();
+
+      // Listen to discovered peers
+      DiscoveryService.instance.peers.listen((peers) {
+        if (mounted) {
+          setState(() {
+            _discoveredPeers = peers;
+          });
+        }
+      });
+
+      // Listen to connection events for peer count
+      P2PService.instance.connectionEvents.listen((event) {
+        if (mounted) {
+          setState(() {
+            _connectedPeerCount = P2PService.instance.peerCount;
+          });
+        }
+      });
+
+      // Listen to sync events for animations
+      SyncCoordinator.instance.syncEvents.listen((event) {
+        if (mounted) {
+          _graphKey.currentState?.playAnimation();
+          setState(() {
+            _isSyncing = false;
+            _lastSyncTime = event.timestamp;
+            _lastSyncedContent = event.contentPreview;
+          });
+        }
+      });
+
+      // Set callback for received clipboard
+      SyncCoordinator.instance.onClipboardReceived = (content) {
+        if (mounted) {
+          setState(() {
+            _currentClipboard = content;
+          });
+          _clipboardService.setClipboard(content);
+        }
+      };
+
+      if (mounted) {
+        setState(() {
+          _connectedPeerCount = P2PService.instance.peerCount;
+        });
+      }
+    } catch (e) {
+      debugPrint('Error initializing services: $e');
+    }
   }
 
   Future<void> _initAuth() async {
@@ -91,7 +149,15 @@ class _HomeScreenState extends State<HomeScreen> {
         });
         if (_isConnected) {
           _triggerSyncAnimation(text);
-          _wsService.sendEncrypted(content: text, sender: _deviceId);
+          _wsService.sendEncrypted(
+            content: text,
+            sender: _deviceId,
+          );
+        }
+        // Also send via P2P if available
+        if (SyncCoordinator.instance.isInitialized) {
+          _triggerSyncAnimation(text);
+          SyncCoordinator.instance.sendClipboard(text);
         }
       }
     });
@@ -107,7 +173,8 @@ class _HomeScreenState extends State<HomeScreen> {
         setState(() {
           _isSyncing = false;
           _lastSyncTime = DateTime.now();
-          _lastSyncedContent = content;
+          _lastSyncedContent =
+              content.length > 30 ? '${content.substring(0, 30)}...' : content;
         });
       }
     });
@@ -125,7 +192,6 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() {
         _connectionStatus = 'Connected (🔐 Encrypted)';
         _isConnected = true;
-        _connectedPeerCount = 1; // Mock: at least server connected
       });
 
       _wsService.messages.listen(
@@ -137,9 +203,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
               if (sender == _deviceId) return;
 
-              final content = await _wsService.decryptMessage(
-                data as Map<String, dynamic>,
-              );
+              final content =
+                  await _wsService.decryptMessage(data as Map<String, dynamic>);
               if (content == null) {
                 debugPrint('Failed to decrypt message');
                 return;
@@ -162,7 +227,6 @@ class _HomeScreenState extends State<HomeScreen> {
             setState(() {
               _connectionStatus = 'Error: $error';
               _isConnected = false;
-              _connectedPeerCount = 0;
             });
           }
         },
@@ -171,7 +235,6 @@ class _HomeScreenState extends State<HomeScreen> {
             setState(() {
               _connectionStatus = 'Disconnected';
               _isConnected = false;
-              _connectedPeerCount = 0;
             });
           }
         },
@@ -180,7 +243,6 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() {
         _connectionStatus = 'Failed to connect: $e';
         _isConnected = false;
-        _connectedPeerCount = 0;
       });
     }
   }
@@ -190,7 +252,6 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       _connectionStatus = 'Disconnected';
       _isConnected = false;
-      _connectedPeerCount = 0;
     });
   }
 
@@ -203,16 +264,27 @@ class _HomeScreenState extends State<HomeScreen> {
       );
       _messageController.clear();
     }
+    // Also send via P2P
+    if (_messageController.text.isNotEmpty &&
+        SyncCoordinator.instance.isInitialized) {
+      _triggerSyncAnimation(_messageController.text);
+      SyncCoordinator.instance.sendClipboard(_messageController.text);
+      _messageController.clear();
+    }
   }
 
   void _handlePeerConnect(PeerData peer) {
-    // TODO: Implement actual connection logic in D7
-    debugPrint('Connecting to peer: ${peer.deviceName}');
+    // Find the real PeerInfo and connect
+    final realPeer =
+        _discoveredPeers.where((p) => p.deviceId == peer.deviceId).firstOrNull;
+    if (realPeer != null) {
+      P2PService.instance.connectToPeer(realPeer);
+    }
   }
 
   void _handlePeerDisconnect(PeerData peer) {
-    // TODO: Implement actual disconnection logic in D7
     debugPrint('Disconnecting from peer: ${peer.deviceName}');
+    // P2P disconnect would need to be implemented in P2PService
   }
 
   @override
@@ -228,7 +300,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    // Build network nodes from mock data for now
+    // Build network nodes from real discovered peers
     final networkNodes = [
       DeviceNode(
         id: 'self',
@@ -236,15 +308,32 @@ class _HomeScreenState extends State<HomeScreen> {
         isThisDevice: true,
         isConnected: true,
       ),
-      ...PeerData.mockPeers.map(
-        (peer) => DeviceNode(
+      ..._discoveredPeers.map((peer) {
+        final isConnected = P2PService.instance.connectedPeers.any(
+          (p) => p.address == peer.addresses.firstOrNull,
+        );
+        return DeviceNode(
           id: peer.deviceId,
           name: peer.deviceName,
           isThisDevice: false,
-          isConnected: peer.isConnected,
-        ),
-      ),
+          isConnected: isConnected,
+        );
+      }),
     ];
+
+    // Convert PeerInfo to PeerData for the widget
+    final peerDataList = _discoveredPeers.map((peer) {
+      final isConnected = P2PService.instance.connectedPeers.any(
+        (p) => p.address == peer.addresses.firstOrNull,
+      );
+      return PeerData(
+        deviceId: peer.deviceId,
+        deviceName: peer.deviceName,
+        address: peer.addresses.isNotEmpty ? peer.addresses.first : 'Unknown',
+        port: peer.port,
+        isConnected: isConnected,
+      );
+    }).toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -252,7 +341,7 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
         actions: [
           StatusBadge(
-            isConnected: _isConnected,
+            isConnected: _isConnected || _connectedPeerCount > 0,
             peerCount: _connectedPeerCount,
           ),
           const SizedBox(width: 8),
@@ -264,7 +353,9 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const PairingScreen()),
+                MaterialPageRoute(
+                  builder: (context) => const PairingScreen(),
+                ),
               );
             },
           ),
@@ -282,7 +373,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Network', style: theme.textTheme.titleMedium),
+                    Text(
+                      'Network',
+                      style: theme.textTheme.titleMedium,
+                    ),
                     const SizedBox(height: 16),
                     Center(
                       child: SizedBox(
@@ -344,15 +438,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Icon(
                       _isConnected ? Icons.cloud_done : Icons.cloud_off,
-                      color: _isConnected
-                          ? Colors.green
-                          : theme.colorScheme.error,
+                      color:
+                          _isConnected ? Colors.green : theme.colorScheme.error,
                     ),
                     const SizedBox(width: 12),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Status', style: theme.textTheme.labelMedium),
+                        Text(
+                          'Status',
+                          style: theme.textTheme.labelMedium,
+                        ),
                         Text(
                           _connectionStatus,
                           style: theme.textTheme.titleMedium,
@@ -374,10 +470,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Row(
                       children: [
-                        Icon(
-                          Icons.content_paste,
-                          color: theme.colorScheme.primary,
-                        ),
+                        Icon(Icons.content_paste,
+                            color: theme.colorScheme.primary),
                         const SizedBox(width: 8),
                         Text(
                           'Current Clipboard',
@@ -407,12 +501,15 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(height: 16),
 
             // Nearby Devices Section
-            Text('Nearby Devices', style: theme.textTheme.titleMedium),
+            Text(
+              'Nearby Devices (${peerDataList.length})',
+              style: theme.textTheme.titleMedium,
+            ),
             const SizedBox(height: 8),
             SizedBox(
               height: 200,
               child: PeerList(
-                peers: PeerData.mockPeers,
+                peers: peerDataList,
                 onConnect: _handlePeerConnect,
                 onDisconnect: _handlePeerDisconnect,
               ),
@@ -420,7 +517,10 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(height: 16),
 
             // Manual Send Section (for testing)
-            Text('Manual Send (Testing)', style: theme.textTheme.titleMedium),
+            Text(
+              'Manual Send (Testing)',
+              style: theme.textTheme.titleMedium,
+            ),
             const SizedBox(height: 8),
             Row(
               children: [
@@ -431,12 +531,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       labelText: 'Message',
                       border: OutlineInputBorder(),
                     ),
-                    enabled: _isConnected,
                   ),
                 ),
                 const SizedBox(width: 8),
                 FilledButton.icon(
-                  onPressed: _isConnected ? _sendMessage : null,
+                  onPressed: _sendMessage,
                   icon: const Icon(Icons.send),
                   label: const Text('Send'),
                 ),
