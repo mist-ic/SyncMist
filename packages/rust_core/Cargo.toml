@@ -8,7 +8,7 @@ crate-type = ["cdylib", "staticlib"]
 
 [dependencies]
 # Flutter Rust Bridge for FFI
-flutter_rust_bridge = "=2.11.1"
+flutter_rust_bridge = "2"
 
 # Encryption
 aes-gcm = "0.10"
@@ -17,5 +17,15 @@ rand = "0.8"
 # Key exchange (for Phase 3)
 x25519-dalek = { version = "2", features = ["static_secrets"] }
 
-# CRDT (for Phase 5)
-# loro = "0.16"
+# QUIC Transport
+quinn = "0.11"
+rustls = { version = "0.23", features = ["ring"] }
+rcgen = "0.13"
+tokio = { version = "1", features = ["full", "sync", "rt-multi-thread"] }
+mdns-sd = "0.11"
+thiserror = "1"
+log = "0.4"
+env_logger = "0.11"
+futures = "0.3"
+async-stream = "0.3"
+
