@@ -1,8 +1,5 @@
 # Internal docs (research, drafts)
-Internal/
-
-# Agent configuration (local to each developer)
-.agent/
+/Internal/
 
 # Moon cache
 .moon/cache/
@@ -20,6 +17,7 @@ node_modules/
 .idea/
 .vscode/
 *.iml
+.agent/
 
 # OS
 .DS_Store
@@ -27,3 +25,4 @@ Thumbs.db
 
 # Logs
 *.log
+*.exe

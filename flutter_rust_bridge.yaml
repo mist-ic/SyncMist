@@ -1,0 +1,10 @@
+# Flutter Rust Bridge Configuration
+rust_root: packages/rust_core/
+rust_input: crate
+dart_output: apps/flutter_app/lib/src/rust/
+
+# Use camelCase for Dart code
+dart_format_line_length: 120
+
+# Generate sync functions
+default_dart_async: false
