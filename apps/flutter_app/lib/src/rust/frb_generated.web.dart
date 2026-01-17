@@ -10,9 +10,11 @@
 import 'crypto.dart';
 import 'dart:async';
 import 'dart:convert';
+import 'discovery/mdns.dart';
 import 'frb_generated.dart';
 import 'lib.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated_web.dart';
+import 'transport/quic.dart';
 
 
 
@@ -25,51 +27,147 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated_web.dart';
                     required super.portManager,
                   });
 
-                  
+                  CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_MdnsDiscoveryPtr => wire.rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMdnsDiscovery;
 
-                  @protected String dco_decode_String(dynamic raw);
+CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_QuicTransportPtr => wire.rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport;
+
+
+
+                  @protected MdnsDiscovery dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMdnsDiscovery(dynamic raw);
+
+@protected QuicTransport dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(dynamic raw);
+
+@protected QuicTransport dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(dynamic raw);
+
+@protected MdnsDiscovery dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMdnsDiscovery(dynamic raw);
+
+@protected QuicTransport dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(dynamic raw);
+
+@protected MdnsDiscovery dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMdnsDiscovery(dynamic raw);
+
+@protected QuicTransport dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(dynamic raw);
+
+@protected String dco_decode_String(dynamic raw);
+
+@protected bool dco_decode_bool(dynamic raw);
+
+@protected DiscoveryError dco_decode_discovery_error(dynamic raw);
+
+@protected List<String> dco_decode_list_String(dynamic raw);
+
+@protected List<PeerInfo> dco_decode_list_peer_info(dynamic raw);
 
 @protected List<int> dco_decode_list_prim_u_8_loose(dynamic raw);
 
 @protected Uint8List dco_decode_list_prim_u_8_strict(dynamic raw);
 
+@protected PeerInfo dco_decode_peer_info(dynamic raw);
+
 @protected (Uint8List,Uint8List) dco_decode_record_list_prim_u_8_strict_list_prim_u_8_strict(dynamic raw);
+
+@protected TransportError dco_decode_transport_error(dynamic raw);
+
+@protected int dco_decode_u_16(dynamic raw);
+
+@protected BigInt dco_decode_u_64(dynamic raw);
 
 @protected int dco_decode_u_8(dynamic raw);
 
 @protected void dco_decode_unit(dynamic raw);
 
+@protected BigInt dco_decode_usize(dynamic raw);
+
+@protected MdnsDiscovery sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMdnsDiscovery(SseDeserializer deserializer);
+
+@protected QuicTransport sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(SseDeserializer deserializer);
+
+@protected QuicTransport sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(SseDeserializer deserializer);
+
+@protected MdnsDiscovery sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMdnsDiscovery(SseDeserializer deserializer);
+
+@protected QuicTransport sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(SseDeserializer deserializer);
+
+@protected MdnsDiscovery sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMdnsDiscovery(SseDeserializer deserializer);
+
+@protected QuicTransport sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(SseDeserializer deserializer);
+
 @protected String sse_decode_String(SseDeserializer deserializer);
+
+@protected bool sse_decode_bool(SseDeserializer deserializer);
+
+@protected DiscoveryError sse_decode_discovery_error(SseDeserializer deserializer);
+
+@protected List<String> sse_decode_list_String(SseDeserializer deserializer);
+
+@protected List<PeerInfo> sse_decode_list_peer_info(SseDeserializer deserializer);
 
 @protected List<int> sse_decode_list_prim_u_8_loose(SseDeserializer deserializer);
 
 @protected Uint8List sse_decode_list_prim_u_8_strict(SseDeserializer deserializer);
 
+@protected PeerInfo sse_decode_peer_info(SseDeserializer deserializer);
+
 @protected (Uint8List,Uint8List) sse_decode_record_list_prim_u_8_strict_list_prim_u_8_strict(SseDeserializer deserializer);
+
+@protected TransportError sse_decode_transport_error(SseDeserializer deserializer);
+
+@protected int sse_decode_u_16(SseDeserializer deserializer);
+
+@protected BigInt sse_decode_u_64(SseDeserializer deserializer);
 
 @protected int sse_decode_u_8(SseDeserializer deserializer);
 
 @protected void sse_decode_unit(SseDeserializer deserializer);
 
+@protected BigInt sse_decode_usize(SseDeserializer deserializer);
+
 @protected int sse_decode_i_32(SseDeserializer deserializer);
 
-@protected bool sse_decode_bool(SseDeserializer deserializer);
+@protected void sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMdnsDiscovery(MdnsDiscovery self, SseSerializer serializer);
+
+@protected void sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(QuicTransport self, SseSerializer serializer);
+
+@protected void sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(QuicTransport self, SseSerializer serializer);
+
+@protected void sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMdnsDiscovery(MdnsDiscovery self, SseSerializer serializer);
+
+@protected void sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(QuicTransport self, SseSerializer serializer);
+
+@protected void sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMdnsDiscovery(MdnsDiscovery self, SseSerializer serializer);
+
+@protected void sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(QuicTransport self, SseSerializer serializer);
 
 @protected void sse_encode_String(String self, SseSerializer serializer);
+
+@protected void sse_encode_bool(bool self, SseSerializer serializer);
+
+@protected void sse_encode_discovery_error(DiscoveryError self, SseSerializer serializer);
+
+@protected void sse_encode_list_String(List<String> self, SseSerializer serializer);
+
+@protected void sse_encode_list_peer_info(List<PeerInfo> self, SseSerializer serializer);
 
 @protected void sse_encode_list_prim_u_8_loose(List<int> self, SseSerializer serializer);
 
 @protected void sse_encode_list_prim_u_8_strict(Uint8List self, SseSerializer serializer);
 
+@protected void sse_encode_peer_info(PeerInfo self, SseSerializer serializer);
+
 @protected void sse_encode_record_list_prim_u_8_strict_list_prim_u_8_strict((Uint8List,Uint8List) self, SseSerializer serializer);
+
+@protected void sse_encode_transport_error(TransportError self, SseSerializer serializer);
+
+@protected void sse_encode_u_16(int self, SseSerializer serializer);
+
+@protected void sse_encode_u_64(BigInt self, SseSerializer serializer);
 
 @protected void sse_encode_u_8(int self, SseSerializer serializer);
 
 @protected void sse_encode_unit(void self, SseSerializer serializer);
 
-@protected void sse_encode_i_32(int self, SseSerializer serializer);
+@protected void sse_encode_usize(BigInt self, SseSerializer serializer);
 
-@protected void sse_encode_bool(bool self, SseSerializer serializer);
+@protected void sse_encode_i_32(int self, SseSerializer serializer);
                 }
                 
 
@@ -79,11 +177,23 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated_web.dart';
 class RustLibWire implements BaseWire {
             RustLibWire.fromExternalLibrary(ExternalLibrary lib);
 
-            
+            void rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMdnsDiscovery(int ptr) => wasmModule.rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMdnsDiscovery(ptr);
+
+void rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMdnsDiscovery(int ptr) => wasmModule.rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMdnsDiscovery(ptr);
+
+void rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(int ptr) => wasmModule.rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(ptr);
+
+void rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(int ptr) => wasmModule.rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(ptr);
         }
         @JS('wasm_bindgen') external RustLibWasmModule get wasmModule;
 
         @JS() @anonymous extension type RustLibWasmModule._(JSObject _) implements JSObject {
-            
+            external void rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMdnsDiscovery(int ptr);
+
+external void rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMdnsDiscovery(int ptr);
+
+external void rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(int ptr);
+
+external void rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(int ptr);
         }
         
