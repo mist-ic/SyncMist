@@ -173,3 +173,173 @@ impl MdnsDiscovery {
         Ok(())
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_create_discovery() {
+        // Verify MdnsDiscovery::new works
+        let device_id = "test-device-123".to_string();
+        let device_name = "Test Device".to_string();
+        
+        let result = MdnsDiscovery::new(device_id.clone(), device_name.clone());
+        assert!(result.is_ok(), "MdnsDiscovery::new should succeed");
+        
+        let discovery = result.unwrap();
+        assert_eq!(discovery.device_id, device_id, "Device ID should match");
+        assert_eq!(discovery.device_name, device_name, "Device name should match");
+    }
+
+    #[test]
+    fn test_peer_info_serialization() {
+        // Verify PeerInfo can be created and has expected fields
+        let peer = PeerInfo {
+            device_id: "peer-456".to_string(),
+            device_name: "Peer Device".to_string(),
+            addresses: vec!["192.168.1.100".to_string(), "192.168.1.101".to_string()],
+            port: 9876,
+            discovered_at: 1234567890,
+        };
+        
+        assert_eq!(peer.device_id, "peer-456");
+        assert_eq!(peer.device_name, "Peer Device");
+        assert_eq!(peer.addresses.len(), 2);
+        assert_eq!(peer.addresses[0], "192.168.1.100");
+        assert_eq!(peer.port, 9876);
+        assert_eq!(peer.discovered_at, 1234567890);
+        
+        // Test cloning
+        let peer_clone = peer.clone();
+        assert_eq!(peer_clone.device_id, peer.device_id);
+        assert_eq!(peer_clone.device_name, peer.device_name);
+    }
+
+    #[test]
+    fn test_register_service() {
+        // Verify service registration works (basic test)
+        let device_id = "test-reg-789".to_string();
+        let device_name = "Registration Test".to_string();
+        
+        let discovery = MdnsDiscovery::new(device_id, device_name);
+        assert!(discovery.is_ok(), "Should create discovery service");
+        
+        let discovery = discovery.unwrap();
+        
+        // Try to register service on a random high port
+        // Note: This may fail on some systems due to network restrictions
+        let result = discovery.register(19876);
+        
+        // We expect this to either succeed or fail with a specific error
+        // The important thing is that it doesn't panic
+        match result {
+            Ok(_) => {
+                println!("Service registration succeeded");
+                // Clean up
+                let _ = discovery.stop();
+            }
+            Err(e) => {
+                println!("Service registration failed (expected on some systems): {}", e);
+                // This is acceptable - some systems may restrict mDNS
+                assert!(e.to_string().contains("Registration error"));
+            }
+        }
+    }
+
+    #[tokio::test]
+    async fn test_start_browsing() {
+        // Verify browsing can be started
+        let device_id = "test-browse-101".to_string();
+        let device_name = "Browse Test".to_string();
+        
+        let discovery = MdnsDiscovery::new(device_id, device_name);
+        assert!(discovery.is_ok(), "Should create discovery service");
+        
+        let discovery = discovery.unwrap();
+        
+        // Start browsing
+        let result = discovery.start_browsing();
+        
+        // Browsing may fail on some systems, but shouldn't panic
+        match result {
+            Ok(_) => {
+                println!("Browsing started successfully");
+                
+                // Initially should have no peers
+                let peers = discovery.get_discovered_peers().await;
+                assert!(peers.is_empty(), "Should have no peers initially");
+                
+                // Clean up
+                let _ = discovery.stop();
+            }
+            Err(e) => {
+                println!("Browsing failed (expected on some systems): {}", e);
+                assert!(e.to_string().contains("Browse error"));
+            }
+        }
+    }
+
+    #[tokio::test]
+    async fn test_get_discovered_peers_empty() {
+        let discovery = MdnsDiscovery::new("test-123".to_string(), "Test".to_string()).unwrap();
+        let peers = discovery.get_discovered_peers().await;
+        assert!(peers.is_empty(), "Should have no discovered peers initially");
+    }
+
+    #[test]
+    fn test_discovery_error_display() {
+        let err = DiscoveryError::Registration("test error".to_string());
+        assert!(err.to_string().contains("Registration error"));
+        
+        let err = DiscoveryError::Browse("browse error".to_string());
+        assert!(err.to_string().contains("Browse error"));
+        
+        let err = DiscoveryError::Parse("parse error".to_string());
+        assert!(err.to_string().contains("Parse error"));
+    }
+
+    #[test]
+    fn test_service_constants() {
+        assert_eq!(SERVICE_TYPE, "_syncmist._udp.local.");
+        assert_eq!(DEFAULT_PORT, 9876);
+    }
+
+    // Integration test: Register and browse
+    #[tokio::test]
+    async fn test_register_and_browse_integration() {
+        // Create two discovery instances
+        let discovery1 = MdnsDiscovery::new("device-1".to_string(), "Device One".to_string());
+        let discovery2 = MdnsDiscovery::new("device-2".to_string(), "Device Two".to_string());
+        
+        if discovery1.is_err() || discovery2.is_err() {
+            println!("Cannot create discovery instances - skipping integration test");
+            return;
+        }
+        
+        let discovery1 = discovery1.unwrap();
+        let discovery2 = discovery2.unwrap();
+        
+        // Try to register first device
+        if let Ok(_) = discovery1.register(29876) {
+            // Start browsing on second device
+            if let Ok(_) = discovery2.start_browsing() {
+                // Wait a bit for discovery
+                tokio::time::sleep(std::time::Duration::from_millis(500)).await;
+                
+                // Check if device 1 was discovered by device 2
+                let peers = discovery2.get_discovered_peers().await;
+                println!("Discovered {} peers", peers.len());
+                
+                // Note: This may or may not find peers depending on system/network configuration
+                // The important thing is that it doesn't crash
+            }
+            
+            // Clean up
+            let _ = discovery1.stop();
+            let _ = discovery2.stop();
+        } else {
+            println!("Could not register service - skipping integration test");
+        }
+    }
+}

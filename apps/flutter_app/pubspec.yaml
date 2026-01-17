@@ -49,6 +49,14 @@ dev_dependencies:
   flutter_lints: ^3.0.0
   freezed: ^2.5.0
   build_runner: ^2.4.0
+  ffigen: ^15.0.0
 
 flutter:
   uses-material-design: true
+
+# Flutter Rust Bridge Configuration
+flutter_rust_bridge:
+  rust_input: crate
+  rust_root: ../../packages/rust_core
+  dart_output: lib/src/rust
+  full_dep: true
