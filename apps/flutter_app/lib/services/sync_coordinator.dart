@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:typed_data';
 
 import 'p2p_service.dart';
@@ -43,8 +42,21 @@ class SyncEvent {
       'SyncEvent($direction, "$contentPreview", peer: $peerId, success: $success)';
 }
 
+/// Abstract crypto interface.
+abstract class CryptoService {
+  /// Set to true in tests to use mock instead of real FFI.
+  static bool useMock = false;
+
+  /// Get the singleton instance.
+  static CryptoService get instance =>
+      useMock ? _MockCryptoService.instance : _RustCryptoService.instance;
+
+  Uint8List encrypt(String plaintext);
+  String decrypt(Uint8List ciphertext);
+}
+
 /// Real Rust crypto service using FFI.
-class _RustCryptoService {
+class _RustCryptoService implements CryptoService {
   static final _RustCryptoService _instance = _RustCryptoService._internal();
   factory _RustCryptoService() => _instance;
   _RustCryptoService._internal();
@@ -60,16 +72,43 @@ class _RustCryptoService {
     return _encryptionKey!;
   }
 
-  /// Encrypt data using AES-256-GCM.
+  @override
   Uint8List encrypt(String plaintext) {
     print('[RustCrypto] Encrypting ${plaintext.length} chars');
     return rust_crypto.encryptText(plaintext: plaintext, key: encryptionKey);
   }
 
-  /// Decrypt data using AES-256-GCM.
+  @override
   String decrypt(Uint8List ciphertext) {
     print('[RustCrypto] Decrypting ${ciphertext.length} bytes');
     return rust_crypto.decryptText(ciphertext: ciphertext, key: encryptionKey);
+  }
+}
+
+/// Mock crypto service for tests.
+class _MockCryptoService implements CryptoService {
+  static final _MockCryptoService _instance = _MockCryptoService._internal();
+  factory _MockCryptoService() => _instance;
+  _MockCryptoService._internal();
+
+  static _MockCryptoService get instance => _instance;
+
+  // Simple XOR-based mock encryption (NOT SECURE - for testing only)
+  final int _mockKey = 0x5A;
+
+  @override
+  Uint8List encrypt(String plaintext) {
+    print('[MockCrypto] Encrypting ${plaintext.length} chars');
+    final bytes = Uint8List.fromList(plaintext.codeUnits);
+    return Uint8List.fromList(bytes.map((b) => b ^ _mockKey).toList());
+  }
+
+  @override
+  String decrypt(Uint8List ciphertext) {
+    print('[MockCrypto] Decrypting ${ciphertext.length} bytes');
+    final bytes =
+        Uint8List.fromList(ciphertext.map((b) => b ^ _mockKey).toList());
+    return String.fromCharCodes(bytes);
   }
 }
 
@@ -95,7 +134,7 @@ class SyncCoordinator {
   late DiscoveryService _discoveryService;
 
   /// Crypto service for encryption.
-  late _RustCryptoService _cryptoService;
+  late CryptoService _cryptoService;
 
   /// Whether the coordinator has been initialized.
   bool isInitialized = false;
@@ -125,7 +164,7 @@ class SyncCoordinator {
     // Initialize services
     _p2pService = P2PService.instance;
     _discoveryService = DiscoveryService.instance;
-    _cryptoService = _RustCryptoService.instance;
+    _cryptoService = CryptoService.instance;
 
     await _p2pService.initialize();
     await _discoveryService.initialize();
