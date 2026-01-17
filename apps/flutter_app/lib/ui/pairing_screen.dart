@@ -223,7 +223,7 @@ class _PairingScreenState extends State<PairingScreen>
                     color: isExpired ? Colors.red : Colors.grey[300]!),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
+                    color: Colors.black.withValues(alpha: 0.1),
                     blurRadius: 10,
                     spreadRadius: 2,
                   ),
@@ -243,7 +243,7 @@ class _PairingScreenState extends State<PairingScreen>
                     Container(
                       width: 250,
                       height: 250,
-                      color: Colors.black.withOpacity(0.7),
+                      color: Colors.black.withValues(alpha: 0.7),
                       child: const Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

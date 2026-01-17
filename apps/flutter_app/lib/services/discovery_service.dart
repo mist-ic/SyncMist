@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
@@ -43,28 +44,31 @@ class DiscoveryService {
   final StreamController<List<PeerInfo>> _peersController =
       StreamController<List<PeerInfo>>.broadcast();
 
+  /// Subscription to underlying discovery stream.
+  StreamSubscription<List<PeerInfo>>? _discoverySubscription;
+
   /// Initialize the discovery service.
   Future<void> initialize() async {
     if (_isInitialized) {
-      print('[DiscoveryService] Already initialized');
+      debugPrint('[DiscoveryService] Already initialized');
       return;
     }
 
-    print('[DiscoveryService] Initializing...');
+    debugPrint('[DiscoveryService] Initializing...');
     _discovery = DiscoveryInterface.instance;
     _ownDeviceId = await getDeviceId();
     _isInitialized = true;
 
     // Listen to discovered peers and filter out self
-    _discovery.discoveredPeers.listen((peers) {
+    _discoverySubscription = _discovery.discoveredPeers.listen((peers) {
       _discoveredPeers =
           peers.where((p) => p.deviceId != _ownDeviceId).toList();
       _peersController.add(_discoveredPeers);
-      print(
+      debugPrint(
           '[DiscoveryService] Updated peers: ${_discoveredPeers.length} devices');
     });
 
-    print('[DiscoveryService] Initialized successfully');
+    debugPrint('[DiscoveryService] Initialized successfully');
   }
 
   /// Get or generate the device ID.
@@ -75,9 +79,9 @@ class DiscoveryService {
     if (deviceId == null) {
       deviceId = const Uuid().v4();
       await prefs.setString(_deviceIdKey, deviceId);
-      print('[DiscoveryService] Generated new device ID: $deviceId');
+      debugPrint('[DiscoveryService] Generated new device ID: $deviceId');
     } else {
-      print('[DiscoveryService] Loaded existing device ID: $deviceId');
+      debugPrint('[DiscoveryService] Loaded existing device ID: $deviceId');
     }
 
     return deviceId;
@@ -101,7 +105,7 @@ class DiscoveryService {
         return 'iOS Device';
       }
     } catch (e) {
-      print('[DiscoveryService] Error getting device name: $e');
+      debugPrint('[DiscoveryService] Error getting device name: $e');
     }
 
     return 'SyncMist Device';
@@ -115,12 +119,12 @@ class DiscoveryService {
     _ensureInitialized();
 
     if (_isScanning) {
-      print('[DiscoveryService] Already scanning');
+      debugPrint('[DiscoveryService] Already scanning');
       return;
     }
 
     try {
-      print('[DiscoveryService] Starting discovery...');
+      debugPrint('[DiscoveryService] Starting discovery...');
 
       final deviceId = await getDeviceId();
       final deviceName = await getDeviceName();
@@ -132,9 +136,9 @@ class DiscoveryService {
       await _discovery.startBrowsing();
       _isScanning = true;
 
-      print('[DiscoveryService] Discovery started');
+      debugPrint('[DiscoveryService] Discovery started');
     } catch (e) {
-      print('[DiscoveryService] Error starting discovery: $e');
+      debugPrint('[DiscoveryService] Error starting discovery: $e');
       rethrow;
     }
   }
@@ -144,21 +148,30 @@ class DiscoveryService {
     _ensureInitialized();
 
     if (!_isScanning) {
-      print('[DiscoveryService] Not currently scanning');
+      debugPrint('[DiscoveryService] Not currently scanning');
       return;
     }
 
     try {
-      print('[DiscoveryService] Stopping discovery...');
+      debugPrint('[DiscoveryService] Stopping discovery...');
       await _discovery.stopBrowsing();
       _isScanning = false;
       _discoveredPeers = [];
       _peersController.add([]);
-      print('[DiscoveryService] Discovery stopped');
+      debugPrint('[DiscoveryService] Discovery stopped');
     } catch (e) {
-      print('[DiscoveryService] Error stopping discovery: $e');
+      debugPrint('[DiscoveryService] Error stopping discovery: $e');
       rethrow;
     }
+  }
+
+  /// Dispose the service resources.
+  Future<void> dispose() async {
+    await stopDiscovery();
+    await _discoverySubscription?.cancel();
+    await _peersController.close();
+    _isInitialized = false;
+    debugPrint('[DiscoveryService] Disposed');
   }
 
   /// Stream of discovered peers (excludes self).
