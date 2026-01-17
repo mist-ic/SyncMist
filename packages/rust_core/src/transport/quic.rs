@@ -424,6 +424,9 @@ mod tests {
 
     #[tokio::test]
     async fn test_server_start() {
+        // Install crypto provider for rustls 0.23+
+        let _ = rustls::crypto::ring::default_provider().install_default();
+        
         let mut transport = QuicTransport::new();
         let result = transport.start_server(0).await;  // Port 0 = OS assigns port
         assert!(result.is_ok());

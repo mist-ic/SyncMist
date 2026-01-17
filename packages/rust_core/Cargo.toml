@@ -8,7 +8,7 @@ crate-type = ["cdylib", "staticlib"]
 
 [dependencies]
 # Flutter Rust Bridge for FFI
-flutter_rust_bridge = "2"
+flutter_rust_bridge = "=2.11.1"
 
 # Encryption
 aes-gcm = "0.10"

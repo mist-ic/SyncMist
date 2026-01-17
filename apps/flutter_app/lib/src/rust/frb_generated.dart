@@ -6,10 +6,12 @@
 import 'crypto.dart';
 import 'dart:async';
 import 'dart:convert';
+import 'discovery/mdns.dart';
 import 'frb_generated.dart';
 import 'frb_generated.io.dart' if (dart.library.js_interop) 'frb_generated.web.dart';
 import 'lib.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
+import 'transport/quic.dart';
 
 /// Main entrypoint of the Rust API
 class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
@@ -65,7 +67,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.11.1';
 
   @override
-  int get rustContentHash => 491418614;
+  int get rustContentHash => 1189968051;
 
   static const kDefaultExternalLibraryLoaderConfig = ExternalLibraryLoaderConfig(
     stem: 'rust_core',
@@ -75,6 +77,38 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
 }
 
 abstract class RustLibApi extends BaseApi {
+  Future<List<PeerInfo>> crateDiscoveryMdnsMdnsDiscoveryGetDiscoveredPeers({required MdnsDiscovery that});
+
+  MdnsDiscovery crateDiscoveryMdnsMdnsDiscoveryNew({required String deviceId, required String deviceName});
+
+  void crateDiscoveryMdnsMdnsDiscoveryRegister({required MdnsDiscovery that, required int port});
+
+  void crateDiscoveryMdnsMdnsDiscoveryStartBrowsing({required MdnsDiscovery that});
+
+  void crateDiscoveryMdnsMdnsDiscoveryStop({required MdnsDiscovery that});
+
+  Future<String> crateTransportQuicQuicTransportAcceptConnection({required QuicTransport that});
+
+  Future<void> crateTransportQuicQuicTransportClose({required QuicTransport that});
+
+  Future<String> crateTransportQuicQuicTransportConnectToPeer(
+      {required QuicTransport that, required String addr, required int port});
+
+  QuicTransport crateTransportQuicQuicTransportDefault();
+
+  Future<void> crateTransportQuicQuicTransportDisconnect({required QuicTransport that, required String peerId});
+
+  Future<List<String>> crateTransportQuicQuicTransportGetConnectedPeers({required QuicTransport that});
+
+  bool crateTransportQuicQuicTransportIsRunning({required QuicTransport that});
+
+  QuicTransport crateTransportQuicQuicTransportNew();
+
+  Future<void> crateTransportQuicQuicTransportSendData(
+      {required QuicTransport that, required String peerId, required List<int> data});
+
+  Future<void> crateTransportQuicQuicTransportStartServer({required QuicTransport that, required int port});
+
   String crateCryptoDecryptText({required List<int> ciphertext, required List<int> key});
 
   Uint8List crateCryptoDeriveSharedSecret({required List<int> mySecret, required List<int> theirPublic});
@@ -85,7 +119,21 @@ abstract class RustLibApi extends BaseApi {
 
   (Uint8List, Uint8List) crateCryptoGenerateKeypair();
 
+  (Uint8List, Uint8List) crateTransportQuicGenerateSelfSignedCert();
+
   void crateInit();
+
+  RustArcIncrementStrongCountFnType get rust_arc_increment_strong_count_MdnsDiscovery;
+
+  RustArcDecrementStrongCountFnType get rust_arc_decrement_strong_count_MdnsDiscovery;
+
+  CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_MdnsDiscoveryPtr;
+
+  RustArcIncrementStrongCountFnType get rust_arc_increment_strong_count_QuicTransport;
+
+  RustArcDecrementStrongCountFnType get rust_arc_decrement_strong_count_QuicTransport;
+
+  CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_QuicTransportPtr;
 }
 
 class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
@@ -97,13 +145,381 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   });
 
   @override
+  Future<List<PeerInfo>> crateDiscoveryMdnsMdnsDiscoveryGetDiscoveredPeers({required MdnsDiscovery that}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMdnsDiscovery(
+            that, serializer);
+        pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 1, port: port_);
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_list_peer_info,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateDiscoveryMdnsMdnsDiscoveryGetDiscoveredPeersConstMeta,
+      argValues: [that],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateDiscoveryMdnsMdnsDiscoveryGetDiscoveredPeersConstMeta => const TaskConstMeta(
+        debugName: "MdnsDiscovery_get_discovered_peers",
+        argNames: ["that"],
+      );
+
+  @override
+  MdnsDiscovery crateDiscoveryMdnsMdnsDiscoveryNew({required String deviceId, required String deviceName}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_String(deviceId, serializer);
+        sse_encode_String(deviceName, serializer);
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 2)!;
+      },
+      codec: SseCodec(
+        decodeSuccessData:
+            sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMdnsDiscovery,
+        decodeErrorData: sse_decode_discovery_error,
+      ),
+      constMeta: kCrateDiscoveryMdnsMdnsDiscoveryNewConstMeta,
+      argValues: [deviceId, deviceName],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateDiscoveryMdnsMdnsDiscoveryNewConstMeta => const TaskConstMeta(
+        debugName: "MdnsDiscovery_new",
+        argNames: ["deviceId", "deviceName"],
+      );
+
+  @override
+  void crateDiscoveryMdnsMdnsDiscoveryRegister({required MdnsDiscovery that, required int port}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMdnsDiscovery(
+            that, serializer);
+        sse_encode_u_16(port, serializer);
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 3)!;
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_unit,
+        decodeErrorData: sse_decode_discovery_error,
+      ),
+      constMeta: kCrateDiscoveryMdnsMdnsDiscoveryRegisterConstMeta,
+      argValues: [that, port],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateDiscoveryMdnsMdnsDiscoveryRegisterConstMeta => const TaskConstMeta(
+        debugName: "MdnsDiscovery_register",
+        argNames: ["that", "port"],
+      );
+
+  @override
+  void crateDiscoveryMdnsMdnsDiscoveryStartBrowsing({required MdnsDiscovery that}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMdnsDiscovery(
+            that, serializer);
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 4)!;
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_unit,
+        decodeErrorData: sse_decode_discovery_error,
+      ),
+      constMeta: kCrateDiscoveryMdnsMdnsDiscoveryStartBrowsingConstMeta,
+      argValues: [that],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateDiscoveryMdnsMdnsDiscoveryStartBrowsingConstMeta => const TaskConstMeta(
+        debugName: "MdnsDiscovery_start_browsing",
+        argNames: ["that"],
+      );
+
+  @override
+  void crateDiscoveryMdnsMdnsDiscoveryStop({required MdnsDiscovery that}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMdnsDiscovery(
+            that, serializer);
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 5)!;
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_unit,
+        decodeErrorData: sse_decode_discovery_error,
+      ),
+      constMeta: kCrateDiscoveryMdnsMdnsDiscoveryStopConstMeta,
+      argValues: [that],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateDiscoveryMdnsMdnsDiscoveryStopConstMeta => const TaskConstMeta(
+        debugName: "MdnsDiscovery_stop",
+        argNames: ["that"],
+      );
+
+  @override
+  Future<String> crateTransportQuicQuicTransportAcceptConnection({required QuicTransport that}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(
+            that, serializer);
+        pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 6, port: port_);
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_String,
+        decodeErrorData: sse_decode_transport_error,
+      ),
+      constMeta: kCrateTransportQuicQuicTransportAcceptConnectionConstMeta,
+      argValues: [that],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateTransportQuicQuicTransportAcceptConnectionConstMeta => const TaskConstMeta(
+        debugName: "QuicTransport_accept_connection",
+        argNames: ["that"],
+      );
+
+  @override
+  Future<void> crateTransportQuicQuicTransportClose({required QuicTransport that}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(
+            that, serializer);
+        pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 7, port: port_);
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_unit,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateTransportQuicQuicTransportCloseConstMeta,
+      argValues: [that],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateTransportQuicQuicTransportCloseConstMeta => const TaskConstMeta(
+        debugName: "QuicTransport_close",
+        argNames: ["that"],
+      );
+
+  @override
+  Future<String> crateTransportQuicQuicTransportConnectToPeer(
+      {required QuicTransport that, required String addr, required int port}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(
+            that, serializer);
+        sse_encode_String(addr, serializer);
+        sse_encode_u_16(port, serializer);
+        pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 8, port: port_);
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_String,
+        decodeErrorData: sse_decode_transport_error,
+      ),
+      constMeta: kCrateTransportQuicQuicTransportConnectToPeerConstMeta,
+      argValues: [that, addr, port],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateTransportQuicQuicTransportConnectToPeerConstMeta => const TaskConstMeta(
+        debugName: "QuicTransport_connect_to_peer",
+        argNames: ["that", "addr", "port"],
+      );
+
+  @override
+  QuicTransport crateTransportQuicQuicTransportDefault() {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 9)!;
+      },
+      codec: SseCodec(
+        decodeSuccessData:
+            sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateTransportQuicQuicTransportDefaultConstMeta,
+      argValues: [],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateTransportQuicQuicTransportDefaultConstMeta => const TaskConstMeta(
+        debugName: "QuicTransport_default",
+        argNames: [],
+      );
+
+  @override
+  Future<void> crateTransportQuicQuicTransportDisconnect({required QuicTransport that, required String peerId}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(
+            that, serializer);
+        sse_encode_String(peerId, serializer);
+        pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 10, port: port_);
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_unit,
+        decodeErrorData: sse_decode_transport_error,
+      ),
+      constMeta: kCrateTransportQuicQuicTransportDisconnectConstMeta,
+      argValues: [that, peerId],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateTransportQuicQuicTransportDisconnectConstMeta => const TaskConstMeta(
+        debugName: "QuicTransport_disconnect",
+        argNames: ["that", "peerId"],
+      );
+
+  @override
+  Future<List<String>> crateTransportQuicQuicTransportGetConnectedPeers({required QuicTransport that}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(
+            that, serializer);
+        pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 11, port: port_);
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_list_String,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateTransportQuicQuicTransportGetConnectedPeersConstMeta,
+      argValues: [that],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateTransportQuicQuicTransportGetConnectedPeersConstMeta => const TaskConstMeta(
+        debugName: "QuicTransport_get_connected_peers",
+        argNames: ["that"],
+      );
+
+  @override
+  bool crateTransportQuicQuicTransportIsRunning({required QuicTransport that}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(
+            that, serializer);
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 12)!;
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_bool,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateTransportQuicQuicTransportIsRunningConstMeta,
+      argValues: [that],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateTransportQuicQuicTransportIsRunningConstMeta => const TaskConstMeta(
+        debugName: "QuicTransport_is_running",
+        argNames: ["that"],
+      );
+
+  @override
+  QuicTransport crateTransportQuicQuicTransportNew() {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 13)!;
+      },
+      codec: SseCodec(
+        decodeSuccessData:
+            sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateTransportQuicQuicTransportNewConstMeta,
+      argValues: [],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateTransportQuicQuicTransportNewConstMeta => const TaskConstMeta(
+        debugName: "QuicTransport_new",
+        argNames: [],
+      );
+
+  @override
+  Future<void> crateTransportQuicQuicTransportSendData(
+      {required QuicTransport that, required String peerId, required List<int> data}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(
+            that, serializer);
+        sse_encode_String(peerId, serializer);
+        sse_encode_list_prim_u_8_loose(data, serializer);
+        pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 14, port: port_);
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_unit,
+        decodeErrorData: sse_decode_transport_error,
+      ),
+      constMeta: kCrateTransportQuicQuicTransportSendDataConstMeta,
+      argValues: [that, peerId, data],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateTransportQuicQuicTransportSendDataConstMeta => const TaskConstMeta(
+        debugName: "QuicTransport_send_data",
+        argNames: ["that", "peerId", "data"],
+      );
+
+  @override
+  Future<void> crateTransportQuicQuicTransportStartServer({required QuicTransport that, required int port}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(
+            that, serializer);
+        sse_encode_u_16(port, serializer);
+        pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 15, port: port_);
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_unit,
+        decodeErrorData: sse_decode_transport_error,
+      ),
+      constMeta: kCrateTransportQuicQuicTransportStartServerConstMeta,
+      argValues: [that, port],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateTransportQuicQuicTransportStartServerConstMeta => const TaskConstMeta(
+        debugName: "QuicTransport_start_server",
+        argNames: ["that", "port"],
+      );
+
+  @override
   String crateCryptoDecryptText({required List<int> ciphertext, required List<int> key}) {
     return handler.executeSync(SyncTask(
       callFfi: () {
         final serializer = SseSerializer(generalizedFrbRustBinding);
         sse_encode_list_prim_u_8_loose(ciphertext, serializer);
         sse_encode_list_prim_u_8_loose(key, serializer);
-        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 1)!;
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 16)!;
       },
       codec: SseCodec(
         decodeSuccessData: sse_decode_String,
@@ -127,7 +543,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         final serializer = SseSerializer(generalizedFrbRustBinding);
         sse_encode_list_prim_u_8_loose(mySecret, serializer);
         sse_encode_list_prim_u_8_loose(theirPublic, serializer);
-        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 2)!;
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 17)!;
       },
       codec: SseCodec(
         decodeSuccessData: sse_decode_list_prim_u_8_strict,
@@ -151,7 +567,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         final serializer = SseSerializer(generalizedFrbRustBinding);
         sse_encode_String(plaintext, serializer);
         sse_encode_list_prim_u_8_loose(key, serializer);
-        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 3)!;
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 18)!;
       },
       codec: SseCodec(
         decodeSuccessData: sse_decode_list_prim_u_8_strict,
@@ -173,7 +589,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     return handler.executeSync(SyncTask(
       callFfi: () {
         final serializer = SseSerializer(generalizedFrbRustBinding);
-        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 4)!;
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 19)!;
       },
       codec: SseCodec(
         decodeSuccessData: sse_decode_list_prim_u_8_strict,
@@ -195,7 +611,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     return handler.executeSync(SyncTask(
       callFfi: () {
         final serializer = SseSerializer(generalizedFrbRustBinding);
-        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 5)!;
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 20)!;
       },
       codec: SseCodec(
         decodeSuccessData: sse_decode_record_list_prim_u_8_strict_list_prim_u_8_strict,
@@ -213,11 +629,33 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  (Uint8List, Uint8List) crateTransportQuicGenerateSelfSignedCert() {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 21)!;
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_record_list_prim_u_8_strict_list_prim_u_8_strict,
+        decodeErrorData: sse_decode_transport_error,
+      ),
+      constMeta: kCrateTransportQuicGenerateSelfSignedCertConstMeta,
+      argValues: [],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateTransportQuicGenerateSelfSignedCertConstMeta => const TaskConstMeta(
+        debugName: "generate_self_signed_cert",
+        argNames: [],
+      );
+
+  @override
   void crateInit() {
     return handler.executeSync(SyncTask(
       callFfi: () {
         final serializer = SseSerializer(generalizedFrbRustBinding);
-        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 6)!;
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 22)!;
       },
       codec: SseCodec(
         decodeSuccessData: sse_decode_unit,
@@ -234,10 +672,108 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         argNames: [],
       );
 
+  RustArcIncrementStrongCountFnType get rust_arc_increment_strong_count_MdnsDiscovery =>
+      wire.rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMdnsDiscovery;
+
+  RustArcDecrementStrongCountFnType get rust_arc_decrement_strong_count_MdnsDiscovery =>
+      wire.rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMdnsDiscovery;
+
+  RustArcIncrementStrongCountFnType get rust_arc_increment_strong_count_QuicTransport =>
+      wire.rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport;
+
+  RustArcDecrementStrongCountFnType get rust_arc_decrement_strong_count_QuicTransport =>
+      wire.rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport;
+
+  @protected
+  MdnsDiscovery dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMdnsDiscovery(
+      dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return MdnsDiscoveryImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  QuicTransport dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(
+      dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return QuicTransportImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  QuicTransport dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(
+      dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return QuicTransportImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  MdnsDiscovery dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMdnsDiscovery(
+      dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return MdnsDiscoveryImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  QuicTransport dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(
+      dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return QuicTransportImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  MdnsDiscovery dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMdnsDiscovery(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return MdnsDiscoveryImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  QuicTransport dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return QuicTransportImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
   @protected
   String dco_decode_String(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as String;
+  }
+
+  @protected
+  bool dco_decode_bool(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as bool;
+  }
+
+  @protected
+  DiscoveryError dco_decode_discovery_error(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    switch (raw[0]) {
+      case 0:
+        return DiscoveryError_Registration(
+          dco_decode_String(raw[1]),
+        );
+      case 1:
+        return DiscoveryError_Browse(
+          dco_decode_String(raw[1]),
+        );
+      case 2:
+        return DiscoveryError_Parse(
+          dco_decode_String(raw[1]),
+        );
+      default:
+        throw Exception("unreachable");
+    }
+  }
+
+  @protected
+  List<String> dco_decode_list_String(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_String).toList();
+  }
+
+  @protected
+  List<PeerInfo> dco_decode_list_peer_info(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_peer_info).toList();
   }
 
   @protected
@@ -250,6 +786,20 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Uint8List dco_decode_list_prim_u_8_strict(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as Uint8List;
+  }
+
+  @protected
+  PeerInfo dco_decode_peer_info(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 5) throw Exception('unexpected arr length: expect 5 but see ${arr.length}');
+    return PeerInfo(
+      deviceId: dco_decode_String(arr[0]),
+      deviceName: dco_decode_String(arr[1]),
+      addresses: dco_decode_list_String(arr[2]),
+      port: dco_decode_u_16(arr[3]),
+      discoveredAt: dco_decode_u_64(arr[4]),
+    );
   }
 
   @protected
@@ -266,6 +816,45 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  TransportError dco_decode_transport_error(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    switch (raw[0]) {
+      case 0:
+        return TransportError_Connection(
+          dco_decode_String(raw[1]),
+        );
+      case 1:
+        return TransportError_Io(
+          dco_decode_String(raw[1]),
+        );
+      case 2:
+        return TransportError_Tls(
+          dco_decode_String(raw[1]),
+        );
+      case 3:
+        return const TransportError_NotConnected();
+      case 4:
+        return TransportError_PeerNotFound(
+          dco_decode_String(raw[1]),
+        );
+      default:
+        throw Exception("unreachable");
+    }
+  }
+
+  @protected
+  int dco_decode_u_16(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as int;
+  }
+
+  @protected
+  BigInt dco_decode_u_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dcoDecodeU64(raw);
+  }
+
+  @protected
   int dco_decode_u_8(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as int;
@@ -278,10 +867,115 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  BigInt dco_decode_usize(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dcoDecodeU64(raw);
+  }
+
+  @protected
+  MdnsDiscovery sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMdnsDiscovery(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return MdnsDiscoveryImpl.frbInternalSseDecode(sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  QuicTransport sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return QuicTransportImpl.frbInternalSseDecode(sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  QuicTransport sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return QuicTransportImpl.frbInternalSseDecode(sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  MdnsDiscovery sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMdnsDiscovery(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return MdnsDiscoveryImpl.frbInternalSseDecode(sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  QuicTransport sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return QuicTransportImpl.frbInternalSseDecode(sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  MdnsDiscovery sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMdnsDiscovery(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return MdnsDiscoveryImpl.frbInternalSseDecode(sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  QuicTransport sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return QuicTransportImpl.frbInternalSseDecode(sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
   String sse_decode_String(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var inner = sse_decode_list_prim_u_8_strict(deserializer);
     return utf8.decoder.convert(inner);
+  }
+
+  @protected
+  bool sse_decode_bool(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getUint8() != 0;
+  }
+
+  @protected
+  DiscoveryError sse_decode_discovery_error(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var tag_ = sse_decode_i_32(deserializer);
+    switch (tag_) {
+      case 0:
+        var var_field0 = sse_decode_String(deserializer);
+        return DiscoveryError_Registration(var_field0);
+      case 1:
+        var var_field0 = sse_decode_String(deserializer);
+        return DiscoveryError_Browse(var_field0);
+      case 2:
+        var var_field0 = sse_decode_String(deserializer);
+        return DiscoveryError_Parse(var_field0);
+      default:
+        throw UnimplementedError('');
+    }
+  }
+
+  @protected
+  List<String> sse_decode_list_String(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <String>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_String(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<PeerInfo> sse_decode_list_peer_info(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <PeerInfo>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_peer_info(deserializer));
+    }
+    return ans_;
   }
 
   @protected
@@ -299,11 +993,64 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  PeerInfo sse_decode_peer_info(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_deviceId = sse_decode_String(deserializer);
+    var var_deviceName = sse_decode_String(deserializer);
+    var var_addresses = sse_decode_list_String(deserializer);
+    var var_port = sse_decode_u_16(deserializer);
+    var var_discoveredAt = sse_decode_u_64(deserializer);
+    return PeerInfo(
+        deviceId: var_deviceId,
+        deviceName: var_deviceName,
+        addresses: var_addresses,
+        port: var_port,
+        discoveredAt: var_discoveredAt);
+  }
+
+  @protected
   (Uint8List, Uint8List) sse_decode_record_list_prim_u_8_strict_list_prim_u_8_strict(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_field0 = sse_decode_list_prim_u_8_strict(deserializer);
     var var_field1 = sse_decode_list_prim_u_8_strict(deserializer);
     return (var_field0, var_field1);
+  }
+
+  @protected
+  TransportError sse_decode_transport_error(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var tag_ = sse_decode_i_32(deserializer);
+    switch (tag_) {
+      case 0:
+        var var_field0 = sse_decode_String(deserializer);
+        return TransportError_Connection(var_field0);
+      case 1:
+        var var_field0 = sse_decode_String(deserializer);
+        return TransportError_Io(var_field0);
+      case 2:
+        var var_field0 = sse_decode_String(deserializer);
+        return TransportError_Tls(var_field0);
+      case 3:
+        return const TransportError_NotConnected();
+      case 4:
+        var var_field0 = sse_decode_String(deserializer);
+        return TransportError_PeerNotFound(var_field0);
+      default:
+        throw UnimplementedError('');
+    }
+  }
+
+  @protected
+  int sse_decode_u_16(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getUint16();
+  }
+
+  @protected
+  BigInt sse_decode_u_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getBigUint64();
   }
 
   @protected
@@ -318,21 +1065,110 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  BigInt sse_decode_usize(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getBigUint64();
+  }
+
+  @protected
   int sse_decode_i_32(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return deserializer.buffer.getInt32();
   }
 
   @protected
-  bool sse_decode_bool(SseDeserializer deserializer) {
+  void sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMdnsDiscovery(
+      MdnsDiscovery self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return deserializer.buffer.getUint8() != 0;
+    sse_encode_usize((self as MdnsDiscoveryImpl).frbInternalSseEncode(move: true), serializer);
+  }
+
+  @protected
+  void sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(
+      QuicTransport self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize((self as QuicTransportImpl).frbInternalSseEncode(move: true), serializer);
+  }
+
+  @protected
+  void sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(
+      QuicTransport self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize((self as QuicTransportImpl).frbInternalSseEncode(move: false), serializer);
+  }
+
+  @protected
+  void sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMdnsDiscovery(
+      MdnsDiscovery self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize((self as MdnsDiscoveryImpl).frbInternalSseEncode(move: false), serializer);
+  }
+
+  @protected
+  void sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(
+      QuicTransport self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize((self as QuicTransportImpl).frbInternalSseEncode(move: false), serializer);
+  }
+
+  @protected
+  void sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMdnsDiscovery(
+      MdnsDiscovery self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize((self as MdnsDiscoveryImpl).frbInternalSseEncode(move: null), serializer);
+  }
+
+  @protected
+  void sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerQuicTransport(
+      QuicTransport self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize((self as QuicTransportImpl).frbInternalSseEncode(move: null), serializer);
   }
 
   @protected
   void sse_encode_String(String self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_list_prim_u_8_strict(utf8.encoder.convert(self), serializer);
+  }
+
+  @protected
+  void sse_encode_bool(bool self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putUint8(self ? 1 : 0);
+  }
+
+  @protected
+  void sse_encode_discovery_error(DiscoveryError self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    switch (self) {
+      case DiscoveryError_Registration(field0: final field0):
+        sse_encode_i_32(0, serializer);
+        sse_encode_String(field0, serializer);
+      case DiscoveryError_Browse(field0: final field0):
+        sse_encode_i_32(1, serializer);
+        sse_encode_String(field0, serializer);
+      case DiscoveryError_Parse(field0: final field0):
+        sse_encode_i_32(2, serializer);
+        sse_encode_String(field0, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_String(List<String> self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_String(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_peer_info(List<PeerInfo> self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_peer_info(item, serializer);
+    }
   }
 
   @protected
@@ -350,11 +1186,54 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_peer_info(PeerInfo self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.deviceId, serializer);
+    sse_encode_String(self.deviceName, serializer);
+    sse_encode_list_String(self.addresses, serializer);
+    sse_encode_u_16(self.port, serializer);
+    sse_encode_u_64(self.discoveredAt, serializer);
+  }
+
+  @protected
   void sse_encode_record_list_prim_u_8_strict_list_prim_u_8_strict(
       (Uint8List, Uint8List) self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_list_prim_u_8_strict(self.$1, serializer);
     sse_encode_list_prim_u_8_strict(self.$2, serializer);
+  }
+
+  @protected
+  void sse_encode_transport_error(TransportError self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    switch (self) {
+      case TransportError_Connection(field0: final field0):
+        sse_encode_i_32(0, serializer);
+        sse_encode_String(field0, serializer);
+      case TransportError_Io(field0: final field0):
+        sse_encode_i_32(1, serializer);
+        sse_encode_String(field0, serializer);
+      case TransportError_Tls(field0: final field0):
+        sse_encode_i_32(2, serializer);
+        sse_encode_String(field0, serializer);
+      case TransportError_NotConnected():
+        sse_encode_i_32(3, serializer);
+      case TransportError_PeerNotFound(field0: final field0):
+        sse_encode_i_32(4, serializer);
+        sse_encode_String(field0, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_u_16(int self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putUint16(self);
+  }
+
+  @protected
+  void sse_encode_u_64(BigInt self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putBigUint64(self);
   }
 
   @protected
@@ -369,14 +1248,113 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_usize(BigInt self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putBigUint64(self);
+  }
+
+  @protected
   void sse_encode_i_32(int self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     serializer.buffer.putInt32(self);
   }
+}
 
-  @protected
-  void sse_encode_bool(bool self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    serializer.buffer.putUint8(self ? 1 : 0);
-  }
+@sealed
+class MdnsDiscoveryImpl extends RustOpaque implements MdnsDiscovery {
+  // Not to be used by end users
+  MdnsDiscoveryImpl.frbInternalDcoDecode(List<dynamic> wire) : super.frbInternalDcoDecode(wire, _kStaticData);
+
+  // Not to be used by end users
+  MdnsDiscoveryImpl.frbInternalSseDecode(BigInt ptr, int externalSizeOnNative)
+      : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount: RustLib.instance.api.rust_arc_increment_strong_count_MdnsDiscovery,
+    rustArcDecrementStrongCount: RustLib.instance.api.rust_arc_decrement_strong_count_MdnsDiscovery,
+    rustArcDecrementStrongCountPtr: RustLib.instance.api.rust_arc_decrement_strong_count_MdnsDiscoveryPtr,
+  );
+
+  /// Get the list of currently discovered peers
+  Future<List<PeerInfo>> getDiscoveredPeers() => RustLib.instance.api.crateDiscoveryMdnsMdnsDiscoveryGetDiscoveredPeers(
+        that: this,
+      );
+
+  /// Register this device on the network
+  void register({required int port}) =>
+      RustLib.instance.api.crateDiscoveryMdnsMdnsDiscoveryRegister(that: this, port: port);
+
+  /// Start browsing for peers on the network
+  /// This starts a background task that populates discovered_peers
+  void startBrowsing() => RustLib.instance.api.crateDiscoveryMdnsMdnsDiscoveryStartBrowsing(
+        that: this,
+      );
+
+  /// Stop discovery and unregister service
+  void stop() => RustLib.instance.api.crateDiscoveryMdnsMdnsDiscoveryStop(
+        that: this,
+      );
+}
+
+@sealed
+class QuicTransportImpl extends RustOpaque implements QuicTransport {
+  // Not to be used by end users
+  QuicTransportImpl.frbInternalDcoDecode(List<dynamic> wire) : super.frbInternalDcoDecode(wire, _kStaticData);
+
+  // Not to be used by end users
+  QuicTransportImpl.frbInternalSseDecode(BigInt ptr, int externalSizeOnNative)
+      : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount: RustLib.instance.api.rust_arc_increment_strong_count_QuicTransport,
+    rustArcDecrementStrongCount: RustLib.instance.api.rust_arc_decrement_strong_count_QuicTransport,
+    rustArcDecrementStrongCountPtr: RustLib.instance.api.rust_arc_decrement_strong_count_QuicTransportPtr,
+  );
+
+  /// Accept an incoming connection (server only)
+  Future<String> acceptConnection() => RustLib.instance.api.crateTransportQuicQuicTransportAcceptConnection(
+        that: this,
+      );
+
+  /// Close the transport and all connections
+  Future<void> close() => RustLib.instance.api.crateTransportQuicQuicTransportClose(
+        that: this,
+      );
+
+  /// Connect to a peer (client mode)
+  ///
+  /// # Arguments
+  /// * `addr` - IP address or hostname of the peer
+  /// * `port` - Port number of the peer
+  Future<String> connectToPeer({required String addr, required int port}) =>
+      RustLib.instance.api.crateTransportQuicQuicTransportConnectToPeer(that: this, addr: addr, port: port);
+
+  /// Disconnect from a peer
+  Future<void> disconnect({required String peerId}) =>
+      RustLib.instance.api.crateTransportQuicQuicTransportDisconnect(that: this, peerId: peerId);
+
+  /// Get list of connected peers
+  Future<List<String>> getConnectedPeers() => RustLib.instance.api.crateTransportQuicQuicTransportGetConnectedPeers(
+        that: this,
+      );
+
+  /// Check if transport is running
+  bool isRunning() => RustLib.instance.api.crateTransportQuicQuicTransportIsRunning(
+        that: this,
+      );
+
+  /// Send data to a specific peer
+  ///
+  /// # Arguments
+  /// * `peer_id` - The peer identifier (address:port)
+  /// * `data` - Data to send
+  Future<void> sendData({required String peerId, required List<int> data}) =>
+      RustLib.instance.api.crateTransportQuicQuicTransportSendData(that: this, peerId: peerId, data: data);
+
+  /// Start the QUIC server on the specified port
+  ///
+  /// # Arguments
+  /// * `port` - Port number to listen on
+  Future<void> startServer({required int port}) =>
+      RustLib.instance.api.crateTransportQuicQuicTransportStartServer(that: this, port: port);
 }
