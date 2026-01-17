@@ -133,9 +133,6 @@ SyncMist/
 │       │   └── crypto.rs     # AES-256-GCM
 │       └── moon.yml
 └── Internal/                 # Team docs (gitignored)
+
 ```
-
-## 📄 License
-
-MIT License – see [LICENSE](LICENSE)
 
