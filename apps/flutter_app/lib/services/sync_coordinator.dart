@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:typed_data';
+
+import 'package:flutter/foundation.dart';
 
 import 'p2p_service.dart';
 import 'discovery_service.dart';
@@ -57,13 +58,13 @@ class _MockCryptoService {
 
   /// Mock encrypt data.
   Uint8List encrypt(Uint8List data) {
-    print('[MockCrypto] Encrypting ${data.length} bytes');
+    debugPrint('[MockCrypto] Encrypting ${data.length} bytes');
     return Uint8List.fromList(data.map((b) => b ^ _mockKey).toList());
   }
 
   /// Mock decrypt data.
   Uint8List decrypt(Uint8List data) {
-    print('[MockCrypto] Decrypting ${data.length} bytes');
+    debugPrint('[MockCrypto] Decrypting ${data.length} bytes');
     // XOR is symmetric
     return Uint8List.fromList(data.map((b) => b ^ _mockKey).toList());
   }
@@ -111,17 +112,20 @@ class SyncCoordinator {
   /// Subscription to incoming data.
   StreamSubscription<Uint8List>? _incomingDataSubscription;
 
+  /// Subscription to peer discovery.
+  StreamSubscription<List<PeerInfo>>? _discoverySubscription;
+
   /// Callback for received clipboard content.
   void Function(String content)? onClipboardReceived;
 
   /// Initialize the sync coordinator.
   Future<void> initialize() async {
     if (isInitialized) {
-      print('[SyncCoordinator] Already initialized');
+      debugPrint('[SyncCoordinator] Already initialized');
       return;
     }
 
-    print('[SyncCoordinator] Initializing...');
+    debugPrint('[SyncCoordinator] Initializing...');
 
     // Initialize services
     _p2pService = P2PService.instance;
@@ -138,7 +142,7 @@ class SyncCoordinator {
     await _p2pService.startAsServer();
 
     isInitialized = true;
-    print('[SyncCoordinator] Initialized successfully');
+    debugPrint('[SyncCoordinator] Initialized successfully');
   }
 
   /// Start syncing clipboard content.
@@ -146,29 +150,29 @@ class SyncCoordinator {
     _ensureInitialized();
 
     if (isSyncing) {
-      print('[SyncCoordinator] Already syncing');
+      debugPrint('[SyncCoordinator] Already syncing');
       return;
     }
 
-    print('[SyncCoordinator] Starting sync...');
+    debugPrint('[SyncCoordinator] Starting sync...');
 
     // Listen for incoming data
     _incomingDataSubscription = _p2pService.incomingData.listen(
       _handleIncomingData,
       onError: (error) {
-        print('[SyncCoordinator] Error receiving data: $error');
+        debugPrint('[SyncCoordinator] Error receiving data: $error');
       },
     );
 
     // Auto-connect to discovered peers
-    _discoveryService.peers.listen((peers) {
+    _discoverySubscription = _discoveryService.peers.listen((peers) {
       for (final peer in peers) {
         _connectToPeerIfNeeded(peer);
       }
     });
 
     isSyncing = true;
-    print('[SyncCoordinator] Sync started');
+    debugPrint('[SyncCoordinator] Sync started');
   }
 
   /// Stop syncing.
@@ -176,24 +180,27 @@ class SyncCoordinator {
     _ensureInitialized();
 
     if (!isSyncing) {
-      print('[SyncCoordinator] Not currently syncing');
+      debugPrint('[SyncCoordinator] Not currently syncing');
       return;
     }
 
-    print('[SyncCoordinator] Stopping sync...');
+    debugPrint('[SyncCoordinator] Stopping sync...');
 
     await _incomingDataSubscription?.cancel();
     _incomingDataSubscription = null;
 
+    await _discoverySubscription?.cancel();
+    _discoverySubscription = null;
+
     isSyncing = false;
-    print('[SyncCoordinator] Sync stopped');
+    debugPrint('[SyncCoordinator] Sync stopped');
   }
 
   /// Send clipboard content to all connected peers.
   Future<void> sendClipboard(String content) async {
     _ensureInitialized();
 
-    print('[SyncCoordinator] Sending clipboard content...');
+    debugPrint('[SyncCoordinator] Sending clipboard content...');
 
     try {
       // Convert to bytes
@@ -213,9 +220,9 @@ class SyncCoordinator {
         success: true,
       ));
 
-      print('[SyncCoordinator] Clipboard sent successfully');
+      debugPrint('[SyncCoordinator] Clipboard sent successfully');
     } catch (e) {
-      print('[SyncCoordinator] Error sending clipboard: $e');
+      debugPrint('[SyncCoordinator] Error sending clipboard: $e');
 
       // Emit failure event
       _syncEvents.add(SyncEvent(
@@ -230,7 +237,7 @@ class SyncCoordinator {
   /// Handle incoming data from peers.
   void _handleIncomingData(Uint8List encryptedData) {
     try {
-      print('[SyncCoordinator] Received ${encryptedData.length} bytes');
+      debugPrint('[SyncCoordinator] Received ${encryptedData.length} bytes');
 
       // Decrypt
       final decryptedBytes = _cryptoService.decrypt(encryptedData);
@@ -249,9 +256,10 @@ class SyncCoordinator {
       // Notify callback
       onClipboardReceived?.call(content);
 
-      print('[SyncCoordinator] Clipboard received: ${_getPreview(content)}');
+      debugPrint(
+          '[SyncCoordinator] Clipboard received: ${_getPreview(content)}');
     } catch (e) {
-      print('[SyncCoordinator] Error processing incoming data: $e');
+      debugPrint('[SyncCoordinator] Error processing incoming data: $e');
 
       // Emit failure event
       _syncEvents.add(SyncEvent(
@@ -301,13 +309,15 @@ class SyncCoordinator {
 
   /// Shutdown the coordinator.
   Future<void> shutdown() async {
-    print('[SyncCoordinator] Shutting down...');
+    debugPrint('[SyncCoordinator] Shutting down...');
 
     await stopSync();
     await _discoveryService.stopDiscovery();
     await _p2pService.disconnectAll();
 
+    await _syncEvents.close();
+
     isInitialized = false;
-    print('[SyncCoordinator] Shutdown complete');
+    debugPrint('[SyncCoordinator] Shutdown complete');
   }
 }
