@@ -1,0 +1,2212 @@
+   Compiling rust_core v0.1.0 (C:\Work\Git\SyncMist\packages\rust_core)
+error[E0412]: cannot find type `MdnsDiscovery` in this scope
+  --> src\frb_generated.rs:73:73
+   |
+73 |                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MdnsDiscovery>,
+   |                                                                         ^^^^^^^^^^^^^ not found in this scope
+   |
+help: consider importing this struct through its public re-export
+   |
+28 + use crate::MdnsDiscovery;
+   |
+
+error[E0412]: cannot find type `MdnsDiscovery` in this scope
+   --> src\frb_generated.rs:164:73
+    |
+164 |                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MdnsDiscovery>,
+    |                                                                         ^^^^^^^^^^^^^ not found in this scope
+    |
+help: consider importing this struct through its public re-export
+    |
+ 28 + use crate::MdnsDiscovery;
+    |
+
+error[E0412]: cannot find type `MdnsDiscovery` in this scope
+   --> src\frb_generated.rs:212:73
+    |
+212 |                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MdnsDiscovery>,
+    |                                                                         ^^^^^^^^^^^^^ not found in this scope
+    |
+help: consider importing this struct through its public re-export
+    |
+ 28 + use crate::MdnsDiscovery;
+    |
+
+error[E0412]: cannot find type `MdnsDiscovery` in this scope
+   --> src\frb_generated.rs:259:73
+    |
+259 |                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MdnsDiscovery>,
+    |                                                                         ^^^^^^^^^^^^^ not found in this scope
+    |
+help: consider importing this struct through its public re-export
+    |
+ 28 + use crate::MdnsDiscovery;
+    |
+
+error[E0412]: cannot find type `QuicTransport` in this scope
+   --> src\frb_generated.rs:306:73
+    |
+306 |                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<QuicTransport>,
+    |                                                                         ^^^^^^^^^^^^^ not found in this scope
+    |
+help: consider importing this struct through its public re-export
+    |
+ 28 + use crate::QuicTransport;
+    |
+
+error[E0412]: cannot find type `QuicTransport` in this scope
+   --> src\frb_generated.rs:364:73
+    |
+364 |                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<QuicTransport>,
+    |                                                                         ^^^^^^^^^^^^^ not found in this scope
+    |
+help: consider importing this struct through its public re-export
+    |
+ 28 + use crate::QuicTransport;
+    |
+
+error[E0412]: cannot find type `QuicTransport` in this scope
+   --> src\frb_generated.rs:422:73
+    |
+422 |                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<QuicTransport>,
+    |                                                                         ^^^^^^^^^^^^^ not found in this scope
+    |
+help: consider importing this struct through its public re-export
+    |
+ 28 + use crate::QuicTransport;
+    |
+
+error[E0412]: cannot find type `QuicTransport` in this scope
+   --> src\frb_generated.rs:514:73
+    |
+514 |                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<QuicTransport>,
+    |                                                                         ^^^^^^^^^^^^^ not found in this scope
+    |
+help: consider importing this struct through its public re-export
+    |
+ 28 + use crate::QuicTransport;
+    |
+
+error[E0412]: cannot find type `QuicTransport` in this scope
+   --> src\frb_generated.rs:574:73
+    |
+574 |                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<QuicTransport>,
+    |                                                                         ^^^^^^^^^^^^^ not found in this scope
+    |
+help: consider importing this struct through its public re-export
+    |
+ 28 + use crate::QuicTransport;
+    |
+
+error[E0412]: cannot find type `QuicTransport` in this scope
+   --> src\frb_generated.rs:633:73
+    |
+633 |                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<QuicTransport>,
+    |                                                                         ^^^^^^^^^^^^^ not found in this scope
+    |
+help: consider importing this struct through its public re-export
+    |
+ 28 + use crate::QuicTransport;
+    |
+
+error[E0412]: cannot find type `QuicTransport` in this scope
+   --> src\frb_generated.rs:711:73
+    |
+711 |                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<QuicTransport>,
+    |                                                                         ^^^^^^^^^^^^^ not found in this scope
+    |
+help: consider importing this struct through its public re-export
+    |
+ 28 + use crate::QuicTransport;
+    |
+
+error[E0412]: cannot find type `QuicTransport` in this scope
+   --> src\frb_generated.rs:773:73
+    |
+773 |                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<QuicTransport>,
+    |                                                                         ^^^^^^^^^^^^^ not found in this scope
+    |
+help: consider importing this struct through its public re-export
+    |
+ 28 + use crate::QuicTransport;
+    |
+
+error[E0412]: cannot find type `MdnsDiscovery` in this scope
+    --> src\frb_generated.rs:1026:61
+     |
+1026 |     flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MdnsDiscovery>
+     |                                                             ^^^^^^^^^^^^^ not found in this scope
+     |
+help: consider importing this struct through its public re-export
+     |
+  28 + use crate::MdnsDiscovery;
+     |
+
+error[E0412]: cannot find type `QuicTransport` in this scope
+    --> src\frb_generated.rs:1029:61
+     |
+1029 |     flutter_rust_bridge::for_generated::RustAutoOpaqueInner<QuicTransport>
+     |                                                             ^^^^^^^^^^^^^ not found in this scope
+     |
+help: consider importing this struct through its public re-export
+     |
+  28 + use crate::QuicTransport;
+     |
+
+error[E0412]: cannot find type `MdnsDiscovery` in this scope
+    --> src\frb_generated.rs:1034:20
+     |
+1034 | impl SseDecode for MdnsDiscovery {
+     |                    ^^^^^^^^^^^^^ not found in this scope
+     |
+help: consider importing this struct through its public re-export
+     |
+  28 + use crate::MdnsDiscovery;
+     |
+
+error[E0412]: cannot find type `MdnsDiscovery` in this scope
+    --> src\frb_generated.rs:1038:69
+     |
+1038 |             flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MdnsDiscovery>,
+     |                                                                     ^^^^^^^^^^^^^ not found in this scope
+     |
+help: consider importing this struct through its public re-export
+     |
+  28 + use crate::MdnsDiscovery;
+     |
+
+error[E0412]: cannot find type `QuicTransport` in this scope
+    --> src\frb_generated.rs:1044:20
+     |
+1044 | impl SseDecode for QuicTransport {
+     |                    ^^^^^^^^^^^^^ not found in this scope
+     |
+help: consider importing this struct through its public re-export
+     |
+  28 + use crate::QuicTransport;
+     |
+
+error[E0412]: cannot find type `QuicTransport` in this scope
+    --> src\frb_generated.rs:1048:69
+     |
+1048 |             flutter_rust_bridge::for_generated::RustAutoOpaqueInner<QuicTransport>,
+     |                                                                     ^^^^^^^^^^^^^ not found in this scope
+     |
+help: consider importing this struct through its public re-export
+     |
+  28 + use crate::QuicTransport;
+     |
+
+error[E0412]: cannot find type `MdnsDiscovery` in this scope
+    --> src\frb_generated.rs:1055:79
+     |
+1055 |     for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MdnsDiscovery>>
+     |                                                                               ^^^^^^^^^^^^^ not found in this scope
+     |
+help: consider importing this struct through its public re-export
+     |
+  28 + use crate::MdnsDiscovery;
+     |
+
+error[E0412]: cannot find type `QuicTransport` in this scope
+    --> src\frb_generated.rs:1065:79
+     |
+1065 |     for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<QuicTransport>>
+     |                                                                               ^^^^^^^^^^^^^ not found in this scope
+     |
+help: consider importing this struct through its public re-export
+     |
+  28 + use crate::QuicTransport;
+     |
+
+error[E0412]: cannot find type `MdnsDiscovery` in this scope
+    --> src\frb_generated.rs:1347:51
+     |
+1347 | impl flutter_rust_bridge::IntoDart for FrbWrapper<MdnsDiscovery> {
+     |                                                   ^^^^^^^^^^^^^ not found in this scope
+     |
+help: consider importing this struct through its public re-export
+     |
+  28 + use crate::MdnsDiscovery;
+     |
+
+error[E0412]: cannot find type `MdnsDiscovery` in this scope
+    --> src\frb_generated.rs:1353:81
+     |
+1353 | impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for FrbWrapper<MdnsDiscovery> {}
+     |                                                                                 ^^^^^^^^^^^^^ not found in this scope
+     |
+help: consider importing this struct through its public re-export
+     |
+  28 + use crate::MdnsDiscovery;
+     |
+
+error[E0412]: cannot find type `MdnsDiscovery` in this scope
+    --> src\frb_generated.rs:1355:51
+     |
+1355 | impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<MdnsDiscovery>> for MdnsDiscovery {
+     |                                                   ^^^^^^^^^^^^^ not found in this scope
+     |
+help: consider importing this struct through its public re-export
+     |
+  28 + use crate::MdnsDiscovery;
+     |
+
+error[E0412]: cannot find type `MdnsDiscovery` in this scope
+    --> src\frb_generated.rs:1355:71
+     |
+1355 | impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<MdnsDiscovery>> for MdnsDiscovery {
+     |                                                                       ^^^^^^^^^^^^^ not found in this scope
+     |
+help: consider importing this struct through its public re-export
+     |
+  28 + use crate::MdnsDiscovery;
+     |
+
+error[E0412]: cannot find type `MdnsDiscovery` in this scope
+    --> src\frb_generated.rs:1356:43
+     |
+1356 |     fn into_into_dart(self) -> FrbWrapper<MdnsDiscovery> {
+     |                                           ^^^^^^^^^^^^^ not found in this scope
+     |
+help: consider importing this struct through its public re-export
+     |
+  28 + use crate::MdnsDiscovery;
+     |
+
+error[E0412]: cannot find type `QuicTransport` in this scope
+    --> src\frb_generated.rs:1362:51
+     |
+1362 | impl flutter_rust_bridge::IntoDart for FrbWrapper<QuicTransport> {
+     |                                                   ^^^^^^^^^^^^^ not found in this scope
+     |
+help: consider importing this struct through its public re-export
+     |
+  28 + use crate::QuicTransport;
+     |
+
+error[E0412]: cannot find type `QuicTransport` in this scope
+    --> src\frb_generated.rs:1368:81
+     |
+1368 | impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for FrbWrapper<QuicTransport> {}
+     |                                                                                 ^^^^^^^^^^^^^ not found in this scope
+     |
+help: consider importing this struct through its public re-export
+     |
+  28 + use crate::QuicTransport;
+     |
+
+error[E0412]: cannot find type `QuicTransport` in this scope
+    --> src\frb_generated.rs:1370:51
+     |
+1370 | impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<QuicTransport>> for QuicTransport {
+     |                                                   ^^^^^^^^^^^^^ not found in this scope
+     |
+help: consider importing this struct through its public re-export
+     |
+  28 + use crate::QuicTransport;
+     |
+
+error[E0412]: cannot find type `QuicTransport` in this scope
+    --> src\frb_generated.rs:1370:71
+     |
+1370 | impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<QuicTransport>> for QuicTransport {
+     |                                                                       ^^^^^^^^^^^^^ not found in this scope
+     |
+help: consider importing this struct through its public re-export
+     |
+  28 + use crate::QuicTransport;
+     |
+
+error[E0412]: cannot find type `QuicTransport` in this scope
+    --> src\frb_generated.rs:1371:43
+     |
+1371 |     fn into_into_dart(self) -> FrbWrapper<QuicTransport> {
+     |                                           ^^^^^^^^^^^^^ not found in this scope
+     |
+help: consider importing this struct through its public re-export
+     |
+  28 + use crate::QuicTransport;
+     |
+
+error[E0412]: cannot find type `MdnsDiscovery` in this scope
+    --> src\frb_generated.rs:1465:20
+     |
+1465 | impl SseEncode for MdnsDiscovery {
+     |                    ^^^^^^^^^^^^^ not found in this scope
+     |
+help: consider importing this struct through its public re-export
+     |
+  28 + use crate::MdnsDiscovery;
+     |
+
+error[E0412]: cannot find type `MdnsDiscovery` in this scope
+    --> src\frb_generated.rs:1468:80
+     |
+1468 | ...   <RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MdnsDiscovery>>>::sse_encode(flutter_rust_bridge::for_genera...
+     |                                                                              ^^^^^^^^^^^^^ not found in this scope
+     |
+help: consider importing this struct through its public re-export
+     |
+  28 + use crate::MdnsDiscovery;
+     |
+
+error[E0412]: cannot find type `QuicTransport` in this scope
+    --> src\frb_generated.rs:1472:20
+     |
+1472 | impl SseEncode for QuicTransport {
+     |                    ^^^^^^^^^^^^^ not found in this scope
+     |
+help: consider importing this struct through its public re-export
+     |
+  28 + use crate::QuicTransport;
+     |
+
+error[E0412]: cannot find type `QuicTransport` in this scope
+    --> src\frb_generated.rs:1475:80
+     |
+1475 | ...   <RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<QuicTransport>>>::sse_encode(flutter_rust_bridge::for_genera...
+     |                                                                              ^^^^^^^^^^^^^ not found in this scope
+     |
+help: consider importing this struct through its public re-export
+     |
+  28 + use crate::QuicTransport;
+     |
+
+error[E0412]: cannot find type `MdnsDiscovery` in this scope
+    --> src\frb_generated.rs:1480:79
+     |
+1480 |     for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MdnsDiscovery>>
+     |                                                                               ^^^^^^^^^^^^^ not found in this scope
+     |
+help: consider importing this struct through its public re-export
+     |
+  28 + use crate::MdnsDiscovery;
+     |
+
+error[E0412]: cannot find type `QuicTransport` in this scope
+    --> src\frb_generated.rs:1491:79
+     |
+1491 |     for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<QuicTransport>>
+     |                                                                               ^^^^^^^^^^^^^ not found in this scope
+     |
+help: consider importing this struct through its public re-export
+     |
+  28 + use crate::QuicTransport;
+     |
+
+error[E0412]: cannot find type `MdnsDiscovery` in this scope
+    --> src\frb_generated.rs:1684:74
+     |
+1684 |         MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MdnsDiscovery>>::increment_strong_count(ptr as _);
+     |                                                                          ^^^^^^^^^^^^^ not found in this scope
+     |
+help: consider importing this struct through its public re-export
+     |
+1667 +     use crate::MdnsDiscovery;
+     |
+
+error[E0412]: cannot find type `MdnsDiscovery` in this scope
+    --> src\frb_generated.rs:1691:74
+     |
+1691 |         MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MdnsDiscovery>>::decrement_strong_count(ptr as _);
+     |                                                                          ^^^^^^^^^^^^^ not found in this scope
+     |
+help: consider importing this struct through its public re-export
+     |
+1667 +     use crate::MdnsDiscovery;
+     |
+
+error[E0412]: cannot find type `QuicTransport` in this scope
+    --> src\frb_generated.rs:1698:74
+     |
+1698 |         MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<QuicTransport>>::increment_strong_count(ptr as _);
+     |                                                                          ^^^^^^^^^^^^^ not found in this scope
+     |
+help: consider importing this struct through its public re-export
+     |
+1667 +     use crate::QuicTransport;
+     |
+
+error[E0412]: cannot find type `QuicTransport` in this scope
+    --> src\frb_generated.rs:1705:74
+     |
+1705 |         MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<QuicTransport>>::decrement_strong_count(ptr as _);
+     |                                                                          ^^^^^^^^^^^^^ not found in this scope
+     |
+help: consider importing this struct through its public re-export
+     |
+1667 +     use crate::QuicTransport;
+     |
+
+error[E0603]: module `mdns` is private
+  --> src\frb_generated.rs:28:23
+   |
+28 | use crate::discovery::mdns::*;
+   |                       ^^^^ private module
+   |
+note: the module `mdns` is defined here
+  --> src\discovery\mod.rs:1:1
+   |
+ 1 | mod mdns;
+   | ^^^^^^^^^
+
+error[E0603]: module `quic` is private
+  --> src\frb_generated.rs:29:23
+   |
+29 | use crate::transport::quic::*;
+   |                       ^^^^ private module
+   |
+note: the module `quic` is defined here
+  --> src\transport\mod.rs:1:1
+   |
+ 1 | mod quic;
+   | ^^^^^^^^^
+
+error[E0603]: module `mdns` is private
+    --> src\frb_generated.rs:1668:27
+     |
+1668 |     use crate::discovery::mdns::*;
+     |                           ^^^^ private module
+     |
+note: the module `mdns` is defined here
+    --> src\discovery\mod.rs:1:1
+     |
+   1 | mod mdns;
+     | ^^^^^^^^^
+
+error[E0603]: module `quic` is private
+    --> src\frb_generated.rs:1669:27
+     |
+1669 |     use crate::transport::quic::*;
+     |                           ^^^^ private module
+     |
+note: the module `quic` is defined here
+    --> src\transport\mod.rs:1:1
+     |
+   1 | mod quic;
+     | ^^^^^^^^^
+
+error[E0603]: module `mdns` is private
+  --> src\frb_generated.rs:97:47
+   |
+97 | ...                   crate::discovery::mdns::MdnsDiscovery::get_discovered_peers(
+   |                                         ^^^^ private module
+   |
+note: the module `mdns` is defined here
+  --> src\discovery\mod.rs:1:1
+   |
+ 1 | mod mdns;
+   | ^^^^^^^^^
+help: consider importing this struct through its public re-export instead
+   |
+97 -                             crate::discovery::mdns::MdnsDiscovery::get_discovered_peers(
+97 +                             crate::MdnsDiscovery::get_discovered_peers(
+   |
+
+error[E0603]: module `mdns` is private
+   --> src\frb_generated.rs:134:57
+    |
+134 |             transform_result_sse::<_, crate::discovery::mdns::DiscoveryError>((move || {
+    |                                                         ^^^^ private module
+    |
+note: the module `mdns` is defined here
+   --> src\discovery\mod.rs:1:1
+    |
+  1 | mod mdns;
+    | ^^^^^^^^^
+help: consider importing this enum through its public re-export instead
+    |
+134 -             transform_result_sse::<_, crate::discovery::mdns::DiscoveryError>((move || {
+134 +             transform_result_sse::<_, crate::DiscoveryError>((move || {
+    |
+
+error[E0603]: module `mdns` is private
+   --> src\frb_generated.rs:136:39
+    |
+136 |                     crate::discovery::mdns::MdnsDiscovery::new(api_device_id, api_device_name)?;
+    |                                       ^^^^ private module
+    |
+note: the module `mdns` is defined here
+   --> src\discovery\mod.rs:1:1
+    |
+  1 | mod mdns;
+    | ^^^^^^^^^
+help: consider importing this struct through its public re-export instead
+    |
+136 -                     crate::discovery::mdns::MdnsDiscovery::new(api_device_id, api_device_name)?;
+136 +                     crate::MdnsDiscovery::new(api_device_id, api_device_name)?;
+    |
+
+error[E0603]: module `mdns` is private
+   --> src\frb_generated.rs:168:57
+    |
+168 |             transform_result_sse::<_, crate::discovery::mdns::DiscoveryError>((move || {
+    |                                                         ^^^^ private module
+    |
+note: the module `mdns` is defined here
+   --> src\discovery\mod.rs:1:1
+    |
+  1 | mod mdns;
+    | ^^^^^^^^^
+help: consider importing this enum through its public re-export instead
+    |
+168 -             transform_result_sse::<_, crate::discovery::mdns::DiscoveryError>((move || {
+168 +             transform_result_sse::<_, crate::DiscoveryError>((move || {
+    |
+
+error[E0603]: module `mdns` is private
+   --> src\frb_generated.rs:184:39
+    |
+184 |                     crate::discovery::mdns::MdnsDiscovery::register(&*api_that_guard, api_port)?;
+    |                                       ^^^^ private module
+    |
+note: the module `mdns` is defined here
+   --> src\discovery\mod.rs:1:1
+    |
+  1 | mod mdns;
+    | ^^^^^^^^^
+help: consider importing this struct through its public re-export instead
+    |
+184 -                     crate::discovery::mdns::MdnsDiscovery::register(&*api_that_guard, api_port)?;
+184 +                     crate::MdnsDiscovery::register(&*api_that_guard, api_port)?;
+    |
+
+error[E0603]: module `mdns` is private
+   --> src\frb_generated.rs:215:57
+    |
+215 |             transform_result_sse::<_, crate::discovery::mdns::DiscoveryError>((move || {
+    |                                                         ^^^^ private module
+    |
+note: the module `mdns` is defined here
+   --> src\discovery\mod.rs:1:1
+    |
+  1 | mod mdns;
+    | ^^^^^^^^^
+help: consider importing this enum through its public re-export instead
+    |
+215 -             transform_result_sse::<_, crate::discovery::mdns::DiscoveryError>((move || {
+215 +             transform_result_sse::<_, crate::DiscoveryError>((move || {
+    |
+
+error[E0603]: module `mdns` is private
+   --> src\frb_generated.rs:231:39
+    |
+231 |                     crate::discovery::mdns::MdnsDiscovery::start_browsing(&*api_that_guard)?;
+    |                                       ^^^^ private module
+    |
+note: the module `mdns` is defined here
+   --> src\discovery\mod.rs:1:1
+    |
+  1 | mod mdns;
+    | ^^^^^^^^^
+help: consider importing this struct through its public re-export instead
+    |
+231 -                     crate::discovery::mdns::MdnsDiscovery::start_browsing(&*api_that_guard)?;
+231 +                     crate::MdnsDiscovery::start_browsing(&*api_that_guard)?;
+    |
+
+error[E0603]: module `mdns` is private
+   --> src\frb_generated.rs:262:57
+    |
+262 |             transform_result_sse::<_, crate::discovery::mdns::DiscoveryError>((move || {
+    |                                                         ^^^^ private module
+    |
+note: the module `mdns` is defined here
+   --> src\discovery\mod.rs:1:1
+    |
+  1 | mod mdns;
+    | ^^^^^^^^^
+help: consider importing this enum through its public re-export instead
+    |
+262 -             transform_result_sse::<_, crate::discovery::mdns::DiscoveryError>((move || {
+262 +             transform_result_sse::<_, crate::DiscoveryError>((move || {
+    |
+
+error[E0603]: module `mdns` is private
+   --> src\frb_generated.rs:277:51
+    |
+277 |                 let output_ok = crate::discovery::mdns::MdnsDiscovery::stop(&*api_that_guard)?;
+    |                                                   ^^^^ private module
+    |
+note: the module `mdns` is defined here
+   --> src\discovery\mod.rs:1:1
+    |
+  1 | mod mdns;
+    | ^^^^^^^^^
+help: consider importing this struct through its public re-export instead
+    |
+277 -                 let output_ok = crate::discovery::mdns::MdnsDiscovery::stop(&*api_that_guard)?;
+277 +                 let output_ok = crate::MdnsDiscovery::stop(&*api_that_guard)?;
+    |
+
+error[E0603]: module `quic` is private
+   --> src\frb_generated.rs:310:61
+    |
+310 |                 transform_result_sse::<_, crate::transport::quic::TransportError>(
+    |                                                             ^^^^ private module
+    |
+note: the module `quic` is defined here
+   --> src\transport\mod.rs:1:1
+    |
+  1 | mod quic;
+    | ^^^^^^^^^
+help: consider importing this enum through its public re-export instead
+    |
+310 -                 transform_result_sse::<_, crate::transport::quic::TransportError>(
+310 +                 transform_result_sse::<_, crate::TransportError>(
+    |
+
+error[E0603]: module `quic` is private
+   --> src\frb_generated.rs:329:59
+    |
+329 |                         let output_ok = crate::transport::quic::QuicTransport::accept_connection(
+    |                                                           ^^^^ private module
+    |
+note: the module `quic` is defined here
+   --> src\transport\mod.rs:1:1
+    |
+  1 | mod quic;
+    | ^^^^^^^^^
+help: consider importing this struct through its public re-export instead
+    |
+329 -                         let output_ok = crate::transport::quic::QuicTransport::accept_connection(
+329 +                         let output_ok = crate::QuicTransport::accept_connection(
+    |
+
+error[E0603]: module `quic` is private
+   --> src\frb_generated.rs:388:47
+    |
+388 | ...                   crate::transport::quic::QuicTransport::close(&mut *api_that_guard)
+    |                                         ^^^^ private module
+    |
+note: the module `quic` is defined here
+   --> src\transport\mod.rs:1:1
+    |
+  1 | mod quic;
+    | ^^^^^^^^^
+help: consider importing this struct through its public re-export instead
+    |
+388 -                             crate::transport::quic::QuicTransport::close(&mut *api_that_guard)
+388 +                             crate::QuicTransport::close(&mut *api_that_guard)
+    |
+
+error[E0603]: module `quic` is private
+   --> src\frb_generated.rs:428:61
+    |
+428 |                 transform_result_sse::<_, crate::transport::quic::TransportError>(
+    |                                                             ^^^^ private module
+    |
+note: the module `quic` is defined here
+   --> src\transport\mod.rs:1:1
+    |
+  1 | mod quic;
+    | ^^^^^^^^^
+help: consider importing this enum through its public re-export instead
+    |
+428 -                 transform_result_sse::<_, crate::transport::quic::TransportError>(
+428 +                 transform_result_sse::<_, crate::TransportError>(
+    |
+
+error[E0603]: module `quic` is private
+   --> src\frb_generated.rs:447:59
+    |
+447 |                         let output_ok = crate::transport::quic::QuicTransport::connect_to_peer(
+    |                                                           ^^^^ private module
+    |
+note: the module `quic` is defined here
+   --> src\transport\mod.rs:1:1
+    |
+  1 | mod quic;
+    | ^^^^^^^^^
+help: consider importing this struct through its public re-export instead
+    |
+447 -                         let output_ok = crate::transport::quic::QuicTransport::connect_to_peer(
+447 +                         let output_ok = crate::QuicTransport::connect_to_peer(
+    |
+
+error[E0603]: module `quic` is private
+   --> src\frb_generated.rs:485:59
+    |
+485 |                     Result::<_, ()>::Ok(crate::transport::quic::QuicTransport::default())?;
+    |                                                           ^^^^ private module
+    |
+note: the module `quic` is defined here
+   --> src\transport\mod.rs:1:1
+    |
+  1 | mod quic;
+    | ^^^^^^^^^
+help: consider importing this struct through its public re-export instead
+    |
+485 -                     Result::<_, ()>::Ok(crate::transport::quic::QuicTransport::default())?;
+485 +                     Result::<_, ()>::Ok(crate::QuicTransport::default())?;
+    |
+
+error[E0603]: module `quic` is private
+   --> src\frb_generated.rs:519:61
+    |
+519 |                 transform_result_sse::<_, crate::transport::quic::TransportError>(
+    |                                                             ^^^^ private module
+    |
+note: the module `quic` is defined here
+   --> src\transport\mod.rs:1:1
+    |
+  1 | mod quic;
+    | ^^^^^^^^^
+help: consider importing this enum through its public re-export instead
+    |
+519 -                 transform_result_sse::<_, crate::transport::quic::TransportError>(
+519 +                 transform_result_sse::<_, crate::TransportError>(
+    |
+
+error[E0603]: module `quic` is private
+   --> src\frb_generated.rs:538:59
+    |
+538 |                         let output_ok = crate::transport::quic::QuicTransport::disconnect(
+    |                                                           ^^^^ private module
+    |
+note: the module `quic` is defined here
+   --> src\transport\mod.rs:1:1
+    |
+  1 | mod quic;
+    | ^^^^^^^^^
+help: consider importing this struct through its public re-export instead
+    |
+538 -                         let output_ok = crate::transport::quic::QuicTransport::disconnect(
+538 +                         let output_ok = crate::QuicTransport::disconnect(
+    |
+
+error[E0603]: module `quic` is private
+   --> src\frb_generated.rs:598:47
+    |
+598 | ...                   crate::transport::quic::QuicTransport::get_connected_peers(
+    |                                         ^^^^ private module
+    |
+note: the module `quic` is defined here
+   --> src\transport\mod.rs:1:1
+    |
+  1 | mod quic;
+    | ^^^^^^^^^
+help: consider importing this struct through its public re-export instead
+    |
+598 -                             crate::transport::quic::QuicTransport::get_connected_peers(
+598 +                             crate::QuicTransport::get_connected_peers(
+    |
+
+error[E0603]: module `quic` is private
+   --> src\frb_generated.rs:652:39
+    |
+652 |                     crate::transport::quic::QuicTransport::is_running(&*api_that_guard),
+    |                                       ^^^^ private module
+    |
+note: the module `quic` is defined here
+   --> src\transport\mod.rs:1:1
+    |
+  1 | mod quic;
+    | ^^^^^^^^^
+help: consider importing this struct through its public re-export instead
+    |
+652 -                     crate::transport::quic::QuicTransport::is_running(&*api_that_guard),
+652 +                     crate::QuicTransport::is_running(&*api_that_guard),
+    |
+
+error[E0603]: module `quic` is private
+   --> src\frb_generated.rs:682:71
+    |
+682 |                 let output_ok = Result::<_, ()>::Ok(crate::transport::quic::QuicTransport::new())?;
+    |                                                                       ^^^^ private module
+    |
+note: the module `quic` is defined here
+   --> src\transport\mod.rs:1:1
+    |
+  1 | mod quic;
+    | ^^^^^^^^^
+help: consider importing this struct through its public re-export instead
+    |
+682 -                 let output_ok = Result::<_, ()>::Ok(crate::transport::quic::QuicTransport::new())?;
+682 +                 let output_ok = Result::<_, ()>::Ok(crate::QuicTransport::new())?;
+    |
+
+error[E0603]: module `quic` is private
+   --> src\frb_generated.rs:717:61
+    |
+717 |                 transform_result_sse::<_, crate::transport::quic::TransportError>(
+    |                                                             ^^^^ private module
+    |
+note: the module `quic` is defined here
+   --> src\transport\mod.rs:1:1
+    |
+  1 | mod quic;
+    | ^^^^^^^^^
+help: consider importing this enum through its public re-export instead
+    |
+717 -                 transform_result_sse::<_, crate::transport::quic::TransportError>(
+717 +                 transform_result_sse::<_, crate::TransportError>(
+    |
+
+error[E0603]: module `quic` is private
+   --> src\frb_generated.rs:736:59
+    |
+736 |                         let output_ok = crate::transport::quic::QuicTransport::send_data(
+    |                                                           ^^^^ private module
+    |
+note: the module `quic` is defined here
+   --> src\transport\mod.rs:1:1
+    |
+  1 | mod quic;
+    | ^^^^^^^^^
+help: consider importing this struct through its public re-export instead
+    |
+736 -                         let output_ok = crate::transport::quic::QuicTransport::send_data(
+736 +                         let output_ok = crate::QuicTransport::send_data(
+    |
+
+error[E0603]: module `quic` is private
+   --> src\frb_generated.rs:778:61
+    |
+778 |                 transform_result_sse::<_, crate::transport::quic::TransportError>(
+    |                                                             ^^^^ private module
+    |
+note: the module `quic` is defined here
+   --> src\transport\mod.rs:1:1
+    |
+  1 | mod quic;
+    | ^^^^^^^^^
+help: consider importing this enum through its public re-export instead
+    |
+778 -                 transform_result_sse::<_, crate::transport::quic::TransportError>(
+778 +                 transform_result_sse::<_, crate::TransportError>(
+    |
+
+error[E0603]: module `quic` is private
+   --> src\frb_generated.rs:797:59
+    |
+797 |                         let output_ok = crate::transport::quic::QuicTransport::start_server(
+    |                                                           ^^^^ private module
+    |
+note: the module `quic` is defined here
+   --> src\transport\mod.rs:1:1
+    |
+  1 | mod quic;
+    | ^^^^^^^^^
+help: consider importing this struct through its public re-export instead
+    |
+797 -                         let output_ok = crate::transport::quic::QuicTransport::start_server(
+797 +                         let output_ok = crate::QuicTransport::start_server(
+    |
+
+error[E0603]: module `quic` is private
+   --> src\frb_generated.rs:984:57
+    |
+984 |             transform_result_sse::<_, crate::transport::quic::TransportError>((move || {
+    |                                                         ^^^^ private module
+    |
+note: the module `quic` is defined here
+   --> src\transport\mod.rs:1:1
+    |
+  1 | mod quic;
+    | ^^^^^^^^^
+help: consider importing this enum through its public re-export instead
+    |
+984 -             transform_result_sse::<_, crate::transport::quic::TransportError>((move || {
+984 +             transform_result_sse::<_, crate::TransportError>((move || {
+    |
+
+error[E0603]: module `quic` is private
+   --> src\frb_generated.rs:985:51
+    |
+985 |                 let output_ok = crate::transport::quic::generate_self_signed_cert()?;
+    |                                                   ^^^^ private module
+    |
+note: the module `quic` is defined here
+   --> src\transport\mod.rs:1:1
+    |
+  1 | mod quic;
+    | ^^^^^^^^^
+help: consider importing this function through its public re-export instead
+    |
+985 -                 let output_ok = crate::transport::quic::generate_self_signed_cert()?;
+985 +                 let output_ok = crate::generate_self_signed_cert()?;
+    |
+
+error[E0603]: module `mdns` is private
+    --> src\frb_generated.rs:1089:38
+     |
+1089 | impl SseDecode for crate::discovery::mdns::DiscoveryError {
+     |                                      ^^^^ private module
+     |
+note: the module `mdns` is defined here
+    --> src\discovery\mod.rs:1:1
+     |
+   1 | mod mdns;
+     | ^^^^^^^^^
+help: consider importing this enum through its public re-export instead
+     |
+1089 - impl SseDecode for crate::discovery::mdns::DiscoveryError {
+1089 + impl SseDecode for crate::DiscoveryError {
+     |
+
+error[E0603]: module `mdns` is private
+    --> src\frb_generated.rs:1096:42
+     |
+1096 |                 return crate::discovery::mdns::DiscoveryError::Registration(var_field0);
+     |                                          ^^^^ private module
+     |
+note: the module `mdns` is defined here
+    --> src\discovery\mod.rs:1:1
+     |
+   1 | mod mdns;
+     | ^^^^^^^^^
+help: consider importing this tuple variant instead
+     |
+1096 -                 return crate::discovery::mdns::DiscoveryError::Registration(var_field0);
+1096 +                 return crate::DiscoveryError::Registration(var_field0);
+     |
+
+error[E0603]: module `mdns` is private
+    --> src\frb_generated.rs:1100:42
+     |
+1100 |                 return crate::discovery::mdns::DiscoveryError::Browse(var_field0);
+     |                                          ^^^^ private module
+     |
+note: the module `mdns` is defined here
+    --> src\discovery\mod.rs:1:1
+     |
+   1 | mod mdns;
+     | ^^^^^^^^^
+help: consider importing this tuple variant instead
+     |
+1100 -                 return crate::discovery::mdns::DiscoveryError::Browse(var_field0);
+1100 +                 return crate::DiscoveryError::Browse(var_field0);
+     |
+
+error[E0603]: module `mdns` is private
+    --> src\frb_generated.rs:1104:42
+     |
+1104 |                 return crate::discovery::mdns::DiscoveryError::Parse(var_field0);
+     |                                          ^^^^ private module
+     |
+note: the module `mdns` is defined here
+    --> src\discovery\mod.rs:1:1
+     |
+   1 | mod mdns;
+     | ^^^^^^^^^
+help: consider importing this tuple variant instead
+     |
+1104 -                 return crate::discovery::mdns::DiscoveryError::Parse(var_field0);
+1104 +                 return crate::DiscoveryError::Parse(var_field0);
+     |
+
+error[E0603]: module `mdns` is private
+    --> src\frb_generated.rs:1125:42
+     |
+1125 | impl SseDecode for Vec<crate::discovery::mdns::PeerInfo> {
+     |                                          ^^^^ private module
+     |
+note: the module `mdns` is defined here
+    --> src\discovery\mod.rs:1:1
+     |
+   1 | mod mdns;
+     | ^^^^^^^^^
+help: consider importing this struct through its public re-export instead
+     |
+1125 - impl SseDecode for Vec<crate::discovery::mdns::PeerInfo> {
+1125 + impl SseDecode for Vec<crate::PeerInfo> {
+     |
+
+error[E0603]: module `mdns` is private
+    --> src\frb_generated.rs:1131:42
+     |
+1131 |             ans_.push(<crate::discovery::mdns::PeerInfo>::sse_decode(deserializer));
+     |                                          ^^^^ private module
+     |
+note: the module `mdns` is defined here
+    --> src\discovery\mod.rs:1:1
+     |
+   1 | mod mdns;
+     | ^^^^^^^^^
+help: consider importing this struct through its public re-export instead
+     |
+1131 -             ans_.push(<crate::discovery::mdns::PeerInfo>::sse_decode(deserializer));
+1131 +             ans_.push(<crate::PeerInfo>::sse_decode(deserializer));
+     |
+
+error[E0603]: module `mdns` is private
+    --> src\frb_generated.rs:1149:38
+     |
+1149 | impl SseDecode for crate::discovery::mdns::PeerInfo {
+     |                                      ^^^^ private module
+     |
+note: the module `mdns` is defined here
+    --> src\discovery\mod.rs:1:1
+     |
+   1 | mod mdns;
+     | ^^^^^^^^^
+help: consider importing this struct through its public re-export instead
+     |
+1149 - impl SseDecode for crate::discovery::mdns::PeerInfo {
+1149 + impl SseDecode for crate::PeerInfo {
+     |
+
+error[E0603]: module `mdns` is private
+    --> src\frb_generated.rs:1157:34
+     |
+1157 |         return crate::discovery::mdns::PeerInfo {
+     |                                  ^^^^ private module
+     |
+note: the module `mdns` is defined here
+    --> src\discovery\mod.rs:1:1
+     |
+   1 | mod mdns;
+     | ^^^^^^^^^
+help: consider importing this struct through its public re-export instead
+     |
+1157 -         return crate::discovery::mdns::PeerInfo {
+1157 +         return crate::PeerInfo {
+     |
+
+error[E0603]: module `quic` is private
+    --> src\frb_generated.rs:1176:38
+     |
+1176 | impl SseDecode for crate::transport::quic::TransportError {
+     |                                      ^^^^ private module
+     |
+note: the module `quic` is defined here
+    --> src\transport\mod.rs:1:1
+     |
+   1 | mod quic;
+     | ^^^^^^^^^
+help: consider importing this enum through its public re-export instead
+     |
+1176 - impl SseDecode for crate::transport::quic::TransportError {
+1176 + impl SseDecode for crate::TransportError {
+     |
+
+error[E0603]: module `quic` is private
+    --> src\frb_generated.rs:1183:42
+     |
+1183 |                 return crate::transport::quic::TransportError::Connection(var_field0);
+     |                                          ^^^^ private module
+     |
+note: the module `quic` is defined here
+    --> src\transport\mod.rs:1:1
+     |
+   1 | mod quic;
+     | ^^^^^^^^^
+help: consider importing this tuple variant instead
+     |
+1183 -                 return crate::transport::quic::TransportError::Connection(var_field0);
+1183 +                 return crate::TransportError::Connection(var_field0);
+     |
+
+error[E0603]: module `quic` is private
+    --> src\frb_generated.rs:1187:42
+     |
+1187 |                 return crate::transport::quic::TransportError::Io(var_field0);
+     |                                          ^^^^ private module
+     |
+note: the module `quic` is defined here
+    --> src\transport\mod.rs:1:1
+     |
+   1 | mod quic;
+     | ^^^^^^^^^
+help: consider importing this tuple variant instead
+     |
+1187 -                 return crate::transport::quic::TransportError::Io(var_field0);
+1187 +                 return crate::TransportError::Io(var_field0);
+     |
+
+error[E0603]: module `quic` is private
+    --> src\frb_generated.rs:1191:42
+     |
+1191 |                 return crate::transport::quic::TransportError::Tls(var_field0);
+     |                                          ^^^^ private module
+     |
+note: the module `quic` is defined here
+    --> src\transport\mod.rs:1:1
+     |
+   1 | mod quic;
+     | ^^^^^^^^^
+help: consider importing this tuple variant instead
+     |
+1191 -                 return crate::transport::quic::TransportError::Tls(var_field0);
+1191 +                 return crate::TransportError::Tls(var_field0);
+     |
+
+error[E0603]: module `quic` is private
+    --> src\frb_generated.rs:1194:42
+     |
+1194 |                 return crate::transport::quic::TransportError::NotConnected;
+     |                                          ^^^^ private module
+     |
+note: the module `quic` is defined here
+    --> src\transport\mod.rs:1:1
+     |
+   1 | mod quic;
+     | ^^^^^^^^^
+help: consider importing this unit variant instead
+     |
+1194 -                 return crate::transport::quic::TransportError::NotConnected;
+1194 +                 return crate::TransportError::NotConnected;
+     |
+
+error[E0603]: module `quic` is private
+    --> src\frb_generated.rs:1198:42
+     |
+1198 |                 return crate::transport::quic::TransportError::PeerNotFound(var_field0);
+     |                                          ^^^^ private module
+     |
+note: the module `quic` is defined here
+    --> src\transport\mod.rs:1:1
+     |
+   1 | mod quic;
+     | ^^^^^^^^^
+help: consider importing this tuple variant instead
+     |
+1198 -                 return crate::transport::quic::TransportError::PeerNotFound(var_field0);
+1198 +                 return crate::TransportError::PeerNotFound(var_field0);
+     |
+
+error[E0603]: module `mdns` is private
+    --> src\frb_generated.rs:1377:58
+     |
+1377 | impl flutter_rust_bridge::IntoDart for crate::discovery::mdns::DiscoveryError {
+     |                                                          ^^^^ private module
+     |
+note: the module `mdns` is defined here
+    --> src\discovery\mod.rs:1:1
+     |
+   1 | mod mdns;
+     | ^^^^^^^^^
+help: consider importing this enum through its public re-export instead
+     |
+1377 - impl flutter_rust_bridge::IntoDart for crate::discovery::mdns::DiscoveryError {
+1377 + impl flutter_rust_bridge::IntoDart for crate::DiscoveryError {
+     |
+
+error[E0603]: module `mdns` is private
+    --> src\frb_generated.rs:1380:31
+     |
+1380 |             crate::discovery::mdns::DiscoveryError::Registration(field0) => {
+     |                               ^^^^ private module
+     |
+note: the module `mdns` is defined here
+    --> src\discovery\mod.rs:1:1
+     |
+   1 | mod mdns;
+     | ^^^^^^^^^
+help: consider importing this tuple variant instead
+     |
+1380 -             crate::discovery::mdns::DiscoveryError::Registration(field0) => {
+1380 +             crate::DiscoveryError::Registration(field0) => {
+     |
+
+error[E0603]: module `mdns` is private
+    --> src\frb_generated.rs:1383:31
+     |
+1383 |             crate::discovery::mdns::DiscoveryError::Browse(field0) => {
+     |                               ^^^^ private module
+     |
+note: the module `mdns` is defined here
+    --> src\discovery\mod.rs:1:1
+     |
+   1 | mod mdns;
+     | ^^^^^^^^^
+help: consider importing this tuple variant instead
+     |
+1383 -             crate::discovery::mdns::DiscoveryError::Browse(field0) => {
+1383 +             crate::DiscoveryError::Browse(field0) => {
+     |
+
+error[E0603]: module `mdns` is private
+    --> src\frb_generated.rs:1386:31
+     |
+1386 |             crate::discovery::mdns::DiscoveryError::Parse(field0) => {
+     |                               ^^^^ private module
+     |
+note: the module `mdns` is defined here
+    --> src\discovery\mod.rs:1:1
+     |
+   1 | mod mdns;
+     | ^^^^^^^^^
+help: consider importing this tuple variant instead
+     |
+1386 -             crate::discovery::mdns::DiscoveryError::Parse(field0) => {
+1386 +             crate::DiscoveryError::Parse(field0) => {
+     |
+
+error[E0603]: module `mdns` is private
+    --> src\frb_generated.rs:1396:27
+     |
+1396 |     for crate::discovery::mdns::DiscoveryError
+     |                           ^^^^ private module
+     |
+note: the module `mdns` is defined here
+    --> src\discovery\mod.rs:1:1
+     |
+   1 | mod mdns;
+     | ^^^^^^^^^
+help: consider importing this enum through its public re-export instead
+     |
+1396 -     for crate::discovery::mdns::DiscoveryError
+1396 +     for crate::DiscoveryError
+     |
+
+error[E0603]: module `mdns` is private
+    --> src\frb_generated.rs:1399:58
+     |
+1399 | impl flutter_rust_bridge::IntoIntoDart<crate::discovery::mdns::DiscoveryError>
+     |                                                          ^^^^ private module
+     |
+note: the module `mdns` is defined here
+    --> src\discovery\mod.rs:1:1
+     |
+   1 | mod mdns;
+     | ^^^^^^^^^
+help: consider importing this enum through its public re-export instead
+     |
+1399 - impl flutter_rust_bridge::IntoIntoDart<crate::discovery::mdns::DiscoveryError>
+1399 + impl flutter_rust_bridge::IntoIntoDart<crate::DiscoveryError>
+     |
+
+error[E0603]: module `mdns` is private
+    --> src\frb_generated.rs:1400:27
+     |
+1400 |     for crate::discovery::mdns::DiscoveryError
+     |                           ^^^^ private module
+     |
+note: the module `mdns` is defined here
+    --> src\discovery\mod.rs:1:1
+     |
+   1 | mod mdns;
+     | ^^^^^^^^^
+help: consider importing this enum through its public re-export instead
+     |
+1400 -     for crate::discovery::mdns::DiscoveryError
+1400 +     for crate::DiscoveryError
+     |
+
+error[E0603]: module `mdns` is private
+    --> src\frb_generated.rs:1402:50
+     |
+1402 |     fn into_into_dart(self) -> crate::discovery::mdns::DiscoveryError {
+     |                                                  ^^^^ private module
+     |
+note: the module `mdns` is defined here
+    --> src\discovery\mod.rs:1:1
+     |
+   1 | mod mdns;
+     | ^^^^^^^^^
+help: consider importing this enum through its public re-export instead
+     |
+1402 -     fn into_into_dart(self) -> crate::discovery::mdns::DiscoveryError {
+1402 +     fn into_into_dart(self) -> crate::DiscoveryError {
+     |
+
+error[E0603]: module `mdns` is private
+    --> src\frb_generated.rs:1407:58
+     |
+1407 | impl flutter_rust_bridge::IntoDart for crate::discovery::mdns::PeerInfo {
+     |                                                          ^^^^ private module
+     |
+note: the module `mdns` is defined here
+    --> src\discovery\mod.rs:1:1
+     |
+   1 | mod mdns;
+     | ^^^^^^^^^
+help: consider importing this struct through its public re-export instead
+     |
+1407 - impl flutter_rust_bridge::IntoDart for crate::discovery::mdns::PeerInfo {
+1407 + impl flutter_rust_bridge::IntoDart for crate::PeerInfo {
+     |
+
+error[E0603]: module `mdns` is private
+    --> src\frb_generated.rs:1420:27
+     |
+1420 |     for crate::discovery::mdns::PeerInfo
+     |                           ^^^^ private module
+     |
+note: the module `mdns` is defined here
+    --> src\discovery\mod.rs:1:1
+     |
+   1 | mod mdns;
+     | ^^^^^^^^^
+help: consider importing this struct through its public re-export instead
+     |
+1420 -     for crate::discovery::mdns::PeerInfo
+1420 +     for crate::PeerInfo
+     |
+
+error[E0603]: module `mdns` is private
+    --> src\frb_generated.rs:1423:58
+     |
+1423 | impl flutter_rust_bridge::IntoIntoDart<crate::discovery::mdns::PeerInfo>
+     |                                                          ^^^^ private module
+     |
+note: the module `mdns` is defined here
+    --> src\discovery\mod.rs:1:1
+     |
+   1 | mod mdns;
+     | ^^^^^^^^^
+help: consider importing this struct through its public re-export instead
+     |
+1423 - impl flutter_rust_bridge::IntoIntoDart<crate::discovery::mdns::PeerInfo>
+1423 + impl flutter_rust_bridge::IntoIntoDart<crate::PeerInfo>
+     |
+
+error[E0603]: module `mdns` is private
+    --> src\frb_generated.rs:1424:27
+     |
+1424 |     for crate::discovery::mdns::PeerInfo
+     |                           ^^^^ private module
+     |
+note: the module `mdns` is defined here
+    --> src\discovery\mod.rs:1:1
+     |
+   1 | mod mdns;
+     | ^^^^^^^^^
+help: consider importing this struct through its public re-export instead
+     |
+1424 -     for crate::discovery::mdns::PeerInfo
+1424 +     for crate::PeerInfo
+     |
+
+error[E0603]: module `mdns` is private
+    --> src\frb_generated.rs:1426:50
+     |
+1426 |     fn into_into_dart(self) -> crate::discovery::mdns::PeerInfo {
+     |                                                  ^^^^ private module
+     |
+note: the module `mdns` is defined here
+    --> src\discovery\mod.rs:1:1
+     |
+   1 | mod mdns;
+     | ^^^^^^^^^
+help: consider importing this struct through its public re-export instead
+     |
+1426 -     fn into_into_dart(self) -> crate::discovery::mdns::PeerInfo {
+1426 +     fn into_into_dart(self) -> crate::PeerInfo {
+     |
+
+error[E0603]: module `quic` is private
+    --> src\frb_generated.rs:1431:58
+     |
+1431 | impl flutter_rust_bridge::IntoDart for crate::transport::quic::TransportError {
+     |                                                          ^^^^ private module
+     |
+note: the module `quic` is defined here
+    --> src\transport\mod.rs:1:1
+     |
+   1 | mod quic;
+     | ^^^^^^^^^
+help: consider importing this enum through its public re-export instead
+     |
+1431 - impl flutter_rust_bridge::IntoDart for crate::transport::quic::TransportError {
+1431 + impl flutter_rust_bridge::IntoDart for crate::TransportError {
+     |
+
+error[E0603]: module `quic` is private
+    --> src\frb_generated.rs:1434:31
+     |
+1434 |             crate::transport::quic::TransportError::Connection(field0) => {
+     |                               ^^^^ private module
+     |
+note: the module `quic` is defined here
+    --> src\transport\mod.rs:1:1
+     |
+   1 | mod quic;
+     | ^^^^^^^^^
+help: consider importing this tuple variant instead
+     |
+1434 -             crate::transport::quic::TransportError::Connection(field0) => {
+1434 +             crate::TransportError::Connection(field0) => {
+     |
+
+error[E0603]: module `quic` is private
+    --> src\frb_generated.rs:1437:31
+     |
+1437 |             crate::transport::quic::TransportError::Io(field0) => {
+     |                               ^^^^ private module
+     |
+note: the module `quic` is defined here
+    --> src\transport\mod.rs:1:1
+     |
+   1 | mod quic;
+     | ^^^^^^^^^
+help: consider importing this tuple variant instead
+     |
+1437 -             crate::transport::quic::TransportError::Io(field0) => {
+1437 +             crate::TransportError::Io(field0) => {
+     |
+
+error[E0603]: module `quic` is private
+    --> src\frb_generated.rs:1440:31
+     |
+1440 |             crate::transport::quic::TransportError::Tls(field0) => {
+     |                               ^^^^ private module
+     |
+note: the module `quic` is defined here
+    --> src\transport\mod.rs:1:1
+     |
+   1 | mod quic;
+     | ^^^^^^^^^
+help: consider importing this tuple variant instead
+     |
+1440 -             crate::transport::quic::TransportError::Tls(field0) => {
+1440 +             crate::TransportError::Tls(field0) => {
+     |
+
+error[E0603]: module `quic` is private
+    --> src\frb_generated.rs:1443:31
+     |
+1443 |             crate::transport::quic::TransportError::NotConnected => [3.into_dart()].into_dart(),
+     |                               ^^^^ private module
+     |
+note: the module `quic` is defined here
+    --> src\transport\mod.rs:1:1
+     |
+   1 | mod quic;
+     | ^^^^^^^^^
+help: consider importing this unit variant instead
+     |
+1443 -             crate::transport::quic::TransportError::NotConnected => [3.into_dart()].into_dart(),
+1443 +             crate::TransportError::NotConnected => [3.into_dart()].into_dart(),
+     |
+
+error[E0603]: module `quic` is private
+    --> src\frb_generated.rs:1444:31
+     |
+1444 |             crate::transport::quic::TransportError::PeerNotFound(field0) => {
+     |                               ^^^^ private module
+     |
+note: the module `quic` is defined here
+    --> src\transport\mod.rs:1:1
+     |
+   1 | mod quic;
+     | ^^^^^^^^^
+help: consider importing this tuple variant instead
+     |
+1444 -             crate::transport::quic::TransportError::PeerNotFound(field0) => {
+1444 +             crate::TransportError::PeerNotFound(field0) => {
+     |
+
+error[E0603]: module `quic` is private
+    --> src\frb_generated.rs:1454:27
+     |
+1454 |     for crate::transport::quic::TransportError
+     |                           ^^^^ private module
+     |
+note: the module `quic` is defined here
+    --> src\transport\mod.rs:1:1
+     |
+   1 | mod quic;
+     | ^^^^^^^^^
+help: consider importing this enum through its public re-export instead
+     |
+1454 -     for crate::transport::quic::TransportError
+1454 +     for crate::TransportError
+     |
+
+error[E0603]: module `quic` is private
+    --> src\frb_generated.rs:1457:58
+     |
+1457 | impl flutter_rust_bridge::IntoIntoDart<crate::transport::quic::TransportError>
+     |                                                          ^^^^ private module
+     |
+note: the module `quic` is defined here
+    --> src\transport\mod.rs:1:1
+     |
+   1 | mod quic;
+     | ^^^^^^^^^
+help: consider importing this enum through its public re-export instead
+     |
+1457 - impl flutter_rust_bridge::IntoIntoDart<crate::transport::quic::TransportError>
+1457 + impl flutter_rust_bridge::IntoIntoDart<crate::TransportError>
+     |
+
+error[E0603]: module `quic` is private
+    --> src\frb_generated.rs:1458:27
+     |
+1458 |     for crate::transport::quic::TransportError
+     |                           ^^^^ private module
+     |
+note: the module `quic` is defined here
+    --> src\transport\mod.rs:1:1
+     |
+   1 | mod quic;
+     | ^^^^^^^^^
+help: consider importing this enum through its public re-export instead
+     |
+1458 -     for crate::transport::quic::TransportError
+1458 +     for crate::TransportError
+     |
+
+error[E0603]: module `quic` is private
+    --> src\frb_generated.rs:1460:50
+     |
+1460 |     fn into_into_dart(self) -> crate::transport::quic::TransportError {
+     |                                                  ^^^^ private module
+     |
+note: the module `quic` is defined here
+    --> src\transport\mod.rs:1:1
+     |
+   1 | mod quic;
+     | ^^^^^^^^^
+help: consider importing this enum through its public re-export instead
+     |
+1460 -     fn into_into_dart(self) -> crate::transport::quic::TransportError {
+1460 +     fn into_into_dart(self) -> crate::TransportError {
+     |
+
+error[E0603]: module `mdns` is private
+    --> src\frb_generated.rs:1515:38
+     |
+1515 | impl SseEncode for crate::discovery::mdns::DiscoveryError {
+     |                                      ^^^^ private module
+     |
+note: the module `mdns` is defined here
+    --> src\discovery\mod.rs:1:1
+     |
+   1 | mod mdns;
+     | ^^^^^^^^^
+help: consider importing this enum through its public re-export instead
+     |
+1515 - impl SseEncode for crate::discovery::mdns::DiscoveryError {
+1515 + impl SseEncode for crate::DiscoveryError {
+     |
+
+error[E0603]: module `mdns` is private
+    --> src\frb_generated.rs:1519:31
+     |
+1519 |             crate::discovery::mdns::DiscoveryError::Registration(field0) => {
+     |                               ^^^^ private module
+     |
+note: the module `mdns` is defined here
+    --> src\discovery\mod.rs:1:1
+     |
+   1 | mod mdns;
+     | ^^^^^^^^^
+help: consider importing this tuple variant instead
+     |
+1519 -             crate::discovery::mdns::DiscoveryError::Registration(field0) => {
+1519 +             crate::DiscoveryError::Registration(field0) => {
+     |
+
+error[E0603]: module `mdns` is private
+    --> src\frb_generated.rs:1523:31
+     |
+1523 |             crate::discovery::mdns::DiscoveryError::Browse(field0) => {
+     |                               ^^^^ private module
+     |
+note: the module `mdns` is defined here
+    --> src\discovery\mod.rs:1:1
+     |
+   1 | mod mdns;
+     | ^^^^^^^^^
+help: consider importing this tuple variant instead
+     |
+1523 -             crate::discovery::mdns::DiscoveryError::Browse(field0) => {
+1523 +             crate::DiscoveryError::Browse(field0) => {
+     |
+
+error[E0603]: module `mdns` is private
+    --> src\frb_generated.rs:1527:31
+     |
+1527 |             crate::discovery::mdns::DiscoveryError::Parse(field0) => {
+     |                               ^^^^ private module
+     |
+note: the module `mdns` is defined here
+    --> src\discovery\mod.rs:1:1
+     |
+   1 | mod mdns;
+     | ^^^^^^^^^
+help: consider importing this tuple variant instead
+     |
+1527 -             crate::discovery::mdns::DiscoveryError::Parse(field0) => {
+1527 +             crate::DiscoveryError::Parse(field0) => {
+     |
+
+error[E0603]: module `mdns` is private
+    --> src\frb_generated.rs:1548:42
+     |
+1548 | impl SseEncode for Vec<crate::discovery::mdns::PeerInfo> {
+     |                                          ^^^^ private module
+     |
+note: the module `mdns` is defined here
+    --> src\discovery\mod.rs:1:1
+     |
+   1 | mod mdns;
+     | ^^^^^^^^^
+help: consider importing this struct through its public re-export instead
+     |
+1548 - impl SseEncode for Vec<crate::discovery::mdns::PeerInfo> {
+1548 + impl SseEncode for Vec<crate::PeerInfo> {
+     |
+
+error[E0603]: module `mdns` is private
+    --> src\frb_generated.rs:1553:32
+     |
+1553 |             <crate::discovery::mdns::PeerInfo>::sse_encode(item, serializer);
+     |                                ^^^^ private module
+     |
+note: the module `mdns` is defined here
+    --> src\discovery\mod.rs:1:1
+     |
+   1 | mod mdns;
+     | ^^^^^^^^^
+help: consider importing this struct through its public re-export instead
+     |
+1553 -             <crate::discovery::mdns::PeerInfo>::sse_encode(item, serializer);
+1553 +             <crate::PeerInfo>::sse_encode(item, serializer);
+     |
+
+error[E0603]: module `mdns` is private
+    --> src\frb_generated.rs:1568:38
+     |
+1568 | impl SseEncode for crate::discovery::mdns::PeerInfo {
+     |                                      ^^^^ private module
+     |
+note: the module `mdns` is defined here
+    --> src\discovery\mod.rs:1:1
+     |
+   1 | mod mdns;
+     | ^^^^^^^^^
+help: consider importing this struct through its public re-export instead
+     |
+1568 - impl SseEncode for crate::discovery::mdns::PeerInfo {
+1568 + impl SseEncode for crate::PeerInfo {
+     |
+
+error[E0603]: module `quic` is private
+    --> src\frb_generated.rs:1587:38
+     |
+1587 | impl SseEncode for crate::transport::quic::TransportError {
+     |                                      ^^^^ private module
+     |
+note: the module `quic` is defined here
+    --> src\transport\mod.rs:1:1
+     |
+   1 | mod quic;
+     | ^^^^^^^^^
+help: consider importing this enum through its public re-export instead
+     |
+1587 - impl SseEncode for crate::transport::quic::TransportError {
+1587 + impl SseEncode for crate::TransportError {
+     |
+
+error[E0603]: module `quic` is private
+    --> src\frb_generated.rs:1591:31
+     |
+1591 |             crate::transport::quic::TransportError::Connection(field0) => {
+     |                               ^^^^ private module
+     |
+note: the module `quic` is defined here
+    --> src\transport\mod.rs:1:1
+     |
+   1 | mod quic;
+     | ^^^^^^^^^
+help: consider importing this tuple variant instead
+     |
+1591 -             crate::transport::quic::TransportError::Connection(field0) => {
+1591 +             crate::TransportError::Connection(field0) => {
+     |
+
+error[E0603]: module `quic` is private
+    --> src\frb_generated.rs:1595:31
+     |
+1595 |             crate::transport::quic::TransportError::Io(field0) => {
+     |                               ^^^^ private module
+     |
+note: the module `quic` is defined here
+    --> src\transport\mod.rs:1:1
+     |
+   1 | mod quic;
+     | ^^^^^^^^^
+help: consider importing this tuple variant instead
+     |
+1595 -             crate::transport::quic::TransportError::Io(field0) => {
+1595 +             crate::TransportError::Io(field0) => {
+     |
+
+error[E0603]: module `quic` is private
+    --> src\frb_generated.rs:1599:31
+     |
+1599 |             crate::transport::quic::TransportError::Tls(field0) => {
+     |                               ^^^^ private module
+     |
+note: the module `quic` is defined here
+    --> src\transport\mod.rs:1:1
+     |
+   1 | mod quic;
+     | ^^^^^^^^^
+help: consider importing this tuple variant instead
+     |
+1599 -             crate::transport::quic::TransportError::Tls(field0) => {
+1599 +             crate::TransportError::Tls(field0) => {
+     |
+
+error[E0603]: module `quic` is private
+    --> src\frb_generated.rs:1603:31
+     |
+1603 |             crate::transport::quic::TransportError::NotConnected => {
+     |                               ^^^^ private module
+     |
+note: the module `quic` is defined here
+    --> src\transport\mod.rs:1:1
+     |
+   1 | mod quic;
+     | ^^^^^^^^^
+help: consider importing this unit variant instead
+     |
+1603 -             crate::transport::quic::TransportError::NotConnected => {
+1603 +             crate::TransportError::NotConnected => {
+     |
+
+error[E0603]: module `quic` is private
+    --> src\frb_generated.rs:1606:31
+     |
+1606 |             crate::transport::quic::TransportError::PeerNotFound(field0) => {
+     |                               ^^^^ private module
+     |
+note: the module `quic` is defined here
+    --> src\transport\mod.rs:1:1
+     |
+   1 | mod quic;
+     | ^^^^^^^^^
+help: consider importing this tuple variant instead
+     |
+1606 -             crate::transport::quic::TransportError::PeerNotFound(field0) => {
+1606 +             crate::TransportError::PeerNotFound(field0) => {
+     |
+
+warning: unexpected `cfg` condition name: `frb_expand`
+  --> src\crypto.rs:16:1
+   |
+16 | #[flutter_rust_bridge::frb(sync)]
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: expected names are: `docsrs`, `feature`, and `test` and 31 more
+   = note: using a cfg inside a attribute macro will use the cfgs from the destination crate and not the ones from the defining crate
+   = help: try referring to `flutter_rust_bridge::frb` crate for guidance on how handle this unexpected cfg
+   = help: the attribute macro `flutter_rust_bridge::frb` may come from an old version of the `flutter_rust_bridge_macros` crate, try updating your dependency with `cargo update -p flutter_rust_bridge_macros`
+   = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+   = note: `#[warn(unexpected_cfgs)]` on by default
+   = note: this warning originates in the attribute macro `flutter_rust_bridge::frb` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: unexpected `cfg` condition name: `frb_expand`
+  --> src\crypto.rs:26:1
+   |
+26 | #[flutter_rust_bridge::frb(sync)]
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: using a cfg inside a attribute macro will use the cfgs from the destination crate and not the ones from the defining crate
+   = help: try referring to `flutter_rust_bridge::frb` crate for guidance on how handle this unexpected cfg
+   = help: the attribute macro `flutter_rust_bridge::frb` may come from an old version of the `flutter_rust_bridge_macros` crate, try updating your dependency with `cargo update -p flutter_rust_bridge_macros`
+   = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+   = note: this warning originates in the attribute macro `flutter_rust_bridge::frb` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: unexpected `cfg` condition name: `frb_expand`
+  --> src\crypto.rs:54:1
+   |
+54 | #[flutter_rust_bridge::frb(sync)]
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: using a cfg inside a attribute macro will use the cfgs from the destination crate and not the ones from the defining crate
+   = help: try referring to `flutter_rust_bridge::frb` crate for guidance on how handle this unexpected cfg
+   = help: the attribute macro `flutter_rust_bridge::frb` may come from an old version of the `flutter_rust_bridge_macros` crate, try updating your dependency with `cargo update -p flutter_rust_bridge_macros`
+   = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+   = note: this warning originates in the attribute macro `flutter_rust_bridge::frb` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: unexpected `cfg` condition name: `frb_expand`
+  --> src\crypto.rs:65:1
+   |
+65 | #[flutter_rust_bridge::frb(sync)]
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: using a cfg inside a attribute macro will use the cfgs from the destination crate and not the ones from the defining crate
+   = help: try referring to `flutter_rust_bridge::frb` crate for guidance on how handle this unexpected cfg
+   = help: the attribute macro `flutter_rust_bridge::frb` may come from an old version of the `flutter_rust_bridge_macros` crate, try updating your dependency with `cargo update -p flutter_rust_bridge_macros`
+   = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+   = note: this warning originates in the attribute macro `flutter_rust_bridge::frb` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: unexpected `cfg` condition name: `frb_expand`
+  --> src\crypto.rs:92:1
+   |
+92 | #[flutter_rust_bridge::frb(sync)]
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: using a cfg inside a attribute macro will use the cfgs from the destination crate and not the ones from the defining crate
+   = help: try referring to `flutter_rust_bridge::frb` crate for guidance on how handle this unexpected cfg
+   = help: the attribute macro `flutter_rust_bridge::frb` may come from an old version of the `flutter_rust_bridge_macros` crate, try updating your dependency with `cargo update -p flutter_rust_bridge_macros`
+   = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+   = note: this warning originates in the attribute macro `flutter_rust_bridge::frb` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: unexpected `cfg` condition name: `frb_expand`
+  --> src\transport\quic.rs:17:1
+   |
+17 | #[flutter_rust_bridge::frb]
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: using a cfg inside a attribute macro will use the cfgs from the destination crate and not the ones from the defining crate
+   = help: try referring to `flutter_rust_bridge::frb` crate for guidance on how handle this unexpected cfg
+   = help: the attribute macro `flutter_rust_bridge::frb` may come from an old version of the `flutter_rust_bridge_macros` crate, try updating your dependency with `cargo update -p flutter_rust_bridge_macros`
+   = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+   = note: this warning originates in the attribute macro `flutter_rust_bridge::frb` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: unexpected `cfg` condition name: `frb_expand`
+  --> src\transport\quic.rs:48:1
+   |
+48 | #[flutter_rust_bridge::frb]
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: using a cfg inside a attribute macro will use the cfgs from the destination crate and not the ones from the defining crate
+   = help: try referring to `flutter_rust_bridge::frb` crate for guidance on how handle this unexpected cfg
+   = help: the attribute macro `flutter_rust_bridge::frb` may come from an old version of the `flutter_rust_bridge_macros` crate, try updating your dependency with `cargo update -p flutter_rust_bridge_macros`
+   = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+   = note: this warning originates in the attribute macro `flutter_rust_bridge::frb` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: unexpected `cfg` condition name: `frb_expand`
+   --> src\transport\quic.rs:129:1
+    |
+129 | #[flutter_rust_bridge::frb]
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: using a cfg inside a attribute macro will use the cfgs from the destination crate and not the ones from the defining crate
+    = help: try referring to `flutter_rust_bridge::frb` crate for guidance on how handle this unexpected cfg
+    = help: the attribute macro `flutter_rust_bridge::frb` may come from an old version of the `flutter_rust_bridge_macros` crate, try updating your dependency with `cargo update -p flutter_rust_bridge_macros`
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+    = note: this warning originates in the attribute macro `flutter_rust_bridge::frb` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: unexpected `cfg` condition name: `frb_expand`
+   --> src\transport\quic.rs:144:5
+    |
+144 |     #[flutter_rust_bridge::frb]
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: using a cfg inside a attribute macro will use the cfgs from the destination crate and not the ones from the defining crate
+    = help: try referring to `flutter_rust_bridge::frb` crate for guidance on how handle this unexpected cfg
+    = help: the attribute macro `flutter_rust_bridge::frb` may come from an old version of the `flutter_rust_bridge_macros` crate, try updating your dependency with `cargo update -p flutter_rust_bridge_macros`
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+    = note: this warning originates in the attribute macro `flutter_rust_bridge::frb` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: unexpected `cfg` condition name: `frb_expand`
+   --> src\transport\quic.rs:158:5
+    |
+158 |     #[flutter_rust_bridge::frb]
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: using a cfg inside a attribute macro will use the cfgs from the destination crate and not the ones from the defining crate
+    = help: try referring to `flutter_rust_bridge::frb` crate for guidance on how handle this unexpected cfg
+    = help: the attribute macro `flutter_rust_bridge::frb` may come from an old version of the `flutter_rust_bridge_macros` crate, try updating your dependency with `cargo update -p flutter_rust_bridge_macros`
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+    = note: this warning originates in the attribute macro `flutter_rust_bridge::frb` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: unexpected `cfg` condition name: `frb_expand`
+   --> src\transport\quic.rs:199:5
+    |
+199 |     #[flutter_rust_bridge::frb]
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: using a cfg inside a attribute macro will use the cfgs from the destination crate and not the ones from the defining crate
+    = help: try referring to `flutter_rust_bridge::frb` crate for guidance on how handle this unexpected cfg
+    = help: the attribute macro `flutter_rust_bridge::frb` may come from an old version of the `flutter_rust_bridge_macros` crate, try updating your dependency with `cargo update -p flutter_rust_bridge_macros`
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+    = note: this warning originates in the attribute macro `flutter_rust_bridge::frb` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: unexpected `cfg` condition name: `frb_expand`
+   --> src\transport\quic.rs:226:5
+    |
+226 |     #[flutter_rust_bridge::frb]
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: using a cfg inside a attribute macro will use the cfgs from the destination crate and not the ones from the defining crate
+    = help: try referring to `flutter_rust_bridge::frb` crate for guidance on how handle this unexpected cfg
+    = help: the attribute macro `flutter_rust_bridge::frb` may come from an old version of the `flutter_rust_bridge_macros` crate, try updating your dependency with `cargo update -p flutter_rust_bridge_macros`
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+    = note: this warning originates in the attribute macro `flutter_rust_bridge::frb` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: unexpected `cfg` condition name: `frb_expand`
+   --> src\transport\quic.rs:282:5
+    |
+282 |     #[flutter_rust_bridge::frb]
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: using a cfg inside a attribute macro will use the cfgs from the destination crate and not the ones from the defining crate
+    = help: try referring to `flutter_rust_bridge::frb` crate for guidance on how handle this unexpected cfg
+    = help: the attribute macro `flutter_rust_bridge::frb` may come from an old version of the `flutter_rust_bridge_macros` crate, try updating your dependency with `cargo update -p flutter_rust_bridge_macros`
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+    = note: this warning originates in the attribute macro `flutter_rust_bridge::frb` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: unexpected `cfg` condition name: `frb_expand`
+   --> src\transport\quic.rs:312:5
+    |
+312 |     #[flutter_rust_bridge::frb(ignore)]
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: using a cfg inside a attribute macro will use the cfgs from the destination crate and not the ones from the defining crate
+    = help: try referring to `flutter_rust_bridge::frb` crate for guidance on how handle this unexpected cfg
+    = help: the attribute macro `flutter_rust_bridge::frb` may come from an old version of the `flutter_rust_bridge_macros` crate, try updating your dependency with `cargo update -p flutter_rust_bridge_macros`
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+    = note: this warning originates in the attribute macro `flutter_rust_bridge::frb` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: unexpected `cfg` condition name: `frb_expand`
+   --> src\transport\quic.rs:350:5
+    |
+350 |     #[flutter_rust_bridge::frb]
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: using a cfg inside a attribute macro will use the cfgs from the destination crate and not the ones from the defining crate
+    = help: try referring to `flutter_rust_bridge::frb` crate for guidance on how handle this unexpected cfg
+    = help: the attribute macro `flutter_rust_bridge::frb` may come from an old version of the `flutter_rust_bridge_macros` crate, try updating your dependency with `cargo update -p flutter_rust_bridge_macros`
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+    = note: this warning originates in the attribute macro `flutter_rust_bridge::frb` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: unexpected `cfg` condition name: `frb_expand`
+   --> src\transport\quic.rs:365:5
+    |
+365 |     #[flutter_rust_bridge::frb]
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: using a cfg inside a attribute macro will use the cfgs from the destination crate and not the ones from the defining crate
+    = help: try referring to `flutter_rust_bridge::frb` crate for guidance on how handle this unexpected cfg
+    = help: the attribute macro `flutter_rust_bridge::frb` may come from an old version of the `flutter_rust_bridge_macros` crate, try updating your dependency with `cargo update -p flutter_rust_bridge_macros`
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+    = note: this warning originates in the attribute macro `flutter_rust_bridge::frb` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: unexpected `cfg` condition name: `frb_expand`
+   --> src\transport\quic.rs:383:5
+    |
+383 |     #[flutter_rust_bridge::frb]
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: using a cfg inside a attribute macro will use the cfgs from the destination crate and not the ones from the defining crate
+    = help: try referring to `flutter_rust_bridge::frb` crate for guidance on how handle this unexpected cfg
+    = help: the attribute macro `flutter_rust_bridge::frb` may come from an old version of the `flutter_rust_bridge_macros` crate, try updating your dependency with `cargo update -p flutter_rust_bridge_macros`
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+    = note: this warning originates in the attribute macro `flutter_rust_bridge::frb` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: unexpected `cfg` condition name: `frb_expand`
+   --> src\transport\quic.rs:389:5
+    |
+389 |     #[flutter_rust_bridge::frb]
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: using a cfg inside a attribute macro will use the cfgs from the destination crate and not the ones from the defining crate
+    = help: try referring to `flutter_rust_bridge::frb` crate for guidance on how handle this unexpected cfg
+    = help: the attribute macro `flutter_rust_bridge::frb` may come from an old version of the `flutter_rust_bridge_macros` crate, try updating your dependency with `cargo update -p flutter_rust_bridge_macros`
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+    = note: this warning originates in the attribute macro `flutter_rust_bridge::frb` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: unexpected `cfg` condition name: `frb_expand`
+  --> src\discovery\mdns.rs:13:1
+   |
+13 | #[flutter_rust_bridge::frb]
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: using a cfg inside a attribute macro will use the cfgs from the destination crate and not the ones from the defining crate
+   = help: try referring to `flutter_rust_bridge::frb` crate for guidance on how handle this unexpected cfg
+   = help: the attribute macro `flutter_rust_bridge::frb` may come from an old version of the `flutter_rust_bridge_macros` crate, try updating your dependency with `cargo update -p flutter_rust_bridge_macros`
+   = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+   = note: this warning originates in the attribute macro `flutter_rust_bridge::frb` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: unexpected `cfg` condition name: `frb_expand`
+  --> src\discovery\mdns.rs:36:1
+   |
+36 | #[flutter_rust_bridge::frb]
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: using a cfg inside a attribute macro will use the cfgs from the destination crate and not the ones from the defining crate
+   = help: try referring to `flutter_rust_bridge::frb` crate for guidance on how handle this unexpected cfg
+   = help: the attribute macro `flutter_rust_bridge::frb` may come from an old version of the `flutter_rust_bridge_macros` crate, try updating your dependency with `cargo update -p flutter_rust_bridge_macros`
+   = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+   = note: this warning originates in the attribute macro `flutter_rust_bridge::frb` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: unexpected `cfg` condition name: `frb_expand`
+  --> src\discovery\mdns.rs:47:1
+   |
+47 | #[flutter_rust_bridge::frb]
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: using a cfg inside a attribute macro will use the cfgs from the destination crate and not the ones from the defining crate
+   = help: try referring to `flutter_rust_bridge::frb` crate for guidance on how handle this unexpected cfg
+   = help: the attribute macro `flutter_rust_bridge::frb` may come from an old version of the `flutter_rust_bridge_macros` crate, try updating your dependency with `cargo update -p flutter_rust_bridge_macros`
+   = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+   = note: this warning originates in the attribute macro `flutter_rust_bridge::frb` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: unexpected `cfg` condition name: `frb_expand`
+  --> src\discovery\mdns.rs:57:5
+   |
+57 |     #[flutter_rust_bridge::frb]
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: using a cfg inside a attribute macro will use the cfgs from the destination crate and not the ones from the defining crate
+   = help: try referring to `flutter_rust_bridge::frb` crate for guidance on how handle this unexpected cfg
+   = help: the attribute macro `flutter_rust_bridge::frb` may come from an old version of the `flutter_rust_bridge_macros` crate, try updating your dependency with `cargo update -p flutter_rust_bridge_macros`
+   = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+   = note: this warning originates in the attribute macro `flutter_rust_bridge::frb` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: unexpected `cfg` condition name: `frb_expand`
+  --> src\discovery\mdns.rs:70:5
+   |
+70 |     #[flutter_rust_bridge::frb]
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: using a cfg inside a attribute macro will use the cfgs from the destination crate and not the ones from the defining crate
+   = help: try referring to `flutter_rust_bridge::frb` crate for guidance on how handle this unexpected cfg
+   = help: the attribute macro `flutter_rust_bridge::frb` may come from an old version of the `flutter_rust_bridge_macros` crate, try updating your dependency with `cargo update -p flutter_rust_bridge_macros`
+   = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+   = note: this warning originates in the attribute macro `flutter_rust_bridge::frb` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: unexpected `cfg` condition name: `frb_expand`
+   --> src\discovery\mdns.rs:100:5
+    |
+100 |     #[flutter_rust_bridge::frb]
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: using a cfg inside a attribute macro will use the cfgs from the destination crate and not the ones from the defining crate
+    = help: try referring to `flutter_rust_bridge::frb` crate for guidance on how handle this unexpected cfg
+    = help: the attribute macro `flutter_rust_bridge::frb` may come from an old version of the `flutter_rust_bridge_macros` crate, try updating your dependency with `cargo update -p flutter_rust_bridge_macros`
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+    = note: this warning originates in the attribute macro `flutter_rust_bridge::frb` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: unexpected `cfg` condition name: `frb_expand`
+   --> src\discovery\mdns.rs:161:5
+    |
+161 |     #[flutter_rust_bridge::frb]
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: using a cfg inside a attribute macro will use the cfgs from the destination crate and not the ones from the defining crate
+    = help: try referring to `flutter_rust_bridge::frb` crate for guidance on how handle this unexpected cfg
+    = help: the attribute macro `flutter_rust_bridge::frb` may come from an old version of the `flutter_rust_bridge_macros` crate, try updating your dependency with `cargo update -p flutter_rust_bridge_macros`
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+    = note: this warning originates in the attribute macro `flutter_rust_bridge::frb` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: unexpected `cfg` condition name: `frb_expand`
+   --> src\discovery\mdns.rs:168:5
+    |
+168 |     #[flutter_rust_bridge::frb]
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: using a cfg inside a attribute macro will use the cfgs from the destination crate and not the ones from the defining crate
+    = help: try referring to `flutter_rust_bridge::frb` crate for guidance on how handle this unexpected cfg
+    = help: the attribute macro `flutter_rust_bridge::frb` may come from an old version of the `flutter_rust_bridge_macros` crate, try updating your dependency with `cargo update -p flutter_rust_bridge_macros`
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+    = note: this warning originates in the attribute macro `flutter_rust_bridge::frb` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: unused imports: `Receiver` and `channel`
+ --> src\discovery\mdns.rs:4:25
+  |
+4 | use tokio::sync::mpsc::{channel, Receiver};
+  |                         ^^^^^^^  ^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+error[E0277]: the trait bound `MdnsDiscovery: SseEncode` is not satisfied
+   --> src\frb_generated.rs:134:36
+    |
+134 |             transform_result_sse::<_, crate::discovery::mdns::DiscoveryError>((move || {
+    |                                    ^ unsatisfied trait bound
+    |
+help: the trait `SseEncode` is not implemented for `MdnsDiscovery`
+   --> src\discovery\mdns.rs:47:1
+    |
+ 47 | #[flutter_rust_bridge::frb]
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    = help: the following other types implement trait `SseEncode`:
+              ()
+              (Vec<u8>, Vec<u8>)
+              DiscoveryError
+              PeerInfo
+              String
+              Vec<PeerInfo>
+              Vec<String>
+              Vec<u8>
+            and 7 others
+note: required by a bound in `transform_result_sse`
+   --> src\frb_generated.rs:36:1
+    |
+ 36 | / flutter_rust_bridge::frb_generated_boilerplate!(
+ 37 | |     default_stream_sink_codec = SseCodec,
+ 38 | |     default_rust_opaque = RustOpaqueMoi,
+ 39 | |     default_rust_auto_opaque = RustAutoOpaqueMoi,
+ 40 | | );
+    | | ^
+    | | |
+    | |_required by a bound in this function
+    |   required by this bound in `transform_result_sse`
+    = note: this error originates in the attribute macro `flutter_rust_bridge::frb` which comes from the expansion of the macro `flutter_rust_bridge::frb_generated_boilerplate` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `QuicTransport: SseEncode` is not satisfied
+   --> src\frb_generated.rs:483:36
+    |
+483 |             transform_result_sse::<_, ()>((move || {
+    |                                    ^ unsatisfied trait bound
+    |
+help: the trait `SseEncode` is not implemented for `QuicTransport`
+   --> src\transport\quic.rs:129:1
+    |
+129 | #[flutter_rust_bridge::frb]
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    = help: the following other types implement trait `SseEncode`:
+              ()
+              (Vec<u8>, Vec<u8>)
+              DiscoveryError
+              PeerInfo
+              String
+              Vec<PeerInfo>
+              Vec<String>
+              Vec<u8>
+            and 7 others
+note: required by a bound in `transform_result_sse`
+   --> src\frb_generated.rs:36:1
+    |
+ 36 | / flutter_rust_bridge::frb_generated_boilerplate!(
+ 37 | |     default_stream_sink_codec = SseCodec,
+ 38 | |     default_rust_opaque = RustOpaqueMoi,
+ 39 | |     default_rust_auto_opaque = RustAutoOpaqueMoi,
+ 40 | | );
+    | | ^
+    | | |
+    | |_required by a bound in this function
+    |   required by this bound in `transform_result_sse`
+    = note: this error originates in the attribute macro `flutter_rust_bridge::frb` which comes from the expansion of the macro `flutter_rust_bridge::frb_generated_boilerplate` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `QuicTransport: SseEncode` is not satisfied
+   --> src\frb_generated.rs:681:36
+    |
+681 |             transform_result_sse::<_, ()>((move || {
+    |                                    ^ unsatisfied trait bound
+    |
+help: the trait `SseEncode` is not implemented for `QuicTransport`
+   --> src\transport\quic.rs:129:1
+    |
+129 | #[flutter_rust_bridge::frb]
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    = help: the following other types implement trait `SseEncode`:
+              ()
+              (Vec<u8>, Vec<u8>)
+              DiscoveryError
+              PeerInfo
+              String
+              Vec<PeerInfo>
+              Vec<String>
+              Vec<u8>
+            and 7 others
+note: required by a bound in `transform_result_sse`
+   --> src\frb_generated.rs:36:1
+    |
+ 36 | / flutter_rust_bridge::frb_generated_boilerplate!(
+ 37 | |     default_stream_sink_codec = SseCodec,
+ 38 | |     default_rust_opaque = RustOpaqueMoi,
+ 39 | |     default_rust_auto_opaque = RustAutoOpaqueMoi,
+ 40 | | );
+    | | ^
+    | | |
+    | |_required by a bound in this function
+    |   required by this bound in `transform_result_sse`
+    = note: this error originates in the attribute macro `flutter_rust_bridge::frb` which comes from the expansion of the macro `flutter_rust_bridge::frb_generated_boilerplate` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+Some errors have detailed explanations: E0277, E0412, E0603.
+For more information about an error, try `rustc --explain E0277`.
+warning: `rust_core` (lib) generated 27 warnings
+error: could not compile `rust_core` (lib) due to 123 previous errors; 27 warnings emitted

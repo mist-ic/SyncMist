@@ -1,87 +1,125 @@
 # SyncMist
 
+**Pure P2P Clipboard Sync** - Copy anywhere, paste everywhere. No servers, no cloud.
 
-**Universal Clipboard Sync** - Copy anywhere, paste everywhere.
+## 🎯 Hackathon Version
 
+This is the hackathon implementation with **pure peer-to-peer architecture** - zero server dependency.
 
 ## 🚀 Features
 
-- **Cross-Platform**: Windows, Linux, macOS, Android (iOS coming soon)
+- **Pure P2P**: Direct device-to-device sync via QUIC protocol
+- **Zero Server**: No cloud, no relay, no data collection
 - **End-to-End Encryption**: AES-256-GCM encryption in Rust
-- **Real-Time Sync**: WebSocket-based instant clipboard sharing
-- **Clipboard History**: Search and reuse past clips (CRDT-powered)
-- **LAN Discovery**: Direct P2P sync on same network
-- **Semantic Clipboard**: Smart detection of URLs, colors, emails
+- **LAN Discovery**: Automatic peer finding via mDNS
+- **Cross-Platform**: Windows, Linux, macOS, Android, iOS
+- **Offline-First**: Works completely without internet
 
 ## 📦 Tech Stack
 
 | Component | Technology |
 |-----------|------------|
-| **Client** | Flutter + Rust Core |
-| **Server** | Go + gorilla/websocket |
-| **Encryption** | AES-256-GCM (Rust) |
-| **Build System** | Moon (moonrepo) |
-| **Package Manager** | Bun |
+| **Client** | Flutter |
+| **Core** | Rust (QUIC + mDNS + Crypto) |
+| **Transport** | QUIC (quinn) |
+| **Discovery** | mDNS (mdns-sd) |
+| **Encryption** | AES-256-GCM |
+| **FFI** | flutter_rust_bridge |
 
 ## 🏗️ Project Structure
 
 ```
 SyncMist/
-├── .moon/                    # Moon workspace config
 ├── apps/
-│   ├── flutter_app/          # Cross-platform Flutter client
-│   └── server/               # Go WebSocket relay server
-├── packages/
-│   └── rust_core/            # Rust encryption & CRDT library
-└── docs/                     # Documentation
+│   └── flutter_app/          # Cross-platform Flutter UI
+└── packages/
+    └── rust_core/            # Rust P2P + crypto core
+        ├── src/
+        │   ├── transport/    # QUIC transport layer
+        │   ├── discovery/    # mDNS discovery
+        │   └── crypto.rs     # AES-256-GCM encryption
 ```
 
 ## 🛠️ Development Setup
 
 ### Prerequisites
 
-- [Moon](https://moonrepo.dev/docs/install) - Build orchestration
-- [Bun](https://bun.sh) - JavaScript runtime
-- [Flutter](https://flutter.dev) - UI framework (3.16+)
-- [Go](https://go.dev) - Server (1.21+)
+- [Flutter](https://flutter.dev) - UI framework (3.29+)
 - [Rust](https://rustup.rs) - Native code (stable)
+- [flutter_rust_bridge_codegen](https://cjycode.com/flutter_rust_bridge/) - FFI generator
 
 ### Quick Start
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/syncmist.git
-cd syncmist
+git clone https://github.com/mist-ic/SyncMist.git
+cd SyncMist
 
-# Install Moon (if not already installed)
-curl -fsSL https://moonrepo.dev/install/moon.sh | bash
+# Build Rust core
+cd packages/rust_core
+cargo build
+cargo test
 
-# Run all builds
-moon run :build
+# Generate FFI bindings
+cd apps/flutter_app
+flutter_rust_bridge_codegen generate
 
-# Start development
-moon run server:dev    # Start Go server
-moon run flutter_app:dev  # Start Flutter app
+# Run Flutter app
+flutter pub get
+flutter run -d windows  # or linux, macos, android, ios
 ```
 
-## 📋 Moon Commands
+## 🔒 Security Architecture
 
-| Command | Description |
-|---------|-------------|
-| `moon run :build` | Build all projects |
-| `moon run :test` | Run all tests |
-| `moon run server:dev` | Start Go server in dev mode |
-| `moon run flutter_app:dev` | Start Flutter app |
-| `moon run rust_core:test` | Run Rust tests |
-| `moon check` | Validate configuration |
-| `moon project-graph` | Visualize dependencies |
+1. **Trust On First Use (TOFU)**: Self-signed certificates for QUIC
+2. **Future**: QR code pairing with certificate fingerprint pinning
+3. **AES-256-GCM**: All clipboard data encrypted before transmission
+4. **No Server**: Data never leaves your local network
+5. **Open Source**: Audit the code yourself
 
-## 🔒 Security
+## 🌐 Network Architecture
 
-- All clipboard data is encrypted before leaving your device
-- X25519 key exchange for secure device pairing
-- No plaintext ever reaches the server
-- Open source - audit the code yourself
+```
+┌─────────────┐              ┌─────────────┐
+│  Device A   │◄────QUIC────►│  Device B   │
+│             │   encrypted  │             │
+│ mDNS Beacon │              │ mDNS Scan   │
+└─────────────┘              └─────────────┘
+       │                            │
+       └────────Local Network───────┘
+            (no internet needed)
+```
+
+## 📝 Development Commands
+
+### Rust Core
+
+```bash
+cd packages/rust_core
+cargo build          # Build library
+cargo test           # Run unit tests
+cargo clean          # Clean build artifacts
+```
+
+### Flutter App
+
+```bash
+cd apps/flutter_app
+flutter pub get                           # Install dependencies
+flutter_rust_bridge_codegen generate      # Regenerate FFI bindings
+flutter analyze                           # Lint code
+flutter test                              # Run tests
+flutter run -d windows                    # Run on Windows
+```
+
+## 🧪 Testing
+
+Two devices on the same local network:
+
+1. Launch SyncMist on both devices
+2. They auto-discover each other via mDNS
+3. Copy text on Device A → appears on Device B
+4. Copy text on Device B → appears on Device A
 
 ## 📄 License
 
@@ -89,4 +127,4 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ---
 
-Built with ❤️ for the hackathon
+**Hackathon Project** - Pure P2P clipboard sync with zero servers

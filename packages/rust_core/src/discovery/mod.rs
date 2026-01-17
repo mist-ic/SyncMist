@@ -1,3 +1,3 @@
-mod mdns;
+pub mod mdns;
 pub use mdns::*;
 
