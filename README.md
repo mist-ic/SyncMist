@@ -1,130 +1,153 @@
 # SyncMist
 
-**Pure P2P Clipboard Sync** - Copy anywhere, paste everywhere. No servers, no cloud.
+**Universal Clipboard Sync** – Copy anywhere, paste everywhere.
 
-## 🎯 Hackathon Version
+> 🏆 **Hackathon Branch** – Cross-platform, cross-network clipboard synchronization
 
-This is the hackathon implementation with **pure peer-to-peer architecture** - zero server dependency.
+## 🎯 Problem Statement
 
-## 🚀 Features
+Build a clipboard sync system that:
 
-- **Pure P2P**: Direct device-to-device sync via QUIC protocol
-- **Zero Server**: No cloud, no relay, no data collection
-- **End-to-End Encryption**: AES-256-GCM encryption in Rust
-- **LAN Discovery**: Automatic peer finding via mDNS
-- **Cross-Platform**: Windows, Linux, macOS, Android, iOS
-- **Offline-First**: Works completely without internet
+- ✅ Works across **different networks** (not just same Wi-Fi)
+- ✅ **End-to-end encrypted** – clipboard data never touches servers
+- ✅ **P2P data transfer** with signaling for discovery
+- ✅ **Cross-platform** – Windows, Linux, Android
+- ✅ **Offline queuing** – sync when reconnected
+
+## ✨ Features
+
+| Feature | Status |
+|---------|--------|
+| Cross-platform (Windows/Linux/Android) | ✅ |
+| E2E Encryption (AES-256-GCM) | ✅ |
+| mDNS Discovery (LAN) | ✅ |
+| QUIC Transport (P2P) | ✅ |
+| Device Pairing (QR Code) | ✅ |
+| Clipboard History | 🔜 |
+| NAT Traversal (Internet) | 🔜 |
 
 ## 📦 Tech Stack
 
-| Component | Technology |
-|-----------|------------|
-| **Client** | Flutter |
-| **Core** | Rust (QUIC + mDNS + Crypto) |
-| **Transport** | QUIC (quinn) |
-| **Discovery** | mDNS (mdns-sd) |
-| **Encryption** | AES-256-GCM |
+| Layer | Technology |
+|-------|------------|
+| **UI** | Flutter |
+| **Services** | Dart (Riverpod) |
+| **Core** | Rust (quinn, mdns-sd, aes-gcm) |
 | **FFI** | flutter_rust_bridge |
+| **Build** | Moon monorepo |
 
-## 🏗️ Project Structure
+## 🏗️ Architecture
 
 ```
-SyncMist/
-├── apps/
-│   └── flutter_app/          # Cross-platform Flutter UI
-└── packages/
-    └── rust_core/            # Rust P2P + crypto core
-        ├── src/
-        │   ├── transport/    # QUIC transport layer
-        │   ├── discovery/    # mDNS discovery
-        │   └── crypto.rs     # AES-256-GCM encryption
+┌─────────────────────────────────────────────────────────┐
+│                     Flutter UI                          │
+│  (Home Screen, Peer List, Network Graph, Status Badge)  │
+├─────────────────────────────────────────────────────────┤
+│                   Flutter Services                       │
+│  (SyncCoordinator, P2PService, DiscoveryService)        │
+├─────────────────────────────────────────────────────────┤
+│                     Rust Core (FFI)                      │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐      │
+│  │ QUIC        │  │ mDNS        │  │ AES-256-GCM │      │
+│  │ Transport   │  │ Discovery   │  │ Crypto      │      │
+│  └─────────────┘  └─────────────┘  └─────────────┘      │
+└─────────────────────────────────────────────────────────┘
 ```
 
-## 🛠️ Development Setup
+## 🚀 Quick Start
 
 ### Prerequisites
 
-- [Flutter](https://flutter.dev) - UI framework (3.29+)
-- [Rust](https://rustup.rs) - Native code (stable)
-- [flutter_rust_bridge_codegen](https://cjycode.com/flutter_rust_bridge/) - FFI generator
+- [Flutter](https://flutter.dev) 3.22+
+- [Rust](https://rustup.rs) stable
+- [Moon](https://moonrepo.dev) (optional)
 
-### Quick Start
+### Build & Run
 
 ```bash
-# Clone the repository
+# Clone
 git clone https://github.com/mist-ic/SyncMist.git
 cd SyncMist
+git checkout Hackathon
 
-# Build Rust core
+# Rust core
 cd packages/rust_core
-cargo build
-cargo test
+cargo build --release
+cargo test  # 23 tests
 
-# Generate FFI bindings
-cd apps/flutter_app
-flutter_rust_bridge_codegen generate
-
-# Run Flutter app
+# Flutter app
+cd ../../apps/flutter_app
 flutter pub get
-flutter run -d windows  # or linux, macos, android, ios
+flutter run -d windows  # or linux, android
 ```
 
-## 🔒 Security Architecture
-
-1. **Trust On First Use (TOFU)**: Self-signed certificates for QUIC
-2. **Future**: QR code pairing with certificate fingerprint pinning
-3. **AES-256-GCM**: All clipboard data encrypted before transmission
-4. **No Server**: Data never leaves your local network
-5. **Open Source**: Audit the code yourself
-
-## 🌐 Network Architecture
-
-```
-┌─────────────┐              ┌─────────────┐
-│  Device A   │◄────QUIC────►│  Device B   │
-│             │   encrypted  │             │
-│ mDNS Beacon │              │ mDNS Scan   │
-└─────────────┘              └─────────────┘
-       │                            │
-       └────────Local Network───────┘
-            (no internet needed)
-```
-
-## 📝 Development Commands
-
-### Rust Core
+### Moon Commands (Optional)
 
 ```bash
-cd packages/rust_core
-cargo build          # Build library
-cargo test           # Run unit tests
-cargo clean          # Clean build artifacts
+moon run flutter_app:dev          # Run app
+moon run flutter_app:analyze      # Lint
+moon run flutter_app:build-windows # Build
 ```
 
-### Flutter App
+## 🔒 Security
+
+| Aspect | Implementation |
+|--------|----------------|
+| **Encryption** | AES-256-GCM (Rust) |
+| **Key Exchange** | TOFU (Trust On First Use) |
+| **Transport** | QUIC with TLS 1.3 |
+| **Data Storage** | Local only – never on servers |
+
+## 🧪 Testing Guide
+
+1. Run app on 2+ devices (same network for LAN, or paired for internet)
+2. Devices auto-discover via mDNS
+3. Click link icon to connect
+4. Copy on Device A → paste on Device B
 
 ```bash
-cd apps/flutter_app
-flutter pub get                           # Install dependencies
-flutter_rust_bridge_codegen generate      # Regenerate FFI bindings
-flutter analyze                           # Lint code
-flutter test                              # Run tests
-flutter run -d windows                    # Run on Windows
+# Verify Rust tests pass
+cd packages/rust_core && cargo test
+
+# Verify Flutter analyzes clean
+cd apps/flutter_app && flutter analyze
 ```
 
-## 🧪 Testing
+## 👥 Team
 
-Two devices on the same local network:
+| Member | Role | Tasks |
+|--------|------|-------|
+| **Praveen** | Rust Core | QUIC, mDNS, Crypto, FFI |
+| **Bish** | Services | P2P, Discovery, Sync Coordinator |
+| **Dhruv** | UI | Widgets, Home Screen, Integration |
 
-1. Launch SyncMist on both devices
-2. They auto-discover each other via mDNS
-3. Copy text on Device A → appears on Device B
-4. Copy text on Device B → appears on Device A
+## 📁 Project Structure
+
+```
+SyncMist/
+├── .moon/                    # Moon monorepo config
+├── apps/
+│   └── flutter_app/          # Flutter client
+│       ├── lib/
+│       │   ├── ui/           # Widgets & screens
+│       │   ├── services/     # Business logic
+│       │   ├── core/         # Interfaces
+│       │   └── src/rust/     # FFI bindings
+│       └── moon.yml
+├── packages/
+│   └── rust_core/            # Rust library
+│       ├── src/
+│       │   ├── transport/    # QUIC
+│       │   ├── discovery/    # mDNS
+│       │   └── crypto.rs     # AES-256-GCM
+│       └── moon.yml
+└── Internal/                 # Team docs (gitignored)
+```
 
 ## 📄 License
 
-MIT License - see [LICENSE](LICENSE) for details.
+MIT License – see [LICENSE](LICENSE)
 
 ---
 
-**Hackathon Project** - Pure P2P clipboard sync with zero servers
+**Built for Hackathon** – Universal Clipboard Sync
