@@ -1,11 +1,12 @@
 import 'dart:async';
-import 'dart:typed_data';
+
+import 'package:flutter/foundation.dart';
 
 /// Abstract interface for P2P transport layer.
-/// 
+///
 /// This interface defines the contract for peer-to-peer communication.
 /// Currently uses a mock implementation for development.
-/// 
+///
 /// TODO: Replace with RustTransport.instance when FFI ready
 abstract class TransportInterface {
   /// Start listening for incoming connections on the specified port.
@@ -60,7 +61,7 @@ class PeerConnection {
     }
     // Simulate network latency
     await Future.delayed(const Duration(milliseconds: 50));
-    print('[PeerConnection] Sent ${data.length} bytes to $peerId');
+    debugPrint('[PeerConnection] Sent ${data.length} bytes to $peerId');
   }
 
   /// Simulate receiving data (used by mock transport).
@@ -74,12 +75,12 @@ class PeerConnection {
   Future<void> close() async {
     isConnected = false;
     await _dataController.close();
-    print('[PeerConnection] Closed connection to $peerId');
+    debugPrint('[PeerConnection] Closed connection to $peerId');
   }
 }
 
 /// Mock implementation of TransportInterface for development.
-/// 
+///
 /// TODO: Replace with RustTransport.instance when FFI ready
 class MockTransport implements TransportInterface {
   static final MockTransport _instance = MockTransport._internal();
@@ -97,22 +98,22 @@ class MockTransport implements TransportInterface {
   @override
   Future<void> startServer({int port = 9876}) async {
     if (_isServerRunning) {
-      print('[MockTransport] Server already running on port $_serverPort');
+      debugPrint('[MockTransport] Server already running on port $_serverPort');
       return;
     }
 
     // Simulate startup latency
     await Future.delayed(const Duration(milliseconds: 50));
-    
+
     _serverPort = port;
     _isServerRunning = true;
-    print('[MockTransport] Server started on port $port');
+    debugPrint('[MockTransport] Server started on port $port');
   }
 
   @override
   Future<PeerConnection> connectToPeer(String address, int port) async {
-    print('[MockTransport] Connecting to $address:$port...');
-    
+    debugPrint('[MockTransport] Connecting to $address:$port...');
+
     // Simulate connection latency
     await Future.delayed(const Duration(milliseconds: 50));
 
@@ -130,7 +131,7 @@ class MockTransport implements TransportInterface {
     });
 
     _connections.add(connection);
-    print('[MockTransport] Connected to $address:$port as $peerId');
+    debugPrint('[MockTransport] Connected to $address:$port as $peerId');
 
     return connection;
   }
@@ -140,7 +141,7 @@ class MockTransport implements TransportInterface {
 
   @override
   Future<void> disconnect() async {
-    print('[MockTransport] Disconnecting all peers...');
+    debugPrint('[MockTransport] Disconnecting all peers...');
 
     for (final connection in _connections) {
       await connection.close();
@@ -148,7 +149,7 @@ class MockTransport implements TransportInterface {
     _connections.clear();
     _isServerRunning = false;
 
-    print('[MockTransport] All connections closed, server stopped');
+    debugPrint('[MockTransport] All connections closed, server stopped');
   }
 
   /// Get list of active connections (for testing/debugging).
@@ -159,9 +160,10 @@ class MockTransport implements TransportInterface {
 
   /// Simulate receiving data from a peer (for testing).
   void simulateIncomingData(String peerId, Uint8List data) {
-    final connection = _connections.where((c) => c.peerId == peerId).firstOrNull;
+    final connection =
+        _connections.where((c) => c.peerId == peerId).firstOrNull;
     if (connection != null) {
-      print('[MockTransport] Simulating incoming data from $peerId');
+      debugPrint('[MockTransport] Simulating incoming data from $peerId');
       Future.delayed(const Duration(milliseconds: 50), () {
         connection.receiveData(data);
       });
